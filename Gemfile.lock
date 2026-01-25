@@ -3,6 +3,7 @@ PATH
   specs:
     rubocop-view_component (0.1.0)
       lint_roller (~> 1.1)
+      parser
       rubocop (>= 1.72.2)
 
 GEM
