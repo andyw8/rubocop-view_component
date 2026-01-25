@@ -1,1 +1,33 @@
-# Write it!
+ViewComponent/ComponentSuffix:
+  Description: 'Enforce -Component suffix for ViewComponent classes.'
+  Enabled: true
+  VersionAdded: '0.1'
+  Severity: warning
+  StyleGuide: 'https://viewcomponent.org/best_practices.html'
+
+ViewComponent/NoGlobalState:
+  Description: 'Avoid accessing global state (params, request, session, cookies, flash) directly.'
+  Enabled: true
+  VersionAdded: '0.1'
+  Severity: warning
+  StyleGuide: 'https://viewcomponent.org/best_practices.html'
+
+ViewComponent/PreferPrivateMethods:
+  Description: 'Suggest making helper methods private.'
+  Enabled: true
+  VersionAdded: '0.1'
+  Severity: convention
+  StyleGuide: 'https://viewcomponent.org/best_practices.html'
+  AllowedPublicMethods:
+    - initialize
+    - call
+    - before_render
+    - before_render_check
+    - render?
+
+ViewComponent/PreferSlots:
+  Description: 'Prefer slots over HTML string parameters.'
+  Enabled: true
+  VersionAdded: '0.1'
+  Severity: warning
+  StyleGuide: 'https://viewcomponent.org/best_practices.html'
