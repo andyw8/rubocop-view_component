@@ -1,0 +1,7 @@
+plugins:
+  - rubocop-internal_affairs
+  - rubocop-view_component
+
+Naming/FileName:
+  Exclude:
+    - lib/rubocop-view_component.rb
