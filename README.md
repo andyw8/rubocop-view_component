@@ -1,28 +1,42 @@
 # RuboCop::ViewComponent
 
-TODO: Delete this and the text below, and describe your gem
-
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/rubocop/view_component`. To experiment with that code, run `bin/console` for an interactive prompt.
+A RuboCop extension that enforces [ViewComponent best practices](https://viewcomponent.org/best_practices.html).
 
 ## Installation
 
-TODO: Replace `UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG` with your gem name right after releasing it to RubyGems.org. Please do not do it earlier due to security reasons. Alternatively, replace this section with instructions to install your gem from git if you don't plan to release to RubyGems.org.
+Add to your Gemfile:
 
-Install the gem and add to the application's Gemfile by executing:
-
-```bash
-bundle add UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG --require=false
+```ruby
+gem 'rubocop-view_component', require: false
 ```
 
-If bundler is not being used to manage dependencies, install the gem by executing:
+Add to your `.rubocop.yml`:
 
-```bash
-gem install UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
+```yaml
+require:
+  - rubocop-view_component
 ```
+
+## Cops
+
+This gem provides several cops to enforce ViewComponent best practices:
+
+- **ViewComponent/ComponentSuffix** - Enforce `-Component` suffix for ViewComponent classes
+- **ViewComponent/NoGlobalState** - Prevent direct access to `params`, `request`, `session`, etc.
+- **ViewComponent/PreferPrivateMethods** - Suggest making helper methods private
+- **ViewComponent/PreferSlots** - Detect HTML parameters that should be slots
+- **ViewComponent/PreferComposition** - Discourage deep inheritance chains
+- **ViewComponent/TestRenderedOutput** - Encourage testing rendered output over private methods
+
+See [PLAN.md](PLAN.md) for detailed cop descriptions and implementation status.
 
 ## Usage
 
-TODO: Write usage instructions here
+Run RuboCop as usual:
+
+```bash
+bundle exec rubocop
+```
 
 ## Development
 
