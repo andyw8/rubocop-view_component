@@ -3,8 +3,8 @@
 RSpec.describe RuboCop::Cop::ViewComponent::PreferPrivateMethods, :config do
   let(:config) { RuboCop::Config.new }
 
-  context 'when component has public helper methods' do
-    it 'registers offense for public helper method' do
+  context "when component has public helper methods" do
+    it "registers offense for public helper method" do
       expect_offense(<<~RUBY)
         class CardComponent < ViewComponent::Base
           def initialize(title)
@@ -19,7 +19,7 @@ RSpec.describe RuboCop::Cop::ViewComponent::PreferPrivateMethods, :config do
       RUBY
     end
 
-    it 'registers offense for multiple public helpers' do
+    it "registers offense for multiple public helpers" do
       expect_offense(<<~RUBY)
         class CardComponent < ViewComponent::Base
           def helper_one
@@ -36,8 +36,8 @@ RSpec.describe RuboCop::Cop::ViewComponent::PreferPrivateMethods, :config do
     end
   end
 
-  context 'when helper methods are already private' do
-    it 'does not register offense' do
+  context "when helper methods are already private" do
+    it "does not register offense" do
       expect_no_offenses(<<~RUBY)
         class CardComponent < ViewComponent::Base
           def initialize(title)
@@ -54,8 +54,8 @@ RSpec.describe RuboCop::Cop::ViewComponent::PreferPrivateMethods, :config do
     end
   end
 
-  context 'with allowed public interface methods' do
-    it 'allows initialize' do
+  context "with allowed public interface methods" do
+    it "allows initialize" do
       expect_no_offenses(<<~RUBY)
         class CardComponent < ViewComponent::Base
           def initialize(title)
@@ -65,7 +65,7 @@ RSpec.describe RuboCop::Cop::ViewComponent::PreferPrivateMethods, :config do
       RUBY
     end
 
-    it 'allows call' do
+    it "allows call" do
       expect_no_offenses(<<~RUBY)
         class CardComponent < ViewComponent::Base
           def call
@@ -75,7 +75,7 @@ RSpec.describe RuboCop::Cop::ViewComponent::PreferPrivateMethods, :config do
       RUBY
     end
 
-    it 'allows before_render' do
+    it "allows before_render" do
       expect_no_offenses(<<~RUBY)
         class CardComponent < ViewComponent::Base
           def before_render
@@ -85,7 +85,7 @@ RSpec.describe RuboCop::Cop::ViewComponent::PreferPrivateMethods, :config do
       RUBY
     end
 
-    it 'allows render?' do
+    it "allows render?" do
       expect_no_offenses(<<~RUBY)
         class CardComponent < ViewComponent::Base
           def render?
@@ -96,8 +96,8 @@ RSpec.describe RuboCop::Cop::ViewComponent::PreferPrivateMethods, :config do
     end
   end
 
-  context 'with mixed visibility' do
-    it 'only flags public methods' do
+  context "with mixed visibility" do
+    it "only flags public methods" do
       expect_offense(<<~RUBY)
         class CardComponent < ViewComponent::Base
           def public_helper
@@ -122,8 +122,8 @@ RSpec.describe RuboCop::Cop::ViewComponent::PreferPrivateMethods, :config do
     end
   end
 
-  context 'when not a ViewComponent' do
-    it 'does not register offense' do
+  context "when not a ViewComponent" do
+    it "does not register offense" do
       expect_no_offenses(<<~RUBY)
         class RegularClass
           def public_method

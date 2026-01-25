@@ -37,9 +37,8 @@ Gem::Specification.new do |spec|
   # For more information and examples about making a new gem, check out our
   # guide at: https://bundler.io/guides/creating_gem.html
 
-  spec.metadata['default_lint_roller_plugin'] = 'RuboCop::ViewComponent::Plugin'
+  spec.metadata["default_lint_roller_plugin"] = "RuboCop::ViewComponent::Plugin"
 
-  spec.add_dependency 'lint_roller', '~> 1.1'
-  spec.add_dependency 'rubocop', '>= 1.72.2'
+  spec.add_dependency "lint_roller", "~> 1.1"
+  spec.add_dependency "rubocop", ">= 1.72.2"
 end
-

@@ -25,8 +25,8 @@ module RuboCop
       class PreferPrivateMethods < RuboCop::Cop::Base
         include ViewComponent::Base
 
-        MSG = 'Consider making this method private. ' \
-              'Only ViewComponent interface methods should be public.'
+        MSG = "Consider making this method private. " \
+              "Only ViewComponent interface methods should be public."
 
         ALLOWED_PUBLIC_METHODS = %i[
           initialize

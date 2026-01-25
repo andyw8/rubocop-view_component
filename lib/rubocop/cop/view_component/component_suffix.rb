@@ -17,13 +17,13 @@ module RuboCop
       class ComponentSuffix < RuboCop::Cop::Base
         include ViewComponent::Base
 
-        MSG = 'ViewComponent class names should end with `Component`.'
+        MSG = "ViewComponent class names should end with `Component`."
 
         def on_class(node)
           return unless view_component_class?(node)
 
           class_name = node.identifier.source
-          return if class_name.end_with?('Component')
+          return if class_name.end_with?("Component")
 
           add_offense(node.identifier)
         end

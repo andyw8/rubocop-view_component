@@ -20,7 +20,7 @@ module RuboCop
           return false unless node.const_type?
 
           source = node.source
-          source == 'ViewComponent::Base' || source == 'ApplicationComponent'
+          source == "ViewComponent::Base" || source == "ApplicationComponent"
         end
 
         # Find the enclosing class node

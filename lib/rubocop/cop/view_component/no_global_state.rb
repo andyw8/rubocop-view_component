@@ -27,8 +27,8 @@ module RuboCop
       class NoGlobalState < RuboCop::Cop::Base
         include ViewComponent::Base
 
-        MSG = 'Avoid accessing `%<method>s` directly in ViewComponents. ' \
-              'Pass necessary data through the constructor instead.'
+        MSG = "Avoid accessing `%<method>s` directly in ViewComponents. " \
+              "Pass necessary data through the constructor instead."
 
         GLOBAL_STATE_METHODS = %i[
           params

@@ -26,8 +26,8 @@ module RuboCop
       class PreferSlots < RuboCop::Cop::Base
         include ViewComponent::Base
 
-        MSG = 'Consider using `%<slot_method>s` instead of passing HTML ' \
-              'as a parameter. This maintains Rails\' automatic HTML escaping.'
+        MSG = "Consider using `%<slot_method>s` instead of passing HTML " \
+              "as a parameter. This maintains Rails' automatic HTML escaping."
 
         HTML_PARAM_PATTERNS = [
           /_html$/,
@@ -44,7 +44,7 @@ module RuboCop
           html_tag
         ].freeze
 
-        def_node_search :html_safe_call?, '(send _ :html_safe)'
+        def_node_search :html_safe_call?, "(send _ :html_safe)"
 
         def on_class(node)
           return unless view_component_class?(node)
@@ -93,9 +93,9 @@ module RuboCop
 
         def suggest_slot_name(param_name)
           clean_name = param_name.to_s
-                                 .sub(/_html$/, '')
-                                 .sub(/_content$/, '')
-                                 .sub(/^html_/, '')
+            .sub(/_html$/, "")
+            .sub(/_content$/, "")
+            .sub(/^html_/, "")
 
           "renders_one :#{clean_name}"
         end

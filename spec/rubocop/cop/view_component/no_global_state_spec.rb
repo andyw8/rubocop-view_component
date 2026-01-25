@@ -3,8 +3,8 @@
 RSpec.describe RuboCop::Cop::ViewComponent::NoGlobalState, :config do
   let(:config) { RuboCop::Config.new }
 
-  context 'when accessing params' do
-    it 'registers an offense' do
+  context "when accessing params" do
+    it "registers an offense" do
       expect_offense(<<~RUBY)
         class UserComponent < ViewComponent::Base
           def admin?
@@ -15,7 +15,7 @@ RSpec.describe RuboCop::Cop::ViewComponent::NoGlobalState, :config do
       RUBY
     end
 
-    it 'registers offense for params method call' do
+    it "registers offense for params method call" do
       expect_offense(<<~RUBY)
         class UserComponent < ViewComponent::Base
           def admin?
@@ -27,8 +27,8 @@ RSpec.describe RuboCop::Cop::ViewComponent::NoGlobalState, :config do
     end
   end
 
-  context 'when accessing request' do
-    it 'registers an offense' do
+  context "when accessing request" do
+    it "registers an offense" do
       expect_offense(<<~RUBY)
         class UserComponent < ViewComponent::Base
           def user_agent
@@ -40,8 +40,8 @@ RSpec.describe RuboCop::Cop::ViewComponent::NoGlobalState, :config do
     end
   end
 
-  context 'when accessing session' do
-    it 'registers an offense' do
+  context "when accessing session" do
+    it "registers an offense" do
       expect_offense(<<~RUBY)
         class UserComponent < ViewComponent::Base
           def current_user_id
@@ -53,8 +53,8 @@ RSpec.describe RuboCop::Cop::ViewComponent::NoGlobalState, :config do
     end
   end
 
-  context 'when accessing cookies' do
-    it 'registers an offense' do
+  context "when accessing cookies" do
+    it "registers an offense" do
       expect_offense(<<~RUBY)
         class UserComponent < ViewComponent::Base
           def preference
@@ -66,8 +66,8 @@ RSpec.describe RuboCop::Cop::ViewComponent::NoGlobalState, :config do
     end
   end
 
-  context 'when accessing flash' do
-    it 'registers an offense' do
+  context "when accessing flash" do
+    it "registers an offense" do
       expect_offense(<<~RUBY)
         class UserComponent < ViewComponent::Base
           def notice
@@ -79,8 +79,8 @@ RSpec.describe RuboCop::Cop::ViewComponent::NoGlobalState, :config do
     end
   end
 
-  context 'when not accessing global state' do
-    it 'does not register offense for instance variables' do
+  context "when not accessing global state" do
+    it "does not register offense for instance variables" do
       expect_no_offenses(<<~RUBY)
         class UserComponent < ViewComponent::Base
           def initialize(admin:)
@@ -94,7 +94,7 @@ RSpec.describe RuboCop::Cop::ViewComponent::NoGlobalState, :config do
       RUBY
     end
 
-    it 'does not register offense for method arguments' do
+    it "does not register offense for method arguments" do
       expect_no_offenses(<<~RUBY)
         class UserComponent < ViewComponent::Base
           def format_params(params)
@@ -105,8 +105,8 @@ RSpec.describe RuboCop::Cop::ViewComponent::NoGlobalState, :config do
     end
   end
 
-  context 'when not in a ViewComponent' do
-    it 'does not register offense in regular classes' do
+  context "when not in a ViewComponent" do
+    it "does not register offense in regular classes" do
       expect_no_offenses(<<~RUBY)
         class RegularClass
           def admin?

@@ -3,8 +3,8 @@
 RSpec.describe RuboCop::Cop::ViewComponent::PreferSlots, :config do
   let(:config) { RuboCop::Config.new }
 
-  context 'when initialize has HTML parameter names' do
-    it 'registers offense for _html suffix' do
+  context "when initialize has HTML parameter names" do
+    it "registers offense for _html suffix" do
       expect_offense(<<~RUBY)
         class ModalComponent < ViewComponent::Base
           def initialize(title:, body_html:)
@@ -16,7 +16,7 @@ RSpec.describe RuboCop::Cop::ViewComponent::PreferSlots, :config do
       RUBY
     end
 
-    it 'registers offense for _content suffix' do
+    it "registers offense for _content suffix" do
       expect_offense(<<~RUBY)
         class ModalComponent < ViewComponent::Base
           def initialize(title:, body_content:)
@@ -28,7 +28,7 @@ RSpec.describe RuboCop::Cop::ViewComponent::PreferSlots, :config do
       RUBY
     end
 
-    it 'registers offense for html_ prefix' do
+    it "registers offense for html_ prefix" do
       expect_offense(<<~RUBY)
         class ModalComponent < ViewComponent::Base
           def initialize(title:, html_body:)
@@ -40,7 +40,7 @@ RSpec.describe RuboCop::Cop::ViewComponent::PreferSlots, :config do
       RUBY
     end
 
-    it 'registers offense for content parameter' do
+    it "registers offense for content parameter" do
       expect_offense(<<~RUBY)
         class ModalComponent < ViewComponent::Base
           def initialize(title:, content:)
@@ -53,8 +53,8 @@ RSpec.describe RuboCop::Cop::ViewComponent::PreferSlots, :config do
     end
   end
 
-  context 'when parameter has html_safe default value' do
-    it 'registers offense' do
+  context "when parameter has html_safe default value" do
+    it "registers offense" do
       expect_offense(<<~RUBY)
         class ModalComponent < ViewComponent::Base
           def initialize(title:, body: "".html_safe)
@@ -67,8 +67,8 @@ RSpec.describe RuboCop::Cop::ViewComponent::PreferSlots, :config do
     end
   end
 
-  context 'when parameters are not HTML-related' do
-    it 'does not register offense for regular parameters' do
+  context "when parameters are not HTML-related" do
+    it "does not register offense for regular parameters" do
       expect_no_offenses(<<~RUBY)
         class CardComponent < ViewComponent::Base
           def initialize(title:, description:)
@@ -79,7 +79,7 @@ RSpec.describe RuboCop::Cop::ViewComponent::PreferSlots, :config do
       RUBY
     end
 
-    it 'does not register offense for html_class' do
+    it "does not register offense for html_class" do
       expect_no_offenses(<<~RUBY)
         class CardComponent < ViewComponent::Base
           def initialize(title:, html_class:)
@@ -91,8 +91,8 @@ RSpec.describe RuboCop::Cop::ViewComponent::PreferSlots, :config do
     end
   end
 
-  context 'when not a ViewComponent' do
-    it 'does not register offense' do
+  context "when not a ViewComponent" do
+    it "does not register offense" do
       expect_no_offenses(<<~RUBY)
         class RegularClass
           def initialize(body_html:)
@@ -103,8 +103,8 @@ RSpec.describe RuboCop::Cop::ViewComponent::PreferSlots, :config do
     end
   end
 
-  context 'when component uses slots' do
-    it 'does not register offense' do
+  context "when component uses slots" do
+    it "does not register offense" do
       expect_no_offenses(<<~RUBY)
         class ModalComponent < ViewComponent::Base
           renders_one :body
