@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "tmpdir"
+
 RSpec.describe RuboCop::Cop::ViewComponent::PreferPrivateMethods, :config do
   let(:config) { RuboCop::Config.new }
 
@@ -128,6 +130,94 @@ RSpec.describe RuboCop::Cop::ViewComponent::PreferPrivateMethods, :config do
         class RegularClass
           def public_method
             'public'
+          end
+        end
+      RUBY
+    end
+  end
+
+  context "with template files" do
+    around do |example|
+      Dir.mktmpdir do |tmpdir|
+        @tmpdir = tmpdir
+        example.run
+      end
+    end
+
+    it "does not flag methods called in template, but flags unused methods" do
+      component_path = File.join(@tmpdir, "example_component.rb")
+      template_path = File.join(@tmpdir, "example_component.html.erb")
+
+      # Create template file that calls formatted_title
+      File.write(template_path, <<~ERB)
+        <div class="card">
+          <h1><%= formatted_title %></h1>
+        </div>
+      ERB
+
+      # Create component file
+      File.write(component_path, <<~RUBY)
+        # frozen_string_literal: true
+
+        class ExampleComponent < ViewComponent::Base
+          def initialize(title)
+            @title = title
+          end
+
+          def formatted_title
+            @title.upcase
+          end
+
+          def helper_not_used
+            "not used"
+          end
+        end
+      RUBY
+
+      expect_offense(<<~RUBY, component_path)
+        # frozen_string_literal: true
+
+        class ExampleComponent < ViewComponent::Base
+          def initialize(title)
+            @title = title
+          end
+
+          def formatted_title
+            @title.upcase
+          end
+
+          def helper_not_used
+          ^^^^^^^^^^^^^^^^^^^ ViewComponent/PreferPrivateMethods: Consider making this method private. Only ViewComponent interface methods should be public.
+            "not used"
+          end
+        end
+      RUBY
+    end
+
+    it "allows all public methods when all are ViewComponent interface methods" do
+      component_path = File.join(@tmpdir, "card_component.rb")
+
+      # No template file needed for this test
+      File.write(component_path, <<~RUBY)
+        class CardComponent < ViewComponent::Base
+          def initialize(title)
+            @title = title
+          end
+
+          def call
+            'rendered'
+          end
+        end
+      RUBY
+
+      expect_no_offenses(<<~RUBY, component_path)
+        class CardComponent < ViewComponent::Base
+          def initialize(title)
+            @title = title
+          end
+
+          def call
+            'rendered'
           end
         end
       RUBY

@@ -25,7 +25,7 @@ This gem provides several cops to enforce ViewComponent best practices:
 
 - **ViewComponent/ComponentSuffix** - Enforce `-Component` suffix for ViewComponent classes
 - **ViewComponent/NoGlobalState** - Prevent direct access to `params`, `request`, `session`, etc.
-- **ViewComponent/PreferPrivateMethods** - Suggest making helper methods private
+- **ViewComponent/PreferPrivateMethods** - Suggest making helper methods private (analyzes ERB templates to avoid flagging methods used in views)
 - **ViewComponent/PreferSlots** - Detect HTML parameters that should be slots
 - **ViewComponent/PreferComposition** - Discourage deep inheritance chains
 - **ViewComponent/TestRenderedOutput** - Encourage testing rendered output over private methods

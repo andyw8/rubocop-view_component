@@ -37,6 +37,7 @@ Gem::Specification.new do |spec|
 
   spec.metadata["default_lint_roller_plugin"] = "RuboCop::ViewComponent::Plugin"
 
+  spec.add_dependency "herb"
   spec.add_dependency "lint_roller", "~> 1.1"
   spec.add_dependency "parser"
   spec.add_dependency "rubocop", ">= 1.72.2"
