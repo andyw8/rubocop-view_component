@@ -1,5 +1,7 @@
 # RuboCop::ViewComponent
 
+> **Note:** This gem was vibe-coded and is not yet ready for real-world use. It's currently experimental and may have bugs or incomplete features. Contributions are welcome!
+
 A RuboCop extension that enforces [ViewComponent best practices](https://viewcomponent.org/best_practices.html).
 
 ## Installation
