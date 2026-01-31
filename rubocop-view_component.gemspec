@@ -8,13 +8,11 @@ Gem::Specification.new do |spec|
   spec.authors = ["Andy Waite"]
   spec.email = ["andyw8@users.noreply.github.com"]
 
-  spec.summary = "TODO: Write a short summary, because RubyGems requires one."
-  spec.description = "TODO: Write a longer description or delete this line."
+  spec.summary = "RuboCop extension for ViewComponent best practices"
+  spec.description = "A RuboCop extension that enforces ViewComponent best practices and conventions"
   spec.homepage = "https://github.com/andyw8/rubocop-view_component"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 2.7.0"
-
-  spec.metadata["allowed_push_host"] = "TODO: Set to your gem server 'https://example.com'"
   spec.metadata["homepage_uri"] = spec.homepage
   spec.metadata["source_code_uri"] = "https://github.com/andyw8/rubocop-view_component"
 
