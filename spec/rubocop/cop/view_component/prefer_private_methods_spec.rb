@@ -133,4 +133,43 @@ RSpec.describe RuboCop::Cop::ViewComponent::PreferPrivateMethods, :config do
       RUBY
     end
   end
+
+  context "with template files" do
+    let(:component_file) { "spec/fixtures/components/template_method_component.rb" }
+
+    it "does not flag methods called in template, but flags unused methods" do
+      expect_offense(<<~RUBY, component_file)
+        # frozen_string_literal: true
+
+        class TemplateMethodComponent < ViewComponent::Base
+          def initialize(title)
+            @title = title
+          end
+
+          def formatted_title
+            @title.upcase
+          end
+
+          def helper_not_used
+          ^^^^^^^^^^^^^^^^^^^ ViewComponent/PreferPrivateMethods: Consider making this method private. Only ViewComponent interface methods should be public.
+            "not used"
+          end
+        end
+      RUBY
+    end
+
+    it "allows all public methods when they are all used in template" do
+      expect_no_offenses(<<~RUBY, component_file)
+        class CardComponent < ViewComponent::Base
+          def initialize(title)
+            @title = title
+          end
+
+          def call
+            'rendered'
+          end
+        end
+      RUBY
+    end
+  end
 end

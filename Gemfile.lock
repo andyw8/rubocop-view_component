@@ -2,6 +2,7 @@ PATH
   remote: .
   specs:
     rubocop-view_component (0.1.0)
+      herb
       lint_roller (~> 1.1)
       parser
       rubocop (>= 1.72.2)
@@ -13,6 +14,8 @@ GEM
     date (3.5.1)
     diff-lcs (1.6.2)
     erb (6.0.1)
+    herb (0.8.9)
+    herb (0.8.9-arm64-darwin)
     io-console (0.8.2)
     irb (1.16.0)
       pp (>= 0.6.0)
