@@ -49,9 +49,8 @@ module RuboCop
 
           # Parse the extracted Ruby code
           parse_ruby_for_method_calls(ruby_code)
-        rescue => e
+        rescue
           # Graceful degradation on parse errors
-          warn "Warning: Failed to parse template #{template_path}: #{e.message}" if ENV["RUBOCOP_DEBUG"]
           Set.new
         end
 

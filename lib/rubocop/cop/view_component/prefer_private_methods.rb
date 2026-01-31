@@ -74,9 +74,8 @@ module RuboCop
           template_paths.each_with_object(Set.new) do |path, methods|
             methods.merge(extract_method_calls(path))
           end
-        rescue => e
+        rescue
           # Graceful degradation on errors
-          warn "Warning: Failed to analyze templates: #{e.message}" if ENV["RUBOCOP_DEBUG"]
           Set.new
         end
 
