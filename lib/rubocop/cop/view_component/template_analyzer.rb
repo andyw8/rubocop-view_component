@@ -49,9 +49,6 @@ module RuboCop
 
           # Parse the extracted Ruby code
           parse_ruby_for_method_calls(ruby_code)
-        rescue
-          # Graceful degradation on parse errors
-          Set.new
         end
 
         private

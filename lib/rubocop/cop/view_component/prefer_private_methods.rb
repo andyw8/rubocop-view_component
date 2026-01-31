@@ -74,9 +74,6 @@ module RuboCop
           template_paths.each_with_object(Set.new) do |path, methods|
             methods.merge(extract_method_calls(path))
           end
-        rescue
-          # Graceful degradation on errors
-          Set.new
         end
 
         def visibility_modifier?(node)
