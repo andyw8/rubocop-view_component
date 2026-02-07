@@ -32,11 +32,14 @@ Dir.mktmpdir do |clone_dir|
     puts "Adding rubocop-view_component gem to Gemfile..."
     File.open("Gemfile", "a") { |f| f.puts "gem 'rubocop-view_component', path: '#{gem_dir}'" }
 
+    # Clear bundler env so the Primer clone gets its own independent bundle
+    clean_env = ENV.to_h.reject { |k, _| k.start_with?("BUNDLE_") }
+
     puts "Running bundle install..."
-    system("bundle", "install", exception: true)
+    system(clean_env, "bundle", "install", exception: true)
 
     puts "Running RuboCop (ViewComponent cops only)..."
-    rubocop_output, = Open3.capture2("bundle", "exec", "rubocop", "--require", "rubocop-view_component", "--only", "ViewComponent", "--format", "json")
+    rubocop_output, = Open3.capture2(clean_env, "bundle", "exec", "rubocop", "--require", "rubocop-view_component", "--only", "ViewComponent", "--format", "json")
 
     data = JSON.parse(rubocop_output)
     offenses = data["files"].flat_map do |file|
