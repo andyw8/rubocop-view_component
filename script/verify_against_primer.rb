@@ -7,85 +7,121 @@ require "fileutils"
 require "open3"
 require "bundler"
 
-mode = ARGV[0]
-unless %w[verify regenerate].include?(mode)
-  abort "Usage: #{$PROGRAM_NAME} <verify|regenerate>"
-end
+GEM_DIR = File.expand_path("..", __dir__)
+RESULTS_FILE = File.join(GEM_DIR, "spec", "primer_verification.json")
+REPO_URL = "https://github.com/primer/view_components.git"
 
-gem_dir = File.expand_path("..", __dir__)
-results_file = File.join(gem_dir, "spec", "primer_verification.json")
+def main
+  mode = ARGV.include?("--regenerate") ? :regenerate : :verify
 
-Dir.mktmpdir do |clone_dir|
-  puts "Cloning primer/view_components into #{clone_dir}..."
-  system("git", "clone", "--depth", "1", "https://github.com/primer/view_components.git", clone_dir, exception: true)
+  Dir.mktmpdir do |clone_dir|
+    clone_repo(clone_dir)
 
-  Dir.chdir(clone_dir) do
-    puts "Configuring ViewComponentParentClasses in .rubocop.yml..."
-    rubocop_yml = YAML.load_file(".rubocop.yml") || {}
-    rubocop_yml["AllCops"] ||= {}
-    parents = rubocop_yml["AllCops"]["ViewComponentParentClasses"] || []
-    unless parents.include?("Primer::Component")
-      parents << "Primer::Component"
-      rubocop_yml["AllCops"]["ViewComponentParentClasses"] = parents
-      File.write(".rubocop.yml", YAML.dump(rubocop_yml))
-    end
+    Dir.chdir(clone_dir) do
+      configure_rubocop
+      add_gem_to_gemfile
 
-    puts "Adding rubocop-view_component gem to Gemfile..."
-    File.open("Gemfile", "a") { |f| f.puts "gem 'rubocop-view_component', path: '#{gem_dir}'" }
+      Bundler.with_unbundled_env do
+        output = run_rubocop
+        offenses = extract_offenses(output)
 
-    # Use unbundled env so the Primer clone gets its own independent bundle
-    Bundler.with_unbundled_env do
-      puts "Running bundle install..."
-      system("bundle", "install", exception: true)
-
-      puts "Running RuboCop (ViewComponent cops only)..."
-      rubocop_output, status = Open3.capture2("bundle", "exec", "rubocop", "--require", "rubocop-view_component", "--only", "ViewComponent", "--format", "json")
-
-      puts "RuboCop exit status: #{status.exitstatus}"
-
-      if rubocop_output.strip.empty?
-        abort "ERROR: RuboCop produced no output (exit status: #{status.exitstatus})"
-      end
-
-      data = JSON.parse(rubocop_output)
-      offenses = data["files"].flat_map do |file|
-        file["offenses"].map do |offense|
-          {
-            "path" => file["path"],
-            "line" => offense["location"]["start_line"],
-            "cop" => offense["cop_name"],
-            "message" => offense["message"]
-          }
-        end
-      end
-
-      current_json = "#{JSON.pretty_generate(offenses)}\n"
-
-      case mode
-      when "regenerate"
-        File.write(results_file, current_json)
-        puts "#{offenses.length} offense(s) written to #{results_file}"
-      when "verify"
-        unless File.exist?(results_file)
-          abort "ERROR: #{results_file} not found. Run '#{$PROGRAM_NAME} regenerate' first."
-        end
-
-        expected_json = File.read(results_file)
-
-        if current_json.strip == expected_json.strip
-          puts "Verification passed: output matches #{results_file}"
-        else
-          puts "Verification failed: output differs from #{results_file}"
-          expected = JSON.parse(expected_json)
-          added = offenses - expected
-          removed = expected - offenses
-
-          added.each { |o| puts "  + #{o["cop"]}: #{o["path"]}:#{o["line"]}" }
-          removed.each { |o| puts "  - #{o["cop"]}: #{o["path"]}:#{o["line"]}" }
-
-          exit 1
+        case mode
+        when :regenerate then regenerate(offenses)
+        when :verify then verify(offenses)
         end
       end
     end
   end
 end
+
+def system!(*args)
+  system(*args, exception: true)
+end
+
+def clone_repo(clone_dir)
+  puts "Cloning primer/view_components into #{clone_dir}..."
+  system!("git", "clone", "--depth", "1", REPO_URL, clone_dir)
+end
+
+def configure_rubocop
+  puts "Configuring ViewComponentParentClasses in .rubocop.yml..."
+  config = YAML.load_file(".rubocop.yml") || {}
+  config["AllCops"] ||= {}
+  parents = config["AllCops"]["ViewComponentParentClasses"] || []
+  unless parents.include?("Primer::Component")
+    parents << "Primer::Component"
+    config["AllCops"]["ViewComponentParentClasses"] = parents
+    File.write(".rubocop.yml", YAML.dump(config))
+  end
+end
+
+def add_gem_to_gemfile
+  puts "Adding rubocop-view_component gem to Gemfile..."
+  File.open("Gemfile", "a") { |f| f.puts "gem 'rubocop-view_component', path: '#{GEM_DIR}'" }
+end
+
+def run_rubocop
+  puts "Running bundle install..."
+  system!("bundle", "install")
+
+  puts "Running RuboCop (ViewComponent cops only)..."
+  output, status = Open3.capture2(
+    "bundle", "exec", "rubocop",
+    "--require", "rubocop-view_component",
+    "--only", "ViewComponent",
+    "--format", "json"
+  )
+
+  puts "RuboCop exit status: #{status.exitstatus}"
+
+  if output.strip.empty?
+    abort "ERROR: RuboCop produced no output (exit status: #{status.exitstatus})"
+  end
+
+  output
+end
+
+def extract_offenses(rubocop_output)
+  data = JSON.parse(rubocop_output)
+  data["files"].flat_map do |file|
+    file["offenses"].map do |offense|
+      {
+        "path" => file["path"],
+        "line" => offense["location"]["start_line"],
+        "cop" => offense["cop_name"],
+        "message" => offense["message"]
+      }
+    end
+  end
+end
+
+def regenerate(offenses)
+  json = "#{JSON.pretty_generate(offenses)}\n"
+  File.write(RESULTS_FILE, json)
+  puts "#{offenses.length} offense(s) written to #{RESULTS_FILE}"
+end
+
+def verify(offenses)
+  unless File.exist?(RESULTS_FILE)
+    abort "ERROR: #{RESULTS_FILE} not found. Run '#{$PROGRAM_NAME} --regenerate' first."
+  end
+
+  current_json = JSON.pretty_generate(offenses)
+  expected_json = File.read(RESULTS_FILE)
+
+  if current_json.strip == expected_json.strip
+    puts "Verification passed: output matches #{RESULTS_FILE}"
+  else
+    puts "Verification failed: output differs from #{RESULTS_FILE}"
+    expected = JSON.parse(expected_json)
+    added = offenses - expected
+    removed = expected - offenses
+
+    added.each { |o| puts "  + #{o["cop"]}: #{o["path"]}:#{o["line"]}" }
+    removed.each { |o| puts "  - #{o["cop"]}: #{o["path"]}:#{o["line"]}" }
+
+    exit 1
+  end
+end
+
+main
