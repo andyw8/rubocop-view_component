@@ -1,3 +1,6 @@
+AllCops:
+  ViewComponentParentClasses: []
+
 ViewComponent/ComponentSuffix:
   Description: 'Enforce -Component suffix for ViewComponent classes.'
   Enabled: true

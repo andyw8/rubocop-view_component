@@ -40,6 +40,20 @@ Run RuboCop as usual:
 bundle exec rubocop
 ```
 
+## Configuration
+
+By default, all cops detect classes that inherit from `ViewComponent::Base` or `ApplicationComponent`. If your project uses a different base class (e.g. `Primer::Component`), you can configure additional parent classes under `AllCops`:
+
+```yaml
+# .rubocop.yml
+AllCops:
+  ViewComponentParentClasses:
+    - Primer::Component
+    - MyApp::BaseComponent
+```
+
+This applies to all ViewComponent cops.
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.

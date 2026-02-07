@@ -74,6 +74,39 @@ RSpec.describe RuboCop::Cop::ViewComponent::ComponentSuffix, :config do
     end
   end
 
+  context "when ViewComponentParentClasses is configured" do
+    let(:config) do
+      RuboCop::Config.new(
+        "AllCops" => {
+          "ViewComponentParentClasses" => ["Primer::Component"]
+        }
+      )
+    end
+
+    it "registers an offense for classes inheriting from a configured parent" do
+      expect_offense(<<~RUBY)
+        class FooBar < Primer::Component
+              ^^^^^^ ViewComponent class names should end with `Component`.
+        end
+      RUBY
+    end
+
+    it "does not register offense when class name ends with Component" do
+      expect_no_offenses(<<~RUBY)
+        class FooBarComponent < Primer::Component
+        end
+      RUBY
+    end
+
+    it "still recognizes the default parent classes" do
+      expect_offense(<<~RUBY)
+        class FooBar < ViewComponent::Base
+              ^^^^^^ ViewComponent class names should end with `Component`.
+        end
+      RUBY
+    end
+  end
+
   context "with compact nested class syntax" do
     it "registers offense for compact syntax" do
       expect_offense(<<~RUBY)
