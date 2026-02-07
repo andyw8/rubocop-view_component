@@ -32,6 +32,13 @@ ViewComponent/PreferPrivateMethods:
   AllowedPublicMethodPatterns:
     - "^with_"
 
+ViewComponent/PreferComposition:
+  Description: 'Prefer composition over inheritance for ViewComponents.'
+  Enabled: true
+  VersionAdded: '0.3'
+  Severity: convention
+  StyleGuide: 'https://viewcomponent.org/best_practices.html'
+
 ViewComponent/PreferSlots:
   Description: 'Prefer slots over HTML string parameters.'
   Enabled: true
