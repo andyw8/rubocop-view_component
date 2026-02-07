@@ -27,3 +27,5 @@ jobs:
           bundler-cache: true
       - name: Run the default task
         run: bundle exec rake
+      - name: Verify against Primer ViewComponents
+        run: bundle exec ruby script/verify_against_primer.rb verify
