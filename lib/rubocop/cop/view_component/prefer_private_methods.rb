@@ -31,14 +31,6 @@ module RuboCop
         MSG = "Consider making this method private. " \
               "Only ViewComponent interface methods should be public."
 
-        ALLOWED_PUBLIC_METHODS = %i[
-          initialize
-          call
-          before_render
-          before_render_check
-          render?
-        ].freeze
-
         def on_class(node)
           return unless view_component_class?(node)
 
@@ -51,7 +43,12 @@ module RuboCop
           current_visibility = :public
           template_method_calls = methods_called_in_templates
 
-          class_node.body&.each_child_node do |child|
+          body = class_node.body
+          return unless body
+
+          children = body.begin_type? ? body.children : [body]
+
+          children.each do |child|
             if visibility_modifier?(child)
               current_visibility = child.method_name
               next
@@ -59,11 +56,24 @@ module RuboCop
 
             next unless child.def_type?
             next unless current_visibility == :public
-            next if ALLOWED_PUBLIC_METHODS.include?(child.method_name)
+            next if allowed_public_method?(child.method_name)
             next if template_method_calls.include?(child.method_name)
 
             add_offense(child)
           end
+        end
+
+        def allowed_public_method?(method_name)
+          allowed_public_methods.include?(method_name.to_s) ||
+            allowed_public_method_patterns.any? { |pattern| method_name.to_s.match?(pattern) }
+        end
+
+        def allowed_public_methods
+          cop_config.fetch("AllowedPublicMethods", [])
+        end
+
+        def allowed_public_method_patterns
+          cop_config.fetch("AllowedPublicMethodPatterns", []).map { |pattern| Regexp.new(pattern) }
         end
 
         def methods_called_in_templates

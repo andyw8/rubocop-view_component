@@ -27,6 +27,10 @@ ViewComponent/PreferPrivateMethods:
     - before_render
     - before_render_check
     - render?
+    - render_in
+    - around_render
+  AllowedPublicMethodPatterns:
+    - "^with_"
 
 ViewComponent/PreferSlots:
   Description: 'Prefer slots over HTML string parameters.'

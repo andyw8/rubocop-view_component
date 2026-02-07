@@ -85,11 +85,135 @@ RSpec.describe RuboCop::Cop::ViewComponent::PreferPrivateMethods, :config do
       RUBY
     end
 
+    it "allows before_render_check" do
+      expect_no_offenses(<<~RUBY)
+        class CardComponent < ViewComponent::Base
+          def before_render_check
+            raise "invalid" unless @valid
+          end
+        end
+      RUBY
+    end
+
     it "allows render?" do
       expect_no_offenses(<<~RUBY)
         class CardComponent < ViewComponent::Base
           def render?
             @show
+          end
+        end
+      RUBY
+    end
+
+    it "allows render_in" do
+      expect_no_offenses(<<~RUBY)
+        class CardComponent < ViewComponent::Base
+          def render_in(view_context, &block)
+            super
+          end
+        end
+      RUBY
+    end
+
+    it "allows around_render" do
+      expect_no_offenses(<<~RUBY)
+        class CardComponent < ViewComponent::Base
+          def around_render
+            yield
+          end
+        end
+      RUBY
+    end
+  end
+
+  context "with AllowedPublicMethodPatterns" do
+    it "allows with_* slot builder methods by default" do
+      expect_no_offenses(<<~RUBY)
+        class CardComponent < ViewComponent::Base
+          def with_header(text)
+            @header = text
+          end
+
+          def with_footer(text)
+            @footer = text
+          end
+        end
+      RUBY
+    end
+
+    context "with custom patterns" do
+      let(:config) do
+        RuboCop::Config.new(
+          "AllCops" => {"DisplayCopNames" => true},
+          "ViewComponent/PreferPrivateMethods" => {
+            "AllowedPublicMethods" => %w[initialize call],
+            "AllowedPublicMethodPatterns" => ["^render_", "^with_"]
+          }
+        )
+      end
+
+      it "allows methods matching custom patterns" do
+        expect_no_offenses(<<~RUBY)
+          class CardComponent < ViewComponent::Base
+            def render_header
+              'header'
+            end
+
+            def with_title(text)
+              @title = text
+            end
+          end
+        RUBY
+      end
+
+      it "still flags methods not matching any pattern" do
+        expect_offense(<<~RUBY)
+          class CardComponent < ViewComponent::Base
+            def initialize(title)
+              @title = title
+            end
+
+            def formatted_title
+            ^^^^^^^^^^^^^^^^^^^ ViewComponent/PreferPrivateMethods: Consider making this method private. Only ViewComponent interface methods should be public.
+              @title.upcase
+            end
+          end
+        RUBY
+      end
+    end
+  end
+
+  context "with custom AllowedPublicMethods" do
+    let(:config) do
+      RuboCop::Config.new(
+        "AllCops" => {"DisplayCopNames" => true},
+        "ViewComponent/PreferPrivateMethods" => {
+          "AllowedPublicMethods" => %w[initialize call custom_public_method],
+          "AllowedPublicMethodPatterns" => []
+        }
+      )
+    end
+
+    it "allows custom configured public methods" do
+      expect_no_offenses(<<~RUBY)
+        class CardComponent < ViewComponent::Base
+          def custom_public_method
+            'custom'
+          end
+        end
+      RUBY
+    end
+
+    it "flags methods not in custom allowlist" do
+      expect_offense(<<~RUBY)
+        class CardComponent < ViewComponent::Base
+          def initialize(title)
+            @title = title
+          end
+
+          def other_method
+          ^^^^^^^^^^^^^^^^ ViewComponent/PreferPrivateMethods: Consider making this method private. Only ViewComponent interface methods should be public.
+            'other'
           end
         end
       RUBY
