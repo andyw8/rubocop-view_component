@@ -8,7 +8,7 @@ require "open3"
 require "bundler"
 
 GEM_DIR = File.expand_path("..", __dir__)
-RESULTS_FILE = File.join(GEM_DIR, "spec", "primer_verification.json")
+RESULTS_FILE = File.join(GEM_DIR, "spec", "expected_primer_failures.json")
 REPO_URL = "https://github.com/primer/view_components.git"
 
 def main
