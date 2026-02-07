@@ -40,19 +40,29 @@ Run RuboCop as usual:
 bundle exec rubocop
 ```
 
-## Configuration
+## Optional Configuration
 
-By default, all cops detect classes that inherit from `ViewComponent::Base` or `ApplicationComponent`. If your project uses a different base class (e.g. `Primer::Component`), you can configure additional parent classes under `AllCops`:
+## Base Class
+
+By default, the cops detect classes that inherit from `ViewComponent::Base` or `ApplicationComponent`. If your project uses a different base class (e.g. `Primer::Component`), you can configure additional parent classes under `AllCops`, for example:
 
 ```yaml
 # .rubocop.yml
 AllCops:
   ViewComponentParentClasses:
-    - Primer::Component
     - MyApp::BaseComponent
 ```
 
-This applies to all ViewComponent cops.
+### No Super
+
+View Component convention is to not calling `super` in component initializers, but that may cause `Lint/MissingSuper` failures from RuboCop. We suggest disabling that rule for your view components directory, for example:
+
+```yaml
+# .rubocop.yml
+Lint/MissingSuper:
+  Exclude:
+    - 'app/components/**/*'
+```
 
 ## Development
 
