@@ -9,15 +9,15 @@ require "bundler"
 
 GEM_DIR = File.expand_path("..", __dir__)
 RESULTS_FILE = File.join(GEM_DIR, "spec", "expected_primer_failures.json")
-REPO_URL = "https://github.com/primer/view_components.git"
+TARBALL_URL = "https://github.com/primer/view_components/archive/refs/heads/main.tar.gz"
 
 def main
   mode = ARGV.include?("--regenerate") ? :regenerate : :verify
 
-  Dir.mktmpdir do |clone_dir|
-    clone_repo(clone_dir)
+  Dir.mktmpdir do |dir|
+    download_source(dir)
 
-    Dir.chdir(clone_dir) do
+    Dir.chdir(dir) do
       configure_rubocop
       add_gem_to_gemfile
 
@@ -38,9 +38,10 @@ def system!(*args)
   system(*args, exception: true)
 end
 
-def clone_repo(clone_dir)
-  puts "Cloning primer/view_components into #{clone_dir}..."
-  system!("git", "clone", "--depth", "1", REPO_URL, clone_dir)
+def download_source(dir)
+  puts "Downloading primer/view_components..."
+  system!("curl", "-sL", TARBALL_URL, "-o", "#{dir}/source.tar.gz")
+  system!("tar", "xz", "-C", dir, "--strip-components=1", "-f", "#{dir}/source.tar.gz")
 end
 
 def configure_rubocop
