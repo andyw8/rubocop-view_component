@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+GEM_DIR="$(cd "$(dirname "$0")/.." && pwd)"
+CLONE_DIR="$(mktemp -d)"
+
+cleanup() {
+  echo "Cleaning up ${CLONE_DIR}..."
+  rm -rf "$CLONE_DIR"
+}
+trap cleanup EXIT
+
+echo "Cloning primer/view_components into ${CLONE_DIR}..."
+git clone --depth 1 https://github.com/primer/view_components.git "$CLONE_DIR"
+
+cd "$CLONE_DIR"
+
+echo "Adding rubocop-view_component gem to Gemfile..."
+echo "gem 'rubocop-view_component', path: '${GEM_DIR}'" >> Gemfile
+
+echo "Running bundle install..."
+bundle install
+
+echo "Running RuboCop (ViewComponent cops only)..."
+bundle exec rubocop --require rubocop-view_component --only "ViewComponent"
