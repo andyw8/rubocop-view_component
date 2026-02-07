@@ -1,6 +1,13 @@
 AllCops:
   ViewComponentParentClasses: []
 
+ViewComponent/AvoidSingleUseComponents:
+  Description: 'Detect trivial components that may be better as partials.'
+  Enabled: true
+  VersionAdded: '0.3'
+  Severity: info
+  StyleGuide: 'https://viewcomponent.org/best_practices.html'
+
 ViewComponent/ComponentSuffix:
   Description: 'Enforce -Component suffix for ViewComponent classes.'
   Enabled: true
