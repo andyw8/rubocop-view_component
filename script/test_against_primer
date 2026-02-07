@@ -15,6 +15,19 @@ git clone --depth 1 https://github.com/primer/view_components.git "$CLONE_DIR"
 
 cd "$CLONE_DIR"
 
+echo "Configuring ViewComponentParentClasses in .rubocop.yml..."
+ruby -ryaml -e '
+  path = ".rubocop.yml"
+  config = YAML.load_file(path) || {}
+  config["AllCops"] ||= {}
+  parents = config["AllCops"]["ViewComponentParentClasses"] || []
+  unless parents.include?("Primer::Component")
+    parents << "Primer::Component"
+    config["AllCops"]["ViewComponentParentClasses"] = parents
+    File.write(path, YAML.dump(config))
+  end
+'
+
 echo "Adding rubocop-view_component gem to Gemfile..."
 echo "gem 'rubocop-view_component', path: '${GEM_DIR}'" >> Gemfile
 
