@@ -5,6 +5,7 @@ require "yaml"
 require "tmpdir"
 require "fileutils"
 require "open3"
+require "bundler"
 
 mode = ARGV[0]
 unless %w[verify regenerate].include?(mode)
@@ -32,53 +33,58 @@ Dir.mktmpdir do |clone_dir|
     puts "Adding rubocop-view_component gem to Gemfile..."
     File.open("Gemfile", "a") { |f| f.puts "gem 'rubocop-view_component', path: '#{gem_dir}'" }
 
-    # Clear bundler env so the Primer clone gets its own independent bundle
-    clean_env = ENV.to_h.reject { |k, _| k.start_with?("BUNDLE_") }
+    # Use unbundled env so the Primer clone gets its own independent bundle
+    Bundler.with_unbundled_env do
+      puts "Running bundle install..."
+      system("bundle", "install", exception: true)
 
-    puts "Running bundle install..."
-    system(clean_env, "bundle", "install", exception: true)
+      puts "Running RuboCop (ViewComponent cops only)..."
+      rubocop_output, status = Open3.capture2("bundle", "exec", "rubocop", "--require", "rubocop-view_component", "--only", "ViewComponent", "--format", "json")
 
-    puts "Running RuboCop (ViewComponent cops only)..."
-    rubocop_output, = Open3.capture2(clean_env, "bundle", "exec", "rubocop", "--require", "rubocop-view_component", "--only", "ViewComponent", "--format", "json")
+      puts "RuboCop exit status: #{status.exitstatus}"
 
-    data = JSON.parse(rubocop_output)
-    offenses = data["files"].flat_map do |file|
-      file["offenses"].map do |offense|
-        {
-          "path" => file["path"],
-          "line" => offense["location"]["start_line"],
-          "cop" => offense["cop_name"],
-          "message" => offense["message"]
-        }
-      end
-    end
-
-    current_json = "#{JSON.pretty_generate(offenses)}\n"
-
-    case mode
-    when "regenerate"
-      File.write(results_file, current_json)
-      puts "#{offenses.length} offense(s) written to #{results_file}"
-    when "verify"
-      unless File.exist?(results_file)
-        abort "ERROR: #{results_file} not found. Run '#{$PROGRAM_NAME} regenerate' first."
+      if rubocop_output.strip.empty?
+        abort "ERROR: RuboCop produced no output (exit status: #{status.exitstatus})"
       end
 
-      expected_json = File.read(results_file)
+      data = JSON.parse(rubocop_output)
+      offenses = data["files"].flat_map do |file|
+        file["offenses"].map do |offense|
+          {
+            "path" => file["path"],
+            "line" => offense["location"]["start_line"],
+            "cop" => offense["cop_name"],
+            "message" => offense["message"]
+          }
+        end
+      end
 
-      if current_json.strip == expected_json.strip
-        puts "Verification passed: output matches #{results_file}"
-      else
-        puts "Verification failed: output differs from #{results_file}"
-        # Show a simple diff summary
-        expected = JSON.parse(expected_json)
-        added = offenses - expected
-        removed = expected - offenses
+      current_json = "#{JSON.pretty_generate(offenses)}\n"
 
-        added.each { |o| puts "  + #{o["cop"]}: #{o["path"]}:#{o["line"]}" }
-        removed.each { |o| puts "  - #{o["cop"]}: #{o["path"]}:#{o["line"]}" }
+      case mode
+      when "regenerate"
+        File.write(results_file, current_json)
+        puts "#{offenses.length} offense(s) written to #{results_file}"
+      when "verify"
+        unless File.exist?(results_file)
+          abort "ERROR: #{results_file} not found. Run '#{$PROGRAM_NAME} regenerate' first."
+        end
 
-        exit 1
+        expected_json = File.read(results_file)
+
+        if current_json.strip == expected_json.strip
+          puts "Verification passed: output matches #{results_file}"
+        else
+          puts "Verification failed: output differs from #{results_file}"
+          expected = JSON.parse(expected_json)
+          added = offenses - expected
+          removed = expected - offenses
+
+          added.each { |o| puts "  + #{o["cop"]}: #{o["path"]}:#{o["line"]}" }
+          removed.each { |o| puts "  - #{o["cop"]}: #{o["path"]}:#{o["line"]}" }
+
+          exit 1
+        end
       end
     end
   end
