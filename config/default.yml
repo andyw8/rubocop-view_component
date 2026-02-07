@@ -45,3 +45,13 @@ ViewComponent/PreferSlots:
   VersionAdded: '0.1'
   Severity: convention
   StyleGuide: 'https://viewcomponent.org/best_practices.html'
+
+ViewComponent/TestRenderedOutput:
+  Description: 'Test rendered output instead of component instance methods.'
+  Enabled: true
+  VersionAdded: '0.3'
+  Severity: convention
+  StyleGuide: 'https://viewcomponent.org/best_practices.html'
+  Include:
+    - '**/*_test.rb'
+    - '**/*_spec.rb'
