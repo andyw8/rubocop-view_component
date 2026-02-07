@@ -40,11 +40,41 @@ Run RuboCop as usual:
 bundle exec rubocop
 ```
 
+## Configuration
+
+By default, all cops detect classes that inherit from `ViewComponent::Base` or `ApplicationComponent`. If your project uses a different base class (e.g. `Primer::Component`), you can configure additional parent classes under `AllCops`:
+
+```yaml
+# .rubocop.yml
+AllCops:
+  ViewComponentParentClasses:
+    - Primer::Component
+    - MyApp::BaseComponent
+```
+
+This applies to all ViewComponent cops.
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 
 To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+
+## Primer Verification
+
+The cops are tested against [primer/view_components](https://github.com/primer/view_components) as a real-world baseline, and to catch regressions. The script [`verify_against_primer.rb`](script/verify_against_primer.rb) copies the Primer repo, runs all ViewComponent cops against it, and compares the results to a checked-in snapshot ([`expected_primer_failures.json`](spec/expected_primer_failures.json)). This runs automatically in CI.
+
+To verify locally:
+
+```bash
+bundle exec ruby script/verify_against_primer.rb
+```
+
+If you intentionally change cop behavior, regenerate the snapshot:
+
+```bash
+bundle exec ruby script/verify_against_primer.rb --regenerate
+```
 
 ## Contributing
 

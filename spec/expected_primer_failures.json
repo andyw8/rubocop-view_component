@@ -1,0 +1,818 @@
+[
+  {
+    "path": "app/components/primer/alpha/action_bar.rb",
+    "line": 7,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/alpha/action_bar/divider.rb",
+    "line": 9,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/alpha/action_bar/item.rb",
+    "line": 9,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/alpha/action_list.rb",
+    "line": 11,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/alpha/action_list.rb",
+    "line": 53,
+    "cop": "ViewComponent/PreferPrivateMethods",
+    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+  },
+  {
+    "path": "app/components/primer/alpha/action_list.rb",
+    "line": 189,
+    "cop": "ViewComponent/PreferPrivateMethods",
+    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+  },
+  {
+    "path": "app/components/primer/alpha/action_list.rb",
+    "line": 217,
+    "cop": "ViewComponent/PreferPrivateMethods",
+    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+  },
+  {
+    "path": "app/components/primer/alpha/action_list.rb",
+    "line": 228,
+    "cop": "ViewComponent/PreferPrivateMethods",
+    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+  },
+  {
+    "path": "app/components/primer/alpha/action_list.rb",
+    "line": 236,
+    "cop": "ViewComponent/PreferPrivateMethods",
+    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+  },
+  {
+    "path": "app/components/primer/alpha/action_list.rb",
+    "line": 240,
+    "cop": "ViewComponent/PreferPrivateMethods",
+    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+  },
+  {
+    "path": "app/components/primer/alpha/action_list.rb",
+    "line": 244,
+    "cop": "ViewComponent/PreferPrivateMethods",
+    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+  },
+  {
+    "path": "app/components/primer/alpha/action_list.rb",
+    "line": 248,
+    "cop": "ViewComponent/PreferPrivateMethods",
+    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+  },
+  {
+    "path": "app/components/primer/alpha/action_list.rb",
+    "line": 257,
+    "cop": "ViewComponent/PreferPrivateMethods",
+    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+  },
+  {
+    "path": "app/components/primer/alpha/action_list/divider.rb",
+    "line": 7,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/alpha/action_list/divider.rb",
+    "line": 33,
+    "cop": "ViewComponent/PreferPrivateMethods",
+    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+  },
+  {
+    "path": "app/components/primer/alpha/action_list/form_wrapper.rb",
+    "line": 7,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/alpha/action_list/form_wrapper.rb",
+    "line": 53,
+    "cop": "ViewComponent/PreferPrivateMethods",
+    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+  },
+  {
+    "path": "app/components/primer/alpha/action_list/heading.rb",
+    "line": 7,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/alpha/action_list/item.rb",
+    "line": 8,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/alpha/action_menu.rb",
+    "line": 171,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/alpha/action_menu/list.rb",
+    "line": 8,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/alpha/auto_complete.rb",
+    "line": 14,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/alpha/auto_complete/item.rb",
+    "line": 7,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/alpha/banner.rb",
+    "line": 33,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/alpha/button_marketing.rb",
+    "line": 8,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/alpha/check_box.rb",
+    "line": 56,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/alpha/check_box_group.rb",
+    "line": 17,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/alpha/dialog.rb",
+    "line": 20,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/alpha/dialog/body.rb",
+    "line": 8,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/alpha/dialog/footer.rb",
+    "line": 8,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/alpha/dialog/header.rb",
+    "line": 8,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/alpha/dropdown.rb",
+    "line": 7,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/alpha/dropdown/menu.rb",
+    "line": 8,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/alpha/dropdown/menu.rb",
+    "line": 58,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/alpha/dropdown/menu.rb",
+    "line": 96,
+    "cop": "ViewComponent/PreferPrivateMethods",
+    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+  },
+  {
+    "path": "app/components/primer/alpha/form_button.rb",
+    "line": 17,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/alpha/form_control.rb",
+    "line": 39,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/alpha/form_control.rb",
+    "line": 101,
+    "cop": "ViewComponent/PreferPrivateMethods",
+    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+  },
+  {
+    "path": "app/components/primer/alpha/form_control.rb",
+    "line": 107,
+    "cop": "ViewComponent/PreferPrivateMethods",
+    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+  },
+  {
+    "path": "app/components/primer/alpha/hellip_button.rb",
+    "line": 11,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/alpha/hidden_text_expander.rb",
+    "line": 12,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/alpha/image.rb",
+    "line": 9,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/alpha/include_fragment.rb",
+    "line": 8,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/alpha/layout.rb",
+    "line": 20,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/alpha/layout.rb",
+    "line": 108,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/alpha/layout.rb",
+    "line": 144,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/alpha/menu.rb",
+    "line": 6,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/alpha/multi_input.rb",
+    "line": 38,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/alpha/navigation/tab.rb",
+    "line": 12,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/alpha/octicon_symbols.rb",
+    "line": 8,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/alpha/overlay.rb",
+    "line": 22,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/alpha/overlay/body.rb",
+    "line": 8,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/alpha/overlay/footer.rb",
+    "line": 16,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/alpha/overlay/footer.rb",
+    "line": 22,
+    "cop": "ViewComponent/PreferSlots",
+    "message": "Consider using `renders_one :align` instead of passing HTML as a parameter. This maintains Rails' automatic HTML escaping."
+  },
+  {
+    "path": "app/components/primer/alpha/overlay/header.rb",
+    "line": 8,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/alpha/radio_button.rb",
+    "line": 17,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/alpha/radio_button_group.rb",
+    "line": 17,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/alpha/segmented_control.rb",
+    "line": 9,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/alpha/select.rb",
+    "line": 17,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/alpha/select_panel.rb",
+    "line": 231,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/alpha/skeleton_box.rb",
+    "line": 7,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/alpha/stack.rb",
+    "line": 6,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/alpha/stack_item.rb",
+    "line": 6,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/alpha/submit_button.rb",
+    "line": 17,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/alpha/tab_container.rb",
+    "line": 9,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/alpha/tab_nav.rb",
+    "line": 14,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/alpha/tab_panels.rb",
+    "line": 6,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/alpha/text_area.rb",
+    "line": 15,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/alpha/text_field.rb",
+    "line": 15,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/alpha/toggle_switch.rb",
+    "line": 8,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/alpha/toggle_switch.rb",
+    "line": 91,
+    "cop": "ViewComponent/PreferPrivateMethods",
+    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+  },
+  {
+    "path": "app/components/primer/alpha/toggle_switch.rb",
+    "line": 95,
+    "cop": "ViewComponent/PreferPrivateMethods",
+    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+  },
+  {
+    "path": "app/components/primer/alpha/tooltip.rb",
+    "line": 24,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/alpha/tree_view.rb",
+    "line": 357,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/alpha/tree_view/icon.rb",
+    "line": 10,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/alpha/tree_view/icon_pair.rb",
+    "line": 11,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/alpha/tree_view/leading_action.rb",
+    "line": 10,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/alpha/tree_view/leaf_node.rb",
+    "line": 10,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/alpha/tree_view/loading_failure_message.rb",
+    "line": 10,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/alpha/tree_view/node.rb",
+    "line": 10,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/alpha/tree_view/node.rb",
+    "line": 155,
+    "cop": "ViewComponent/PreferPrivateMethods",
+    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+  },
+  {
+    "path": "app/components/primer/alpha/tree_view/skeleton_loader.rb",
+    "line": 10,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/alpha/tree_view/spinner_loader.rb",
+    "line": 10,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/alpha/tree_view/sub_tree.rb",
+    "line": 10,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/alpha/tree_view/sub_tree_container.rb",
+    "line": 8,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/alpha/tree_view/sub_tree_node.rb",
+    "line": 10,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/alpha/tree_view/visual.rb",
+    "line": 10,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/alpha/underline_nav.rb",
+    "line": 17,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/alpha/underline_panels.rb",
+    "line": 6,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/beta/auto_complete.rb",
+    "line": 14,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/beta/auto_complete/item.rb",
+    "line": 8,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/beta/avatar.rb",
+    "line": 19,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/beta/avatar.rb",
+    "line": 22,
+    "cop": "ViewComponent/PreferPrivateMethods",
+    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+  },
+  {
+    "path": "app/components/primer/beta/avatar_stack.rb",
+    "line": 6,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/beta/base_button.rb",
+    "line": 6,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/beta/blankslate.rb",
+    "line": 13,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/beta/border_box.rb",
+    "line": 6,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/beta/border_box/header.rb",
+    "line": 9,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/beta/breadcrumbs.rb",
+    "line": 19,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/beta/breadcrumbs.rb",
+    "line": 48,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/beta/button.rb",
+    "line": 11,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/beta/button.rb",
+    "line": 120,
+    "cop": "ViewComponent/PreferSlots",
+    "message": "Consider using `renders_one :align` instead of passing HTML as a parameter. This maintains Rails' automatic HTML escaping."
+  },
+  {
+    "path": "app/components/primer/beta/button_group.rb",
+    "line": 6,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/beta/button_group.rb",
+    "line": 102,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/beta/clipboard_copy.rb",
+    "line": 15,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/beta/close_button.rb",
+    "line": 11,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/beta/counter.rb",
+    "line": 11,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/beta/details.rb",
+    "line": 6,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/beta/flash.rb",
+    "line": 8,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/beta/heading.rb",
+    "line": 20,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/beta/icon_button.rb",
+    "line": 22,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/beta/label.rb",
+    "line": 9,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/beta/link.rb",
+    "line": 6,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/beta/markdown.rb",
+    "line": 7,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/beta/nav_list.rb",
+    "line": 17,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/beta/nav_list.rb",
+    "line": 116,
+    "cop": "ViewComponent/PreferPrivateMethods",
+    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+  },
+  {
+    "path": "app/components/primer/beta/nav_list.rb",
+    "line": 139,
+    "cop": "ViewComponent/PreferPrivateMethods",
+    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+  },
+  {
+    "path": "app/components/primer/beta/nav_list/heading.rb",
+    "line": 9,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/beta/octicon.rb",
+    "line": 9,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/beta/popover.rb",
+    "line": 8,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/beta/progress_bar.rb",
+    "line": 6,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/beta/relative_time.rb",
+    "line": 6,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/beta/spinner.rb",
+    "line": 6,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/beta/state.rb",
+    "line": 6,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/beta/subhead.rb",
+    "line": 14,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/beta/text.rb",
+    "line": 6,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/beta/timeline_item.rb",
+    "line": 6,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/beta/timeline_item.rb",
+    "line": 59,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/beta/truncate.rb",
+    "line": 6,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/beta/truncate.rb",
+    "line": 39,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/box.rb",
+    "line": 5,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/conditional_wrapper.rb",
+    "line": 7,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/content.rb",
+    "line": 5,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/icon_button.rb",
+    "line": 14,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/tooltip.rb",
+    "line": 5,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/components/primer/truncate.rb",
+    "line": 5,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  }
+]

@@ -15,12 +15,16 @@ module RuboCop
           view_component_parent?(parent_class)
         end
 
-        # Check if node represents ViewComponent::Base or ApplicationComponent
+        # Check if node represents ViewComponent::Base, ApplicationComponent,
+        # or a configured additional parent class
         def view_component_parent?(node)
           return false unless node.const_type?
 
           source = node.source
-          source == "ViewComponent::Base" || source == "ApplicationComponent"
+          return true if source == "ViewComponent::Base" || source == "ApplicationComponent"
+
+          additional = config.for_all_cops["ViewComponentParentClasses"] || []
+          additional.include?(source)
         end
 
         # Find the enclosing class node
