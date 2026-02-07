@@ -54,6 +54,22 @@ AllCops:
 
 This applies to all ViewComponent cops.
 
+## Primer Verification
+
+The cops are tested against [primer/view_components](https://github.com/primer/view_components) as a real-world baseline, and to catch regressions. The script [`verify_against_primer.rb`](script/verify_against_primer.rb) clones the Primer repo, runs all ViewComponent cops against it, and compares the results to a checked-in snapshot ([`expected_primer_failures.json`](spec/expected_primer_failures.json)). This runs automatically in CI.
+
+To verify locally:
+
+```bash
+bundle exec ruby script/verify_against_primer.rb
+```
+
+If you intentionally change cop behavior, regenerate the snapshot:
+
+```bash
+bundle exec ruby script/verify_against_primer.rb --regenerate
+```
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
