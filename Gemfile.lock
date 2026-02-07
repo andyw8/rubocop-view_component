@@ -105,7 +105,6 @@ DEPENDENCIES
   minitest (~> 5.16)
   rake (~> 13.0)
   rspec
-  rubocop (>= 1.72.2)
   rubocop-view_component!
   standard (~> 1.3)
 

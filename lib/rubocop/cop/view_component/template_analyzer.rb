@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "herb"
-require "set"
 
 module RuboCop
   module Cop
