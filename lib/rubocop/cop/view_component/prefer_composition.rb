@@ -21,7 +21,7 @@ module RuboCop
         include ViewComponent::Base
 
         MSG = "Avoid inheriting from another ViewComponent. " \
-              "Use composition instead by rendering the parent component in the template."
+              "Instead, render the parent component in your template: `<%= render ParentComponent.new %>`"
 
         def on_class(node)
           parent_class = node.parent_class
