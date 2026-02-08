@@ -9,7 +9,7 @@ module RuboCop
       #
       # @example
       #   # bad
-      #   class UserCard < BaseCard
+      #   class UserCardComponent < BaseCardComponent
       #   end
       #
       #   # good
