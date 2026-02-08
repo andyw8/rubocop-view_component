@@ -63,7 +63,7 @@ def configure_rubocop
   config ||= {}
   config["AllCops"] ||= {}
 
-  # Configure parent classes for GOV.UK Components
+  # Configure parent classes for x-govuk components
   parents = config["AllCops"]["ViewComponentParentClasses"] || []
   %w[GovukComponent::Base].each do |klass|
     parents << klass unless parents.include?(klass)

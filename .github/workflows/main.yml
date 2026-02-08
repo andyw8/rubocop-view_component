@@ -45,7 +45,7 @@ jobs:
 
   govuk_verification:
     runs-on: ubuntu-latest
-    name: GOV.UK Components Verification
+    name: x-govuk Components Verification
     steps:
       - uses: actions/checkout@v4
         with:
@@ -55,5 +55,5 @@ jobs:
         with:
           ruby-version: '3.4.7'
           bundler-cache: true
-      - name: Verify against GOV.UK Components
+      - name: Verify against x-govuk Components
         run: script/verify_against_govuk

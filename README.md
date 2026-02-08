@@ -96,7 +96,7 @@ To force download the latest Primer source:
 script/verify_against_primer --update
 ```
 
-### GOV.UK Components
+### x-govuk Components
 
 The script [`verify_against_govuk`](script/verify_against_govuk) downloads the [x-govuk/govuk-components](https://github.com/x-govuk/govuk-components) repo (cached in `verification/govuk/`), runs all ViewComponent cops against it, and compares the results to a checked-in snapshot ([`expected_govuk_failures.json`](spec/expected_govuk_failures.json)). This runs automatically in CI.
 
@@ -112,7 +112,7 @@ If you intentionally change cop behavior, regenerate the snapshot:
 script/verify_against_govuk --regenerate
 ```
 
-To force download the latest GOV.UK Components source:
+To force download the latest x-govuk source:
 
 ```bash
 script/verify_against_govuk --update
