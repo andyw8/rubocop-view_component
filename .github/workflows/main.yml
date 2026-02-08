@@ -41,4 +41,4 @@ jobs:
           ruby-version: '3.4.7'
           bundler-cache: true
       - name: Verify against Primer ViewComponents
-        run: bundle exec ruby script/verify_against_primer.rb
+        run: script/verify_against_primer
