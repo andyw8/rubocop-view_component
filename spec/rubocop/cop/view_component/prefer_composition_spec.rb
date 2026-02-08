@@ -14,7 +14,7 @@ RSpec.describe RuboCop::Cop::ViewComponent::PreferComposition, :config do
 
     it "registers an offense for namespaced component parent" do
       expect_offense(<<~RUBY)
-        class UserCard < Admin::BaseComponent
+        class UserCard < Admin::CardComponent
                          ^^^^^^^^^^^^^^^^^^^^ ViewComponent/PreferComposition: Avoid inheriting from another ViewComponent.
         end
       RUBY
