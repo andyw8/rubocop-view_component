@@ -1,3 +1,4 @@
+#!/usr/bin/env ruby
 # frozen_string_literal: true
 
 require "json"
@@ -10,25 +11,35 @@ require "bundler"
 GEM_DIR = File.expand_path("..", __dir__)
 RESULTS_FILE = File.join(GEM_DIR, "spec", "expected_primer_failures.json")
 TARBALL_URL = "https://github.com/primer/view_components/archive/refs/heads/main.tar.gz"
+VERIFICATION_DIR = File.join(GEM_DIR, "verification", "primer")
 
 def main
   mode = ARGV.include?("--regenerate") ? :regenerate : :verify
+  force_update = ARGV.include?("--update")
 
-  Dir.mktmpdir do |dir|
-    download_source(dir)
+  if force_update && Dir.exist?(VERIFICATION_DIR)
+    puts "Removing existing primer source for update..."
+    FileUtils.rm_rf(VERIFICATION_DIR)
+  end
 
-    Dir.chdir(dir) do
-      configure_rubocop
-      add_gem_to_gemfile
+  if Dir.exist?(VERIFICATION_DIR) && !Dir.empty?(VERIFICATION_DIR)
+    puts "Using existing primer source at #{VERIFICATION_DIR}"
+  else
+    FileUtils.mkdir_p(VERIFICATION_DIR)
+    download_source(VERIFICATION_DIR)
+  end
 
-      Bundler.with_unbundled_env do
-        output = run_rubocop
-        offenses = extract_offenses(output)
+  Dir.chdir(VERIFICATION_DIR) do
+    configure_rubocop
+    add_gem_to_gemfile
 
-        case mode
-        when :regenerate then regenerate(offenses)
-        when :verify then verify(offenses)
-        end
+    Bundler.with_unbundled_env do
+      output = run_rubocop
+      offenses = extract_offenses(output)
+
+      case mode
+      when :regenerate then regenerate(offenses)
+      when :verify then verify(offenses)
       end
     end
   end

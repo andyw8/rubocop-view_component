@@ -72,18 +72,24 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Primer Verification
 
-The cops are tested against [primer/view_components](https://github.com/primer/view_components) as a real-world baseline, and to catch regressions. The script [`verify_against_primer.rb`](script/verify_against_primer.rb) copies the Primer repo, runs all ViewComponent cops against it, and compares the results to a checked-in snapshot ([`expected_primer_failures.json`](spec/expected_primer_failures.json)). This runs automatically in CI.
+The cops are tested against [primer/view_components](https://github.com/primer/view_components) as a real-world baseline, and to catch regressions. The script [`verify_against_primer`](script/verify_against_primer) downloads the Primer repo (cached in `verification/primer/`), runs all ViewComponent cops against it, and compares the results to a checked-in snapshot ([`expected_primer_failures.json`](spec/expected_primer_failures.json)). This runs automatically in CI.
 
 To verify locally:
 
 ```bash
-bundle exec ruby script/verify_against_primer.rb
+script/verify_against_primer
 ```
 
 If you intentionally change cop behavior, regenerate the snapshot:
 
 ```bash
-bundle exec ruby script/verify_against_primer.rb --regenerate
+script/verify_against_primer --regenerate
+```
+
+To force download the latest Primer source:
+
+```bash
+script/verify_against_primer --update
 ```
 
 ## Contributing
