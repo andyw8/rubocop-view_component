@@ -3,78 +3,64 @@
 module RuboCop
   module Cop
     module ViewComponent
-      # Detects test assertions against component instance methods
-      # and suggests using `render_inline` with content assertions instead.
+      # Ensures that ViewComponent tests use `render_inline` to test rendered output
+      # rather than testing component methods directly.
       #
       # This cop is only enabled for test files by default (see config).
       #
       # @example
       #   # bad
-      #   component = TitleComponent.new("hello")
-      #   assert_equal "HELLO", component.formatted_title
-      #
-      #   # bad
-      #   expect(component.formatted_title).to eq("HELLO")
-      #
-      #   # good
-      #   render_inline TitleComponent.new("hello")
-      #   assert_text "HELLO"
+      #   def test_formatted_title
+      #     component = TitleComponent.new("hello")
+      #     assert_equal "HELLO", component.formatted_title
+      #   end
       #
       #   # good
-      #   expect(page).to have_text("HELLO")
+      #   def test_formatted_title
+      #     render_inline TitleComponent.new("hello")
+      #     assert_text "HELLO"
+      #   end
       #
       class TestRenderedOutput < RuboCop::Cop::Base
-        MSG = "Avoid testing ViewComponent methods directly. " \
-              "Use `render_inline` and assert against rendered output instead."
+        MSG = "Test instantiates a component but doesn't use `render_inline` or `render_preview`. " \
+              "Test the rendered output instead of component methods directly."
 
-        # Track local variable assignments of component instances
-        def on_lvasgn(node)
-          var_name = node.children[0]
-          value = node.children[1]
-          return unless value
+        # Check Minitest-style test methods
+        def on_def(node)
+          method_name = node.method_name.to_s
+          return unless method_name.start_with?("test_")
+          return unless instantiates_component?(node)
+          return if contains_render_method?(node)
 
-          if component_new_call?(value)
-            component_variables[var_name] = true
-          end
+          add_offense(node)
         end
 
-        # Detect method calls on component instances
-        def on_send(node)
-          receiver = node.receiver
-          return unless receiver
-
-          # Inline: UserComponent.new("hello").some_method
-          if component_new_call?(receiver)
-            return if configuration_method?(node.method_name)
-
-            add_offense(node)
-            return
-          end
-
-          # Variable: component.some_method
-          return unless receiver.lvar_type?
-
-          var_name = receiver.children[0]
-          return unless component_variables[var_name]
-          return if ignored_method?(node.method_name)
+        # Check RSpec-style it blocks
+        def on_block(node)
+          return unless rspec_it_block?(node)
+          return unless instantiates_component?(node)
+          return if contains_render_method?(node)
 
           add_offense(node)
         end
 
         private
 
-        def component_variables
-          @component_variables ||= {}
+        def instantiates_component?(node)
+          node.each_descendant(:send).any? do |send_node|
+            next unless send_node.method_name == :new
+
+            receiver = send_node.receiver
+            next unless receiver&.const_type?
+
+            const_name(receiver).end_with?("Component")
+          end
         end
 
-        def component_new_call?(node)
-          return false unless node.send_type?
-          return false unless node.method_name == :new
-
-          receiver = node.receiver
-          return false unless receiver&.const_type?
-
-          const_name(receiver).end_with?("Component")
+        def contains_render_method?(node)
+          node.each_descendant(:send).any? do |send_node|
+            %i[render_inline render_preview].include?(send_node.method_name)
+          end
         end
 
         def const_name(node)
@@ -87,13 +73,11 @@ module RuboCop
           end
         end
 
-        def ignored_method?(method_name)
-          %i[class is_a? kind_of? instance_of? respond_to? nil?].include?(method_name)
-        end
+        def rspec_it_block?(node)
+          send_node = node.send_node
+          return false unless send_node
 
-        def configuration_method?(method_name)
-          # Allow ViewComponent slot and content configuration methods
-          method_name.to_s.start_with?("with_")
+          %i[it specify example].include?(send_node.method_name)
         end
       end
     end

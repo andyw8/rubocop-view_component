@@ -823,38 +823,38 @@
   },
   {
     "path": "test/components/base_component_test.rb",
-    "line": 30,
+    "line": 28,
     "cop": "ViewComponent/TestRenderedOutput",
-    "message": "Avoid testing ViewComponent methods directly. Use `render_inline` and assert against rendered output instead."
+    "message": "Test instantiates a component but doesn't use `render_inline` or `render_preview`. Test the rendered output instead of component methods directly."
   },
   {
     "path": "test/components/base_component_test.rb",
-    "line": 31,
+    "line": 34,
     "cop": "ViewComponent/TestRenderedOutput",
-    "message": "Avoid testing ViewComponent methods directly. Use `render_inline` and assert against rendered output instead."
+    "message": "Test instantiates a component but doesn't use `render_inline` or `render_preview`. Test the rendered output instead of component methods directly."
   },
   {
-    "path": "test/components/base_component_test.rb",
-    "line": 36,
+    "path": "test/components/component_test.rb",
+    "line": 236,
     "cop": "ViewComponent/TestRenderedOutput",
-    "message": "Avoid testing ViewComponent methods directly. Use `render_inline` and assert against rendered output instead."
+    "message": "Test instantiates a component but doesn't use `render_inline` or `render_preview`. Test the rendered output instead of component methods directly."
   },
   {
-    "path": "test/components/base_component_test.rb",
-    "line": 37,
+    "path": "test/components/component_test.rb",
+    "line": 247,
     "cop": "ViewComponent/TestRenderedOutput",
-    "message": "Avoid testing ViewComponent methods directly. Use `render_inline` and assert against rendered output instead."
+    "message": "Test instantiates a component but doesn't use `render_inline` or `render_preview`. Test the rendered output instead of component methods directly."
   },
   {
     "path": "test/lib/primer/attributes_helper_test.rb",
-    "line": 14,
+    "line": 8,
     "cop": "ViewComponent/TestRenderedOutput",
-    "message": "Avoid testing ViewComponent methods directly. Use `render_inline` and assert against rendered output instead."
+    "message": "Test instantiates a component but doesn't use `render_inline` or `render_preview`. Test the rendered output instead of component methods directly."
   },
   {
     "path": "test/lib/primer/attributes_helper_test.rb",
-    "line": 29,
+    "line": 23,
     "cop": "ViewComponent/TestRenderedOutput",
-    "message": "Avoid testing ViewComponent methods directly. Use `render_inline` and assert against rendered output instead."
+    "message": "Test instantiates a component but doesn't use `render_inline` or `render_preview`. Test the rendered output instead of component methods directly."
   }
 ]

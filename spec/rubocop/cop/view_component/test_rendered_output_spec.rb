@@ -3,78 +3,120 @@
 RSpec.describe RuboCop::Cop::ViewComponent::TestRenderedOutput, :config do
   let(:config) { RuboCop::Config.new }
 
-  context "when calling methods on a component variable" do
-    it "registers an offense" do
-      expect_offense(<<~RUBY)
-        component = UserComponent.new("hello")
-        component.formatted_title
-        ^^^^^^^^^^^^^^^^^^^^^^^^^ ViewComponent/TestRenderedOutput: Avoid testing ViewComponent methods directly. Use `render_inline` and assert against rendered output instead.
-      RUBY
+  context "with Minitest-style tests" do
+    context "when test instantiates a component but doesn't render" do
+      it "registers an offense" do
+        expect_offense(<<~RUBY)
+          def test_formatted_title
+          ^^^^^^^^^^^^^^^^^^^^^^^^ ViewComponent/TestRenderedOutput: Test instantiates a component but doesn't use `render_inline` or `render_preview`. Test the rendered output instead of component methods directly.
+            component = UserComponent.new("hello")
+            assert_equal "HELLO", component.formatted_title
+          end
+        RUBY
+      end
+    end
+
+    context "when test instantiates a component and uses render_inline" do
+      it "does not register an offense" do
+        expect_no_offenses(<<~RUBY)
+          def test_formatted_title
+            render_inline UserComponent.new("hello")
+            assert_text "HELLO"
+          end
+        RUBY
+      end
+    end
+
+    context "when test instantiates a component and uses render_preview" do
+      it "does not register an offense" do
+        expect_no_offenses(<<~RUBY)
+          def test_preview
+            render_preview(:default)
+            assert_selector ".component"
+          end
+        RUBY
+      end
+    end
+
+    context "when test doesn't instantiate any components" do
+      it "does not register an offense" do
+        expect_no_offenses(<<~RUBY)
+          def test_helper_method
+            user = User.new("hello")
+            assert_equal "HELLO", user.formatted_name
+          end
+        RUBY
+      end
+    end
+
+    context "when test uses with_ configuration methods" do
+      it "does not register an offense" do
+        expect_no_offenses(<<~RUBY)
+          def test_with_content
+            render_inline(UserComponent.new.with_content("Button"))
+            assert_text "Button"
+          end
+        RUBY
+      end
+    end
+
+    context "when method doesn't start with test_" do
+      it "does not register an offense even with component instantiation" do
+        expect_no_offenses(<<~RUBY)
+          def helper_method
+            component = UserComponent.new("hello")
+            component.formatted_title
+          end
+        RUBY
+      end
+    end
+
+    context "when test instantiates a namespaced component" do
+      it "registers an offense" do
+        expect_offense(<<~RUBY)
+          def test_namespaced
+          ^^^^^^^^^^^^^^^^^^^ ViewComponent/TestRenderedOutput: Test instantiates a component but doesn't use `render_inline` or `render_preview`. Test the rendered output instead of component methods directly.
+            component = Admin::UserComponent.new("hello")
+            assert_equal "HELLO", component.formatted_title
+          end
+        RUBY
+      end
     end
   end
 
-  context "when calling methods inline on a component instance" do
-    it "registers an offense" do
-      expect_offense(<<~RUBY)
-        UserComponent.new("hello").formatted_title
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ ViewComponent/TestRenderedOutput: Avoid testing ViewComponent methods directly. Use `render_inline` and assert against rendered output instead.
-      RUBY
-    end
-  end
-
-  context "when calling configuration methods on a component instance" do
-    it "does not register an offense for with_ methods" do
-      expect_no_offenses(<<~RUBY)
-        render_inline(UserComponent.new("hello").with_content("Button"))
-      RUBY
+  context "with RSpec-style tests" do
+    context "when it block instantiates a component but doesn't render" do
+      it "registers an offense" do
+        expect_offense(<<~RUBY)
+          it "formats the title" do
+          ^^^^^^^^^^^^^^^^^^^^^^^^^ ViewComponent/TestRenderedOutput: Test instantiates a component but doesn't use `render_inline` or `render_preview`. Test the rendered output instead of component methods directly.
+            component = UserComponent.new("hello")
+            expect(component.formatted_title).to eq("HELLO")
+          end
+        RUBY
+      end
     end
 
-    it "does not register an offense for with_ slot methods" do
-      expect_no_offenses(<<~RUBY)
-        render_inline(UserComponent.new.with_leading_visual_icon(icon: :star))
-      RUBY
+    context "when it block instantiates a component and uses render_inline" do
+      it "does not register an offense" do
+        expect_no_offenses(<<~RUBY)
+          it "formats the title" do
+            render_inline UserComponent.new("hello")
+            expect(page).to have_text("HELLO")
+          end
+        RUBY
+      end
     end
 
-    it "does not register an offense for chained with_ methods" do
-      expect_no_offenses(<<~RUBY)
-        render_inline(UserComponent.new.with_content("text").with_tooltip(text: "Tooltip"))
-      RUBY
-    end
-  end
-
-  context "when using render_inline" do
-    it "does not register an offense" do
-      expect_no_offenses(<<~RUBY)
-        render_inline UserComponent.new("hello")
-      RUBY
-    end
-  end
-
-  context "when calling methods on non-component variables" do
-    it "does not register an offense" do
-      expect_no_offenses(<<~RUBY)
-        user = User.new("hello")
-        user.formatted_name
-      RUBY
-    end
-  end
-
-  context "when using reflection methods on a component" do
-    it "does not register an offense" do
-      expect_no_offenses(<<~RUBY)
-        component = UserComponent.new("hello")
-        component.is_a?(ViewComponent::Base)
-      RUBY
-    end
-  end
-
-  context "when calling methods on a namespaced component" do
-    it "registers an offense" do
-      expect_offense(<<~RUBY)
-        component = Admin::UserComponent.new("hello")
-        component.formatted_title
-        ^^^^^^^^^^^^^^^^^^^^^^^^^ ViewComponent/TestRenderedOutput: Avoid testing ViewComponent methods directly. Use `render_inline` and assert against rendered output instead.
-      RUBY
+    context "when it block doesn't instantiate components" do
+      it "does not register an offense" do
+        expect_no_offenses(<<~RUBY)
+          it "formats the name" do
+            user = User.new("hello")
+            expect(user.formatted_name).to eq("HELLO")
+          end
+        RUBY
+      end
     end
   end
 end
