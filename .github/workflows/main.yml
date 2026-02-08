@@ -41,7 +41,7 @@ jobs:
           ruby-version: '3.4.7'
           bundler-cache: true
       - name: Verify against Primer ViewComponents
-        run: script/verify_against_primer
+        run: script/verify primer
 
   govuk_verification:
     runs-on: ubuntu-latest
@@ -56,4 +56,4 @@ jobs:
           ruby-version: '3.4.7'
           bundler-cache: true
       - name: Verify against x-govuk Components
-        run: script/verify_against_govuk
+        run: script/verify govuk

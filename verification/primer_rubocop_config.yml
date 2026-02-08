@@ -1,0 +1,19 @@
+AllCops:
+  ViewComponentParentClasses:
+    - Primer::Component
+    - Primer::BaseComponent
+
+# Primer::Forms::BaseComponent is not a ViewComponent - it's a custom base class
+# for a forms framework that mimics the component interface but doesn't inherit
+# from ViewComponent::Base
+ViewComponent/PreferComposition:
+  Exclude:
+    - app/lib/primer/forms/**/*
+    - test/lib/primer/forms/**/*
+
+# These tests intentionally test internal implementation details or helper methods
+ViewComponent/TestRenderedOutput:
+  Exclude:
+    - test/components/base_component_test.rb
+    - test/components/component_test.rb
+    - test/lib/primer/attributes_helper_test.rb
