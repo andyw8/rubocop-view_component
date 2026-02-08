@@ -64,6 +64,17 @@ def configure_rubocop
     parents << klass unless parents.include?(klass)
   end
   config["AllCops"]["ViewComponentParentClasses"] = parents
+
+  # Exclude Primer::Forms from PreferComposition cop
+  # Primer::Forms::BaseComponent is not a ViewComponent - it's a custom base class
+  # for a forms framework that mimics the component interface but doesn't inherit
+  # from ViewComponent::Base
+  config["ViewComponent/PreferComposition"] ||= {}
+  config["ViewComponent/PreferComposition"]["Exclude"] = [
+    "app/lib/primer/forms/**/*",
+    "test/lib/primer/forms/**/*"
+  ]
+
   File.write(".rubocop.yml", YAML.dump(config))
 end
 
