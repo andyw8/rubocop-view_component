@@ -51,7 +51,7 @@ ViewComponent/TestRenderedOutput:
   Enabled: true
   VersionAdded: '0.3'
   Severity: convention
-  StyleGuide: 'https://viewcomponent.org/best_practices.html'
+  StyleGuide: 'https://viewcomponent.org/guide/testing.html'
   Include:
     - '**/*_test.rb'
     - '**/*_spec.rb'
