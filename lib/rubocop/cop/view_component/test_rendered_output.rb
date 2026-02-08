@@ -45,6 +45,8 @@ module RuboCop
 
           # Inline: UserComponent.new("hello").some_method
           if component_new_call?(receiver)
+            return if configuration_method?(node.method_name)
+
             add_offense(node)
             return
           end
@@ -87,6 +89,11 @@ module RuboCop
 
         def ignored_method?(method_name)
           %i[class is_a? kind_of? instance_of? respond_to? nil?].include?(method_name)
+        end
+
+        def configuration_method?(method_name)
+          # Allow ViewComponent slot and content configuration methods
+          method_name.to_s.start_with?("with_")
         end
       end
     end

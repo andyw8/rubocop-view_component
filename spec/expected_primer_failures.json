@@ -820,5 +820,41 @@
     "line": 5,
     "cop": "ViewComponent/ComponentSuffix",
     "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "test/components/base_component_test.rb",
+    "line": 30,
+    "cop": "ViewComponent/TestRenderedOutput",
+    "message": "Avoid testing ViewComponent methods directly. Use `render_inline` and assert against rendered output instead."
+  },
+  {
+    "path": "test/components/base_component_test.rb",
+    "line": 31,
+    "cop": "ViewComponent/TestRenderedOutput",
+    "message": "Avoid testing ViewComponent methods directly. Use `render_inline` and assert against rendered output instead."
+  },
+  {
+    "path": "test/components/base_component_test.rb",
+    "line": 36,
+    "cop": "ViewComponent/TestRenderedOutput",
+    "message": "Avoid testing ViewComponent methods directly. Use `render_inline` and assert against rendered output instead."
+  },
+  {
+    "path": "test/components/base_component_test.rb",
+    "line": 37,
+    "cop": "ViewComponent/TestRenderedOutput",
+    "message": "Avoid testing ViewComponent methods directly. Use `render_inline` and assert against rendered output instead."
+  },
+  {
+    "path": "test/lib/primer/attributes_helper_test.rb",
+    "line": 14,
+    "cop": "ViewComponent/TestRenderedOutput",
+    "message": "Avoid testing ViewComponent methods directly. Use `render_inline` and assert against rendered output instead."
+  },
+  {
+    "path": "test/lib/primer/attributes_helper_test.rb",
+    "line": 29,
+    "cop": "ViewComponent/TestRenderedOutput",
+    "message": "Avoid testing ViewComponent methods directly. Use `render_inline` and assert against rendered output instead."
   }
 ]

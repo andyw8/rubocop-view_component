@@ -22,6 +22,26 @@ RSpec.describe RuboCop::Cop::ViewComponent::TestRenderedOutput, :config do
     end
   end
 
+  context "when calling configuration methods on a component instance" do
+    it "does not register an offense for with_ methods" do
+      expect_no_offenses(<<~RUBY)
+        render_inline(UserComponent.new("hello").with_content("Button"))
+      RUBY
+    end
+
+    it "does not register an offense for with_ slot methods" do
+      expect_no_offenses(<<~RUBY)
+        render_inline(UserComponent.new.with_leading_visual_icon(icon: :star))
+      RUBY
+    end
+
+    it "does not register an offense for chained with_ methods" do
+      expect_no_offenses(<<~RUBY)
+        render_inline(UserComponent.new.with_content("text").with_tooltip(text: "Tooltip"))
+      RUBY
+    end
+  end
+
   context "when using render_inline" do
     it "does not register an offense" do
       expect_no_offenses(<<~RUBY)
