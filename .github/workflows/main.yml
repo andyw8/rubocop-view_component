@@ -42,3 +42,18 @@ jobs:
           bundler-cache: true
       - name: Verify against Primer ViewComponents
         run: script/verify_against_primer
+
+  govuk_verification:
+    runs-on: ubuntu-latest
+    name: GOV.UK Components Verification
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.4.7'
+          bundler-cache: true
+      - name: Verify against GOV.UK Components
+        run: script/verify_against_govuk

@@ -1,0 +1,410 @@
+[
+  {
+    "path": "app/components/govuk_component/accordion_component.rb",
+    "line": 17,
+    "cop": "ViewComponent/PreferSlots",
+    "message": "Consider using `renders_one :attributes` instead of passing HTML as a parameter. This maintains Rails' automatic HTML escaping. (https://viewcomponent.org/best_practices.html)"
+  },
+  {
+    "path": "app/components/govuk_component/accordion_component/section_component.rb",
+    "line": 9,
+    "cop": "ViewComponent/PreferSlots",
+    "message": "Consider using `renders_one :attributes` instead of passing HTML as a parameter. This maintains Rails' automatic HTML escaping. (https://viewcomponent.org/best_practices.html)"
+  },
+  {
+    "path": "app/components/govuk_component/back_link_component.rb",
+    "line": 4,
+    "cop": "ViewComponent/PreferSlots",
+    "message": "Consider using `renders_one :attributes` instead of passing HTML as a parameter. This maintains Rails' automatic HTML escaping. (https://viewcomponent.org/best_practices.html)"
+  },
+  {
+    "path": "app/components/govuk_component/base.rb",
+    "line": 1,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`. (https://viewcomponent.org/best_practices.html)"
+  },
+  {
+    "path": "app/components/govuk_component/base.rb",
+    "line": 8,
+    "cop": "ViewComponent/PreferSlots",
+    "message": "Consider using `renders_one :attributes` instead of passing HTML as a parameter. This maintains Rails' automatic HTML escaping. (https://viewcomponent.org/best_practices.html)"
+  },
+  {
+    "path": "app/components/govuk_component/base.rb",
+    "line": 29,
+    "cop": "ViewComponent/PreferPrivateMethods",
+    "message": "Consider making this method private. Only ViewComponent interface methods should be public. (https://viewcomponent.org/best_practices.html)"
+  },
+  {
+    "path": "app/components/govuk_component/base.rb",
+    "line": 35,
+    "cop": "ViewComponent/PreferPrivateMethods",
+    "message": "Consider making this method private. Only ViewComponent interface methods should be public. (https://viewcomponent.org/best_practices.html)"
+  },
+  {
+    "path": "app/components/govuk_component/breadcrumbs_component.rb",
+    "line": 9,
+    "cop": "ViewComponent/PreferSlots",
+    "message": "Consider using `renders_one :attributes` instead of passing HTML as a parameter. This maintains Rails' automatic HTML escaping. (https://viewcomponent.org/best_practices.html)"
+  },
+  {
+    "path": "app/components/govuk_component/cookie_banner_component.rb",
+    "line": 12,
+    "cop": "ViewComponent/PreferSlots",
+    "message": "Consider using `renders_one :attributes` instead of passing HTML as a parameter. This maintains Rails' automatic HTML escaping. (https://viewcomponent.org/best_practices.html)"
+  },
+  {
+    "path": "app/components/govuk_component/cookie_banner_component/message_component.rb",
+    "line": 7,
+    "cop": "ViewComponent/PreferSlots",
+    "message": "Consider using `renders_one :attributes` instead of passing HTML as a parameter. This maintains Rails' automatic HTML escaping. (https://viewcomponent.org/best_practices.html)"
+  },
+  {
+    "path": "app/components/govuk_component/details_component.rb",
+    "line": 6,
+    "cop": "ViewComponent/PreferSlots",
+    "message": "Consider using `renders_one :attributes` instead of passing HTML as a parameter. This maintains Rails' automatic HTML escaping. (https://viewcomponent.org/best_practices.html)"
+  },
+  {
+    "path": "app/components/govuk_component/exit_this_page_component.rb",
+    "line": 16,
+    "cop": "ViewComponent/PreferSlots",
+    "message": "Consider using `renders_one :attributes` instead of passing HTML as a parameter. This maintains Rails' automatic HTML escaping. (https://viewcomponent.org/best_practices.html)"
+  },
+  {
+    "path": "app/components/govuk_component/footer_component.rb",
+    "line": 21,
+    "cop": "ViewComponent/PreferSlots",
+    "message": "Consider using `renders_one :attributes` instead of passing HTML as a parameter. This maintains Rails' automatic HTML escaping. (https://viewcomponent.org/best_practices.html)"
+  },
+  {
+    "path": "app/components/govuk_component/header_component.rb",
+    "line": 15,
+    "cop": "ViewComponent/PreferSlots",
+    "message": "Consider using `renders_one :attributes` instead of passing HTML as a parameter. This maintains Rails' automatic HTML escaping. (https://viewcomponent.org/best_practices.html)"
+  },
+  {
+    "path": "app/components/govuk_component/header_component.rb",
+    "line": 46,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`. (https://viewcomponent.org/best_practices.html)"
+  },
+  {
+    "path": "app/components/govuk_component/header_component.rb",
+    "line": 49,
+    "cop": "ViewComponent/PreferSlots",
+    "message": "Consider using `renders_one :attributes` instead of passing HTML as a parameter. This maintains Rails' automatic HTML escaping. (https://viewcomponent.org/best_practices.html)"
+  },
+  {
+    "path": "app/components/govuk_component/inset_text_component.rb",
+    "line": 4,
+    "cop": "ViewComponent/PreferSlots",
+    "message": "Consider using `renders_one :attributes` instead of passing HTML as a parameter. This maintains Rails' automatic HTML escaping. (https://viewcomponent.org/best_practices.html)"
+  },
+  {
+    "path": "app/components/govuk_component/notification_banner_component.rb",
+    "line": 16,
+    "cop": "ViewComponent/PreferSlots",
+    "message": "Consider using `renders_one :attributes` instead of passing HTML as a parameter. This maintains Rails' automatic HTML escaping. (https://viewcomponent.org/best_practices.html)"
+  },
+  {
+    "path": "app/components/govuk_component/notification_banner_component.rb",
+    "line": 33,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`. (https://viewcomponent.org/best_practices.html)"
+  },
+  {
+    "path": "app/components/govuk_component/notification_banner_component.rb",
+    "line": 36,
+    "cop": "ViewComponent/PreferSlots",
+    "message": "Consider using `renders_one :attributes` instead of passing HTML as a parameter. This maintains Rails' automatic HTML escaping. (https://viewcomponent.org/best_practices.html)"
+  },
+  {
+    "path": "app/components/govuk_component/notification_banner_component.rb",
+    "line": 55,
+    "cop": "ViewComponent/PreferPrivateMethods",
+    "message": "Consider making this method private. Only ViewComponent interface methods should be public. (https://viewcomponent.org/best_practices.html)"
+  },
+  {
+    "path": "app/components/govuk_component/notification_banner_component.rb",
+    "line": 59,
+    "cop": "ViewComponent/PreferPrivateMethods",
+    "message": "Consider making this method private. Only ViewComponent interface methods should be public. (https://viewcomponent.org/best_practices.html)"
+  },
+  {
+    "path": "app/components/govuk_component/pagination_component.rb",
+    "line": 45,
+    "cop": "ViewComponent/PreferSlots",
+    "message": "Consider using `renders_one :attributes` instead of passing HTML as a parameter. This maintains Rails' automatic HTML escaping. (https://viewcomponent.org/best_practices.html)"
+  },
+  {
+    "path": "app/components/govuk_component/pagination_component/adjacent_page.rb",
+    "line": 1,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`. (https://viewcomponent.org/best_practices.html)"
+  },
+  {
+    "path": "app/components/govuk_component/pagination_component/adjacent_page.rb",
+    "line": 5,
+    "cop": "ViewComponent/PreferSlots",
+    "message": "Consider using `renders_one :attributes` instead of passing HTML as a parameter. This maintains Rails' automatic HTML escaping. (https://viewcomponent.org/best_practices.html)"
+  },
+  {
+    "path": "app/components/govuk_component/pagination_component/item.rb",
+    "line": 1,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`. (https://viewcomponent.org/best_practices.html)"
+  },
+  {
+    "path": "app/components/govuk_component/pagination_component/item.rb",
+    "line": 4,
+    "cop": "ViewComponent/PreferSlots",
+    "message": "Consider using `renders_one :attributes` instead of passing HTML as a parameter. This maintains Rails' automatic HTML escaping. (https://viewcomponent.org/best_practices.html)"
+  },
+  {
+    "path": "app/components/govuk_component/panel_component.rb",
+    "line": 6,
+    "cop": "ViewComponent/PreferSlots",
+    "message": "Consider using `renders_one :attributes` instead of passing HTML as a parameter. This maintains Rails' automatic HTML escaping. (https://viewcomponent.org/best_practices.html)"
+  },
+  {
+    "path": "app/components/govuk_component/phase_banner_component.rb",
+    "line": 8,
+    "cop": "ViewComponent/PreferSlots",
+    "message": "Consider using `renders_one :attributes` instead of passing HTML as a parameter. This maintains Rails' automatic HTML escaping. (https://viewcomponent.org/best_practices.html)"
+  },
+  {
+    "path": "app/components/govuk_component/section_break_component.rb",
+    "line": 8,
+    "cop": "ViewComponent/PreferSlots",
+    "message": "Consider using `renders_one :attributes` instead of passing HTML as a parameter. This maintains Rails' automatic HTML escaping. (https://viewcomponent.org/best_practices.html)"
+  },
+  {
+    "path": "app/components/govuk_component/service_navigation_component.rb",
+    "line": 21,
+    "cop": "ViewComponent/PreferSlots",
+    "message": "Consider using `renders_one :attributes` instead of passing HTML as a parameter. This maintains Rails' automatic HTML escaping. (https://viewcomponent.org/best_practices.html)"
+  },
+  {
+    "path": "app/components/govuk_component/service_navigation_component.rb",
+    "line": 54,
+    "cop": "ViewComponent/PreferPrivateMethods",
+    "message": "Consider making this method private. Only ViewComponent interface methods should be public. (https://viewcomponent.org/best_practices.html)"
+  },
+  {
+    "path": "app/components/govuk_component/service_navigation_component.rb",
+    "line": 62,
+    "cop": "ViewComponent/PreferPrivateMethods",
+    "message": "Consider making this method private. Only ViewComponent interface methods should be public. (https://viewcomponent.org/best_practices.html)"
+  },
+  {
+    "path": "app/components/govuk_component/service_navigation_component/navigation_item_component.rb",
+    "line": 4,
+    "cop": "ViewComponent/PreferSlots",
+    "message": "Consider using `renders_one :attributes` instead of passing HTML as a parameter. This maintains Rails' automatic HTML escaping. (https://viewcomponent.org/best_practices.html)"
+  },
+  {
+    "path": "app/components/govuk_component/service_navigation_component/service_name_component.rb",
+    "line": 4,
+    "cop": "ViewComponent/PreferSlots",
+    "message": "Consider using `renders_one :attributes` instead of passing HTML as a parameter. This maintains Rails' automatic HTML escaping. (https://viewcomponent.org/best_practices.html)"
+  },
+  {
+    "path": "app/components/govuk_component/start_button_component.rb",
+    "line": 4,
+    "cop": "ViewComponent/PreferSlots",
+    "message": "Consider using `renders_one :attributes` instead of passing HTML as a parameter. This maintains Rails' automatic HTML escaping. (https://viewcomponent.org/best_practices.html)"
+  },
+  {
+    "path": "app/components/govuk_component/summary_list_component.rb",
+    "line": 15,
+    "cop": "ViewComponent/PreferSlots",
+    "message": "Consider using `renders_one :attributes` instead of passing HTML as a parameter. This maintains Rails' automatic HTML escaping. (https://viewcomponent.org/best_practices.html)"
+  },
+  {
+    "path": "app/components/govuk_component/summary_list_component/action_component.rb",
+    "line": 7,
+    "cop": "ViewComponent/PreferSlots",
+    "message": "Consider using `renders_one :attributes` instead of passing HTML as a parameter. This maintains Rails' automatic HTML escaping. (https://viewcomponent.org/best_practices.html)"
+  },
+  {
+    "path": "app/components/govuk_component/summary_list_component/card_component.rb",
+    "line": 7,
+    "cop": "ViewComponent/PreferSlots",
+    "message": "Consider using `renders_one :attributes` instead of passing HTML as a parameter. This maintains Rails' automatic HTML escaping. (https://viewcomponent.org/best_practices.html)"
+  },
+  {
+    "path": "app/components/govuk_component/summary_list_component/key_component.rb",
+    "line": 4,
+    "cop": "ViewComponent/PreferSlots",
+    "message": "Consider using `renders_one :attributes` instead of passing HTML as a parameter. This maintains Rails' automatic HTML escaping. (https://viewcomponent.org/best_practices.html)"
+  },
+  {
+    "path": "app/components/govuk_component/summary_list_component/row_component.rb",
+    "line": 18,
+    "cop": "ViewComponent/PreferSlots",
+    "message": "Consider using `renders_one :attributes` instead of passing HTML as a parameter. This maintains Rails' automatic HTML escaping. (https://viewcomponent.org/best_practices.html)"
+  },
+  {
+    "path": "app/components/govuk_component/summary_list_component/value_component.rb",
+    "line": 4,
+    "cop": "ViewComponent/PreferSlots",
+    "message": "Consider using `renders_one :attributes` instead of passing HTML as a parameter. This maintains Rails' automatic HTML escaping. (https://viewcomponent.org/best_practices.html)"
+  },
+  {
+    "path": "app/components/govuk_component/tab_component.rb",
+    "line": 8,
+    "cop": "ViewComponent/PreferSlots",
+    "message": "Consider using `renders_one :attributes` instead of passing HTML as a parameter. This maintains Rails' automatic HTML escaping. (https://viewcomponent.org/best_practices.html)"
+  },
+  {
+    "path": "app/components/govuk_component/tab_component.rb",
+    "line": 21,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`. (https://viewcomponent.org/best_practices.html)"
+  },
+  {
+    "path": "app/components/govuk_component/tab_component.rb",
+    "line": 24,
+    "cop": "ViewComponent/PreferSlots",
+    "message": "Consider using `renders_one :attributes` instead of passing HTML as a parameter. This maintains Rails' automatic HTML escaping. (https://viewcomponent.org/best_practices.html)"
+  },
+  {
+    "path": "app/components/govuk_component/tab_component.rb",
+    "line": 32,
+    "cop": "ViewComponent/PreferPrivateMethods",
+    "message": "Consider making this method private. Only ViewComponent interface methods should be public. (https://viewcomponent.org/best_practices.html)"
+  },
+  {
+    "path": "app/components/govuk_component/tab_component.rb",
+    "line": 38,
+    "cop": "ViewComponent/PreferPrivateMethods",
+    "message": "Consider making this method private. Only ViewComponent interface methods should be public. (https://viewcomponent.org/best_practices.html)"
+  },
+  {
+    "path": "app/components/govuk_component/tab_component.rb",
+    "line": 42,
+    "cop": "ViewComponent/PreferPrivateMethods",
+    "message": "Consider making this method private. Only ViewComponent interface methods should be public. (https://viewcomponent.org/best_practices.html)"
+  },
+  {
+    "path": "app/components/govuk_component/tab_component.rb",
+    "line": 46,
+    "cop": "ViewComponent/PreferPrivateMethods",
+    "message": "Consider making this method private. Only ViewComponent interface methods should be public. (https://viewcomponent.org/best_practices.html)"
+  },
+  {
+    "path": "app/components/govuk_component/tab_component.rb",
+    "line": 50,
+    "cop": "ViewComponent/PreferPrivateMethods",
+    "message": "Consider making this method private. Only ViewComponent interface methods should be public. (https://viewcomponent.org/best_practices.html)"
+  },
+  {
+    "path": "app/components/govuk_component/table_component.rb",
+    "line": 12,
+    "cop": "ViewComponent/PreferSlots",
+    "message": "Consider using `renders_one :attributes` instead of passing HTML as a parameter. This maintains Rails' automatic HTML escaping. (https://viewcomponent.org/best_practices.html)"
+  },
+  {
+    "path": "app/components/govuk_component/table_component/body_component.rb",
+    "line": 12,
+    "cop": "ViewComponent/PreferSlots",
+    "message": "Consider using `renders_one :attributes` instead of passing HTML as a parameter. This maintains Rails' automatic HTML escaping. (https://viewcomponent.org/best_practices.html)"
+  },
+  {
+    "path": "app/components/govuk_component/table_component/caption_component.rb",
+    "line": 6,
+    "cop": "ViewComponent/PreferSlots",
+    "message": "Consider using `renders_one :attributes` instead of passing HTML as a parameter. This maintains Rails' automatic HTML escaping. (https://viewcomponent.org/best_practices.html)"
+  },
+  {
+    "path": "app/components/govuk_component/table_component/cell_component.rb",
+    "line": 7,
+    "cop": "ViewComponent/PreferSlots",
+    "message": "Consider using `renders_one :attributes` instead of passing HTML as a parameter. This maintains Rails' automatic HTML escaping. (https://viewcomponent.org/best_practices.html)"
+  },
+  {
+    "path": "app/components/govuk_component/table_component/col_group_component.rb",
+    "line": 4,
+    "cop": "ViewComponent/PreferSlots",
+    "message": "Consider using `renders_one :attributes` instead of passing HTML as a parameter. This maintains Rails' automatic HTML escaping. (https://viewcomponent.org/best_practices.html)"
+  },
+  {
+    "path": "app/components/govuk_component/table_component/col_group_component.rb",
+    "line": 29,
+    "cop": "ViewComponent/PreferSlots",
+    "message": "Consider using `renders_one :attributes` instead of passing HTML as a parameter. This maintains Rails' automatic HTML escaping. (https://viewcomponent.org/best_practices.html)"
+  },
+  {
+    "path": "app/components/govuk_component/table_component/foot_component.rb",
+    "line": 14,
+    "cop": "ViewComponent/PreferSlots",
+    "message": "Consider using `renders_one :attributes` instead of passing HTML as a parameter. This maintains Rails' automatic HTML escaping. (https://viewcomponent.org/best_practices.html)"
+  },
+  {
+    "path": "app/components/govuk_component/table_component/head_component.rb",
+    "line": 13,
+    "cop": "ViewComponent/PreferSlots",
+    "message": "Consider using `renders_one :attributes` instead of passing HTML as a parameter. This maintains Rails' automatic HTML escaping. (https://viewcomponent.org/best_practices.html)"
+  },
+  {
+    "path": "app/components/govuk_component/table_component/row_component.rb",
+    "line": 20,
+    "cop": "ViewComponent/PreferSlots",
+    "message": "Consider using `renders_one :attributes` instead of passing HTML as a parameter. This maintains Rails' automatic HTML escaping. (https://viewcomponent.org/best_practices.html)"
+  },
+  {
+    "path": "app/components/govuk_component/tag_component.rb",
+    "line": 6,
+    "cop": "ViewComponent/PreferSlots",
+    "message": "Consider using `renders_one :attributes` instead of passing HTML as a parameter. This maintains Rails' automatic HTML escaping. (https://viewcomponent.org/best_practices.html)"
+  },
+  {
+    "path": "app/components/govuk_component/task_list_component.rb",
+    "line": 16,
+    "cop": "ViewComponent/PreferSlots",
+    "message": "Consider using `renders_one :attributes` instead of passing HTML as a parameter. This maintains Rails' automatic HTML escaping. (https://viewcomponent.org/best_practices.html)"
+  },
+  {
+    "path": "app/components/govuk_component/task_list_component/item_component.rb",
+    "line": 31,
+    "cop": "ViewComponent/PreferSlots",
+    "message": "Consider using `renders_one :attributes` instead of passing HTML as a parameter. This maintains Rails' automatic HTML escaping. (https://viewcomponent.org/best_practices.html)"
+  },
+  {
+    "path": "app/components/govuk_component/task_list_component/status_component.rb",
+    "line": 5,
+    "cop": "ViewComponent/PreferSlots",
+    "message": "Consider using `renders_one :attributes` instead of passing HTML as a parameter. This maintains Rails' automatic HTML escaping. (https://viewcomponent.org/best_practices.html)"
+  },
+  {
+    "path": "app/components/govuk_component/task_list_component/title_component.rb",
+    "line": 10,
+    "cop": "ViewComponent/PreferSlots",
+    "message": "Consider using `renders_one :attributes` instead of passing HTML as a parameter. This maintains Rails' automatic HTML escaping. (https://viewcomponent.org/best_practices.html)"
+  },
+  {
+    "path": "app/components/govuk_component/warning_text_component.rb",
+    "line": 4,
+    "cop": "ViewComponent/PreferSlots",
+    "message": "Consider using `renders_one :attributes` instead of passing HTML as a parameter. This maintains Rails' automatic HTML escaping. (https://viewcomponent.org/best_practices.html)"
+  },
+  {
+    "path": "spec/components/govuk_component/accordion_component_spec.rb",
+    "line": 84,
+    "cop": "ViewComponent/TestRenderedOutput",
+    "message": "Test instantiates a component but doesn't use `render_inline` or `render_preview`. Test the rendered output instead of component methods directly. (https://viewcomponent.org/guide/testing.html)"
+  },
+  {
+    "path": "spec/components/govuk_component/breadcrumbs_component_spec.rb",
+    "line": 44,
+    "cop": "ViewComponent/TestRenderedOutput",
+    "message": "Test instantiates a component but doesn't use `render_inline` or `render_preview`. Test the rendered output instead of component methods directly. (https://viewcomponent.org/guide/testing.html)"
+  },
+  {
+    "path": "spec/components/govuk_component/footer_component_spec.rb",
+    "line": 123,
+    "cop": "ViewComponent/TestRenderedOutput",
+    "message": "Test instantiates a component but doesn't use `render_inline` or `render_preview`. Test the rendered output instead of component methods directly. (https://viewcomponent.org/guide/testing.html)"
+  }
+]
