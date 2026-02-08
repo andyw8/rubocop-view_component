@@ -60,11 +60,22 @@ def configure_rubocop
   config = YAML.load_file(".rubocop.yml") || {}
   config["AllCops"] ||= {}
   parents = config["AllCops"]["ViewComponentParentClasses"] || []
-  unless parents.include?("Primer::Component")
-    parents << "Primer::Component"
-    config["AllCops"]["ViewComponentParentClasses"] = parents
-    File.write(".rubocop.yml", YAML.dump(config))
+  %w[Primer::Component Primer::BaseComponent].each do |klass|
+    parents << klass unless parents.include?(klass)
   end
+  config["AllCops"]["ViewComponentParentClasses"] = parents
+
+  # Exclude Primer::Forms from PreferComposition cop
+  # Primer::Forms::BaseComponent is not a ViewComponent - it's a custom base class
+  # for a forms framework that mimics the component interface but doesn't inherit
+  # from ViewComponent::Base
+  config["ViewComponent/PreferComposition"] ||= {}
+  config["ViewComponent/PreferComposition"]["Exclude"] = [
+    "app/lib/primer/forms/**/*",
+    "test/lib/primer/forms/**/*"
+  ]
+
+  File.write(".rubocop.yml", YAML.dump(config))
 end
 
 def add_gem_to_gemfile

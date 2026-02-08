@@ -348,6 +348,12 @@
     "message": "ViewComponent class names should end with `Component`."
   },
   {
+    "path": "app/components/primer/alpha/segmented_control/item.rb",
+    "line": 8,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
     "path": "app/components/primer/alpha/select.rb",
     "line": 17,
     "cop": "ViewComponent/ComponentSuffix",
