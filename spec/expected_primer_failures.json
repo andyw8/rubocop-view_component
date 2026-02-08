@@ -348,6 +348,12 @@
     "message": "ViewComponent class names should end with `Component`."
   },
   {
+    "path": "app/components/primer/alpha/segmented_control/item.rb",
+    "line": 8,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
     "path": "app/components/primer/alpha/select.rb",
     "line": 17,
     "cop": "ViewComponent/ComponentSuffix",
@@ -814,5 +820,143 @@
     "line": 5,
     "cop": "ViewComponent/ComponentSuffix",
     "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "app/lib/primer/forms/action_menu.rb",
+    "line": 6,
+    "cop": "ViewComponent/PreferComposition",
+    "message": "Avoid inheriting from another ViewComponent. Use composition instead by rendering the parent component in the template."
+  },
+  {
+    "path": "app/lib/primer/forms/auto_complete.rb",
+    "line": 6,
+    "cop": "ViewComponent/PreferComposition",
+    "message": "Avoid inheriting from another ViewComponent. Use composition instead by rendering the parent component in the template."
+  },
+  {
+    "path": "app/lib/primer/forms/button.rb",
+    "line": 6,
+    "cop": "ViewComponent/PreferComposition",
+    "message": "Avoid inheriting from another ViewComponent. Use composition instead by rendering the parent component in the template."
+  },
+  {
+    "path": "app/lib/primer/forms/caption.rb",
+    "line": 6,
+    "cop": "ViewComponent/PreferComposition",
+    "message": "Avoid inheriting from another ViewComponent. Use composition instead by rendering the parent component in the template."
+  },
+  {
+    "path": "app/lib/primer/forms/check_box.rb",
+    "line": 6,
+    "cop": "ViewComponent/PreferComposition",
+    "message": "Avoid inheriting from another ViewComponent. Use composition instead by rendering the parent component in the template."
+  },
+  {
+    "path": "app/lib/primer/forms/check_box_group.rb",
+    "line": 6,
+    "cop": "ViewComponent/PreferComposition",
+    "message": "Avoid inheriting from another ViewComponent. Use composition instead by rendering the parent component in the template."
+  },
+  {
+    "path": "app/lib/primer/forms/form_control.rb",
+    "line": 6,
+    "cop": "ViewComponent/PreferComposition",
+    "message": "Avoid inheriting from another ViewComponent. Use composition instead by rendering the parent component in the template."
+  },
+  {
+    "path": "app/lib/primer/forms/form_reference.rb",
+    "line": 6,
+    "cop": "ViewComponent/PreferComposition",
+    "message": "Avoid inheriting from another ViewComponent. Use composition instead by rendering the parent component in the template."
+  },
+  {
+    "path": "app/lib/primer/forms/group.rb",
+    "line": 8,
+    "cop": "ViewComponent/PreferComposition",
+    "message": "Avoid inheriting from another ViewComponent. Use composition instead by rendering the parent component in the template."
+  },
+  {
+    "path": "app/lib/primer/forms/hidden_field.rb",
+    "line": 6,
+    "cop": "ViewComponent/PreferComposition",
+    "message": "Avoid inheriting from another ViewComponent. Use composition instead by rendering the parent component in the template."
+  },
+  {
+    "path": "app/lib/primer/forms/multi.rb",
+    "line": 6,
+    "cop": "ViewComponent/PreferComposition",
+    "message": "Avoid inheriting from another ViewComponent. Use composition instead by rendering the parent component in the template."
+  },
+  {
+    "path": "app/lib/primer/forms/primer_base_component_wrapper.rb",
+    "line": 6,
+    "cop": "ViewComponent/PreferComposition",
+    "message": "Avoid inheriting from another ViewComponent. Use composition instead by rendering the parent component in the template."
+  },
+  {
+    "path": "app/lib/primer/forms/radio_button.rb",
+    "line": 6,
+    "cop": "ViewComponent/PreferComposition",
+    "message": "Avoid inheriting from another ViewComponent. Use composition instead by rendering the parent component in the template."
+  },
+  {
+    "path": "app/lib/primer/forms/radio_button_group.rb",
+    "line": 6,
+    "cop": "ViewComponent/PreferComposition",
+    "message": "Avoid inheriting from another ViewComponent. Use composition instead by rendering the parent component in the template."
+  },
+  {
+    "path": "app/lib/primer/forms/select.rb",
+    "line": 6,
+    "cop": "ViewComponent/PreferComposition",
+    "message": "Avoid inheriting from another ViewComponent. Use composition instead by rendering the parent component in the template."
+  },
+  {
+    "path": "app/lib/primer/forms/separator.rb",
+    "line": 5,
+    "cop": "ViewComponent/PreferComposition",
+    "message": "Avoid inheriting from another ViewComponent. Use composition instead by rendering the parent component in the template."
+  },
+  {
+    "path": "app/lib/primer/forms/spacing_wrapper.rb",
+    "line": 5,
+    "cop": "ViewComponent/PreferComposition",
+    "message": "Avoid inheriting from another ViewComponent. Use composition instead by rendering the parent component in the template."
+  },
+  {
+    "path": "app/lib/primer/forms/submit_button.rb",
+    "line": 6,
+    "cop": "ViewComponent/PreferComposition",
+    "message": "Avoid inheriting from another ViewComponent. Use composition instead by rendering the parent component in the template."
+  },
+  {
+    "path": "app/lib/primer/forms/text_area.rb",
+    "line": 6,
+    "cop": "ViewComponent/PreferComposition",
+    "message": "Avoid inheriting from another ViewComponent. Use composition instead by rendering the parent component in the template."
+  },
+  {
+    "path": "app/lib/primer/forms/text_field.rb",
+    "line": 6,
+    "cop": "ViewComponent/PreferComposition",
+    "message": "Avoid inheriting from another ViewComponent. Use composition instead by rendering the parent component in the template."
+  },
+  {
+    "path": "app/lib/primer/forms/toggle_switch.rb",
+    "line": 6,
+    "cop": "ViewComponent/PreferComposition",
+    "message": "Avoid inheriting from another ViewComponent. Use composition instead by rendering the parent component in the template."
+  },
+  {
+    "path": "app/lib/primer/forms/validation_message.rb",
+    "line": 6,
+    "cop": "ViewComponent/PreferComposition",
+    "message": "Avoid inheriting from another ViewComponent. Use composition instead by rendering the parent component in the template."
+  },
+  {
+    "path": "test/lib/primer/forms/base_component_test.rb",
+    "line": 8,
+    "cop": "ViewComponent/PreferComposition",
+    "message": "Avoid inheriting from another ViewComponent. Use composition instead by rendering the parent component in the template."
   }
 ]

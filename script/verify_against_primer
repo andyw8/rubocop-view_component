@@ -60,11 +60,11 @@ def configure_rubocop
   config = YAML.load_file(".rubocop.yml") || {}
   config["AllCops"] ||= {}
   parents = config["AllCops"]["ViewComponentParentClasses"] || []
-  unless parents.include?("Primer::Component")
-    parents << "Primer::Component"
-    config["AllCops"]["ViewComponentParentClasses"] = parents
-    File.write(".rubocop.yml", YAML.dump(config))
+  %w[Primer::Component Primer::BaseComponent].each do |klass|
+    parents << klass unless parents.include?(klass)
   end
+  config["AllCops"]["ViewComponentParentClasses"] = parents
+  File.write(".rubocop.yml", YAML.dump(config))
 end
 
 def add_gem_to_gemfile
