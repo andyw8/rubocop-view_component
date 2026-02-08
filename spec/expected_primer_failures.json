@@ -820,41 +820,5 @@
     "line": 5,
     "cop": "ViewComponent/ComponentSuffix",
     "message": "ViewComponent class names should end with `Component`."
-  },
-  {
-    "path": "test/components/base_component_test.rb",
-    "line": 28,
-    "cop": "ViewComponent/TestRenderedOutput",
-    "message": "Test instantiates a component but doesn't use `render_inline` or `render_preview`. Test the rendered output instead of component methods directly."
-  },
-  {
-    "path": "test/components/base_component_test.rb",
-    "line": 34,
-    "cop": "ViewComponent/TestRenderedOutput",
-    "message": "Test instantiates a component but doesn't use `render_inline` or `render_preview`. Test the rendered output instead of component methods directly."
-  },
-  {
-    "path": "test/components/component_test.rb",
-    "line": 236,
-    "cop": "ViewComponent/TestRenderedOutput",
-    "message": "Test instantiates a component but doesn't use `render_inline` or `render_preview`. Test the rendered output instead of component methods directly."
-  },
-  {
-    "path": "test/components/component_test.rb",
-    "line": 247,
-    "cop": "ViewComponent/TestRenderedOutput",
-    "message": "Test instantiates a component but doesn't use `render_inline` or `render_preview`. Test the rendered output instead of component methods directly."
-  },
-  {
-    "path": "test/lib/primer/attributes_helper_test.rb",
-    "line": 8,
-    "cop": "ViewComponent/TestRenderedOutput",
-    "message": "Test instantiates a component but doesn't use `render_inline` or `render_preview`. Test the rendered output instead of component methods directly."
-  },
-  {
-    "path": "test/lib/primer/attributes_helper_test.rb",
-    "line": 23,
-    "cop": "ViewComponent/TestRenderedOutput",
-    "message": "Test instantiates a component but doesn't use `render_inline` or `render_preview`. Test the rendered output instead of component methods directly."
   }
 ]

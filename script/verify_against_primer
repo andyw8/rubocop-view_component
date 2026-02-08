@@ -75,6 +75,15 @@ def configure_rubocop
     "test/lib/primer/forms/**/*"
   ]
 
+  # Exclude specific test files from TestRenderedOutput cop
+  # These tests intentionally test internal implementation details or helper methods
+  config["ViewComponent/TestRenderedOutput"] ||= {}
+  config["ViewComponent/TestRenderedOutput"]["Exclude"] = [
+    "test/components/base_component_test.rb",
+    "test/components/component_test.rb",
+    "test/lib/primer/attributes_helper_test.rb"
+  ]
+
   File.write(".rubocop.yml", YAML.dump(config))
 end
 
