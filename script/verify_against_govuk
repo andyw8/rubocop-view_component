@@ -18,12 +18,12 @@ def main
   force_update = ARGV.include?("--update")
 
   if force_update && Dir.exist?(VERIFICATION_DIR)
-    puts "Removing existing govuk source for update..."
+    puts "Removing existing x-govuk source for update..."
     FileUtils.rm_rf(VERIFICATION_DIR)
   end
 
   if Dir.exist?(VERIFICATION_DIR) && !Dir.empty?(VERIFICATION_DIR)
-    puts "Using existing govuk source at #{VERIFICATION_DIR}"
+    puts "Using existing x-govuk source at #{VERIFICATION_DIR}"
   else
     FileUtils.mkdir_p(VERIFICATION_DIR)
     download_source(VERIFICATION_DIR)
