@@ -7,7 +7,7 @@ RSpec.describe RuboCop::Cop::ViewComponent::PreferComposition, :config do
     it "registers an offense" do
       expect_offense(<<~RUBY)
         class UserCard < BaseCardComponent
-                         ^^^^^^^^^^^^^^^^^ ViewComponent/PreferComposition: Avoid inheriting from another ViewComponent. Instead, render the parent component in your template: `<%= render ParentComponent.new %>`
+                         ^^^^^^^^^^^^^^^^^ ViewComponent/PreferComposition: Avoid inheriting from another ViewComponent.
         end
       RUBY
     end
@@ -15,7 +15,7 @@ RSpec.describe RuboCop::Cop::ViewComponent::PreferComposition, :config do
     it "registers an offense for namespaced component parent" do
       expect_offense(<<~RUBY)
         class UserCard < Admin::BaseComponent
-                         ^^^^^^^^^^^^^^^^^^^^ ViewComponent/PreferComposition: Avoid inheriting from another ViewComponent. Instead, render the parent component in your template: `<%= render ParentComponent.new %>`
+                         ^^^^^^^^^^^^^^^^^^^^ ViewComponent/PreferComposition: Avoid inheriting from another ViewComponent.
         end
       RUBY
     end
