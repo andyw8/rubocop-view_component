@@ -3,25 +3,25 @@
     "path": "app/components/polaris/action_list/section_component.rb",
     "line": 16,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+    "message": "Consider making `system_arguments` private. Only ViewComponent interface methods should be public."
   },
   {
     "path": "app/components/polaris/avatar_component.rb",
     "line": 43,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+    "message": "Consider making `style_class` private. Only ViewComponent interface methods should be public."
   },
   {
     "path": "app/components/polaris/avatar_component.rb",
     "line": 69,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+    "message": "Consider making `xor_hash` private. Only ViewComponent interface methods should be public."
   },
   {
     "path": "app/components/polaris/banner_component.rb",
     "line": 77,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+    "message": "Consider making `default_icon` private. Only ViewComponent interface methods should be public."
   },
   {
     "path": "app/components/polaris/base_button.rb",
@@ -39,13 +39,13 @@
     "path": "app/components/polaris/base_checkbox.rb",
     "line": 24,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+    "message": "Consider making `system_arguments` private. Only ViewComponent interface methods should be public."
   },
   {
     "path": "app/components/polaris/base_checkbox.rb",
     "line": 40,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+    "message": "Consider making `indeterminate?` private. Only ViewComponent interface methods should be public."
   },
   {
     "path": "app/components/polaris/base_radio_button.rb",
@@ -57,19 +57,19 @@
     "path": "app/components/polaris/base_radio_button.rb",
     "line": 21,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+    "message": "Consider making `system_arguments` private. Only ViewComponent interface methods should be public."
   },
   {
     "path": "app/components/polaris/button_group_component.rb",
     "line": 60,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+    "message": "Consider making `all_items` private. Only ViewComponent interface methods should be public."
   },
   {
     "path": "app/components/polaris/checkbox_component.rb",
     "line": 62,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+    "message": "Consider making `indeterminate?` private. Only ViewComponent interface methods should be public."
   },
   {
     "path": "app/components/polaris/choice_component.rb",
@@ -81,49 +81,49 @@
     "path": "app/components/polaris/choice_list_component.rb",
     "line": 58,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+    "message": "Consider making `renders?` private. Only ViewComponent interface methods should be public."
   },
   {
     "path": "app/components/polaris/choice_list_component.rb",
     "line": 62,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+    "message": "Consider making `multiple_choice_allowed?` private. Only ViewComponent interface methods should be public."
   },
   {
     "path": "app/components/polaris/collapsible_component.rb",
     "line": 15,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+    "message": "Consider making `system_arguments` private. Only ViewComponent interface methods should be public."
   },
   {
     "path": "app/components/polaris/description_list_component.rb",
     "line": 24,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+    "message": "Consider making `renders?` private. Only ViewComponent interface methods should be public."
   },
   {
     "path": "app/components/polaris/dropzone_component.rb",
     "line": 142,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+    "message": "Consider making `drop_actions` private. Only ViewComponent interface methods should be public."
   },
   {
     "path": "app/components/polaris/exception_list_component.rb",
     "line": 16,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+    "message": "Consider making `renders?` private. Only ViewComponent interface methods should be public."
   },
   {
     "path": "app/components/polaris/filters_component.rb",
     "line": 74,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+    "message": "Consider making `popover_arguments` private. Only ViewComponent interface methods should be public."
   },
   {
     "path": "app/components/polaris/form_layout_component.rb",
     "line": 29,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+    "message": "Consider making `all_items` private. Only ViewComponent interface methods should be public."
   },
   {
     "path": "app/components/polaris/headless_button.rb",
@@ -135,37 +135,37 @@
     "path": "app/components/polaris/headless_button.rb",
     "line": 96,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+    "message": "Consider making `system_arguments` private. Only ViewComponent interface methods should be public."
   },
   {
     "path": "app/components/polaris/headless_button.rb",
     "line": 104,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+    "message": "Consider making `html_options` private. Only ViewComponent interface methods should be public."
   },
   {
     "path": "app/components/polaris/index_table/cell_component.rb",
     "line": 7,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+    "message": "Consider making `system_arguments` private. Only ViewComponent interface methods should be public."
   },
   {
     "path": "app/components/polaris/inline_error_component.rb",
     "line": 14,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+    "message": "Consider making `renders?` private. Only ViewComponent interface methods should be public."
   },
   {
     "path": "app/components/polaris/keyboard_key_component.rb",
     "line": 9,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+    "message": "Consider making `system_arguments` private. Only ViewComponent interface methods should be public."
   },
   {
     "path": "app/components/polaris/label_component.rb",
     "line": 32,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+    "message": "Consider making `renders?` private. Only ViewComponent interface methods should be public."
   },
   {
     "path": "app/components/polaris/layout/annotated_section.rb",
@@ -183,85 +183,85 @@
     "path": "app/components/polaris/layout_component.rb",
     "line": 38,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+    "message": "Consider making `all_sections` private. Only ViewComponent interface methods should be public."
   },
   {
     "path": "app/components/polaris/modal/section_component.rb",
     "line": 6,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+    "message": "Consider making `system_arguments` private. Only ViewComponent interface methods should be public."
   },
   {
     "path": "app/components/polaris/navigation/item_component.rb",
     "line": 54,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+    "message": "Consider making `item_inner_wrapper_classes` private. Only ViewComponent interface methods should be public."
   },
   {
     "path": "app/components/polaris/navigation/item_component.rb",
     "line": 62,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+    "message": "Consider making `link_classes` private. Only ViewComponent interface methods should be public."
   },
   {
     "path": "app/components/polaris/navigation/item_component.rb",
     "line": 71,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+    "message": "Consider making `selected_sub_items?` private. Only ViewComponent interface methods should be public."
   },
   {
     "path": "app/components/polaris/navigation_component.rb",
     "line": 11,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+    "message": "Consider making `renders?` private. Only ViewComponent interface methods should be public."
   },
   {
     "path": "app/components/polaris/navigation_list_component.rb",
     "line": 9,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+    "message": "Consider making `renders?` private. Only ViewComponent interface methods should be public."
   },
   {
     "path": "app/components/polaris/new_tabs_component.rb",
     "line": 33,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+    "message": "Consider making `renders?` private. Only ViewComponent interface methods should be public."
   },
   {
     "path": "app/components/polaris/option_list/checkbox_component.rb",
     "line": 25,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+    "message": "Consider making `system_arguments` private. Only ViewComponent interface methods should be public."
   },
   {
     "path": "app/components/polaris/option_list/option_component.rb",
     "line": 6,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+    "message": "Consider making `system_arguments` private. Only ViewComponent interface methods should be public."
   },
   {
     "path": "app/components/polaris/option_list/radio_button_component.rb",
     "line": 32,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+    "message": "Consider making `system_arguments` private. Only ViewComponent interface methods should be public."
   },
   {
     "path": "app/components/polaris/option_list/section_component.rb",
     "line": 42,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+    "message": "Consider making `system_arguments` private. Only ViewComponent interface methods should be public."
   },
   {
     "path": "app/components/polaris/page_component.rb",
     "line": 57,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+    "message": "Consider making `title_length` private. Only ViewComponent interface methods should be public."
   },
   {
     "path": "app/components/polaris/popover/section_component.rb",
     "line": 6,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+    "message": "Consider making `system_arguments` private. Only ViewComponent interface methods should be public."
   },
   {
     "path": "app/components/polaris/popover_component.rb",
@@ -273,7 +273,7 @@
     "path": "app/components/polaris/popover_component.rb",
     "line": 112,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+    "message": "Consider making `popover_placement` private. Only ViewComponent interface methods should be public."
   },
   {
     "path": "app/components/polaris/resource_item/shortcut_actions_component.rb",
@@ -285,37 +285,37 @@
     "path": "app/components/polaris/resource_item/shortcut_actions_component.rb",
     "line": 82,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+    "message": "Consider making `action_list_item_arguments` private. Only ViewComponent interface methods should be public."
   },
   {
     "path": "app/components/polaris/resource_list_component.rb",
     "line": 37,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+    "message": "Consider making `resource_string` private. Only ViewComponent interface methods should be public."
   },
   {
     "path": "app/components/polaris/resource_list_component.rb",
     "line": 43,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+    "message": "Consider making `count` private. Only ViewComponent interface methods should be public."
   },
   {
     "path": "app/components/polaris/select_component.rb",
     "line": 88,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+    "message": "Consider making `hides_label?` private. Only ViewComponent interface methods should be public."
   },
   {
     "path": "app/components/polaris/shopify_navigation_component.rb",
     "line": 40,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+    "message": "Consider making `system_arguments` private. Only ViewComponent interface methods should be public."
   },
   {
     "path": "app/components/polaris/shopify_navigation_component.rb",
     "line": 56,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+    "message": "Consider making `detect_active` private. Only ViewComponent interface methods should be public."
   },
   {
     "path": "app/components/polaris/shopify_navigation_component.rb",
@@ -327,37 +327,37 @@
     "path": "app/components/polaris/skeleton_display_text_component.rb",
     "line": 17,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+    "message": "Consider making `system_arguments` private. Only ViewComponent interface methods should be public."
   },
   {
     "path": "app/components/polaris/skeleton_thumbnail_component.rb",
     "line": 16,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+    "message": "Consider making `system_arguments` private. Only ViewComponent interface methods should be public."
   },
   {
     "path": "app/components/polaris/tabs_component.rb",
     "line": 33,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+    "message": "Consider making `renders?` private. Only ViewComponent interface methods should be public."
   },
   {
     "path": "app/components/polaris/text_component.rb",
     "line": 114,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+    "message": "Consider making `alignment_class` private. Only ViewComponent interface methods should be public."
   },
   {
     "path": "app/components/polaris/text_component.rb",
     "line": 120,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+    "message": "Consider making `color_class` private. Only ViewComponent interface methods should be public."
   },
   {
     "path": "app/components/polaris/text_component.rb",
     "line": 126,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+    "message": "Consider making `font_weight_class` private. Only ViewComponent interface methods should be public."
   },
   {
     "path": "app/components/polaris/text_field_component.rb",
@@ -369,6 +369,6 @@
     "path": "app/components/polaris/thumbnail_component.rb",
     "line": 39,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+    "message": "Consider making `renders?` private. Only ViewComponent interface methods should be public."
   }
 ]

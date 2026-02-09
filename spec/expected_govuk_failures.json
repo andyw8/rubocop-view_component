@@ -33,13 +33,13 @@
     "path": "app/components/govuk_component/base.rb",
     "line": 29,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public. (https://viewcomponent.org/best_practices.html)"
+    "message": "Consider making `brand` private. Only ViewComponent interface methods should be public. (https://viewcomponent.org/best_practices.html)"
   },
   {
     "path": "app/components/govuk_component/base.rb",
     "line": 35,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public. (https://viewcomponent.org/best_practices.html)"
+    "message": "Consider making `class_prefix` private. Only ViewComponent interface methods should be public. (https://viewcomponent.org/best_practices.html)"
   },
   {
     "path": "app/components/govuk_component/breadcrumbs_component.rb",
@@ -123,13 +123,13 @@
     "path": "app/components/govuk_component/notification_banner_component.rb",
     "line": 55,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public. (https://viewcomponent.org/best_practices.html)"
+    "message": "Consider making `link` private. Only ViewComponent interface methods should be public. (https://viewcomponent.org/best_practices.html)"
   },
   {
     "path": "app/components/govuk_component/notification_banner_component.rb",
     "line": 59,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public. (https://viewcomponent.org/best_practices.html)"
+    "message": "Consider making `default_attributes` private. Only ViewComponent interface methods should be public. (https://viewcomponent.org/best_practices.html)"
   },
   {
     "path": "app/components/govuk_component/pagination_component.rb",
@@ -189,13 +189,13 @@
     "path": "app/components/govuk_component/service_navigation_component.rb",
     "line": 54,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public. (https://viewcomponent.org/best_practices.html)"
+    "message": "Consider making `navigation` private. Only ViewComponent interface methods should be public. (https://viewcomponent.org/best_practices.html)"
   },
   {
     "path": "app/components/govuk_component/service_navigation_component.rb",
     "line": 62,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public. (https://viewcomponent.org/best_practices.html)"
+    "message": "Consider making `navigation_list` private. Only ViewComponent interface methods should be public. (https://viewcomponent.org/best_practices.html)"
   },
   {
     "path": "app/components/govuk_component/service_navigation_component/navigation_item_component.rb",
@@ -273,31 +273,31 @@
     "path": "app/components/govuk_component/tab_component.rb",
     "line": 32,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public. (https://viewcomponent.org/best_practices.html)"
+    "message": "Consider making `hidden_class` private. Only ViewComponent interface methods should be public. (https://viewcomponent.org/best_practices.html)"
   },
   {
     "path": "app/components/govuk_component/tab_component.rb",
     "line": 38,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public. (https://viewcomponent.org/best_practices.html)"
+    "message": "Consider making `li_classes` private. Only ViewComponent interface methods should be public. (https://viewcomponent.org/best_practices.html)"
   },
   {
     "path": "app/components/govuk_component/tab_component.rb",
     "line": 42,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public. (https://viewcomponent.org/best_practices.html)"
+    "message": "Consider making `li_link` private. Only ViewComponent interface methods should be public. (https://viewcomponent.org/best_practices.html)"
   },
   {
     "path": "app/components/govuk_component/tab_component.rb",
     "line": 46,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public. (https://viewcomponent.org/best_practices.html)"
+    "message": "Consider making `default_attributes` private. Only ViewComponent interface methods should be public. (https://viewcomponent.org/best_practices.html)"
   },
   {
     "path": "app/components/govuk_component/tab_component.rb",
     "line": 50,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public. (https://viewcomponent.org/best_practices.html)"
+    "message": "Consider making `combined_attributes` private. Only ViewComponent interface methods should be public. (https://viewcomponent.org/best_practices.html)"
   },
   {
     "path": "app/components/govuk_component/table_component.rb",
