@@ -96,10 +96,10 @@ def configure_rubocop(config_file, display_name)
 
   # Merge the library config into the existing config
   library_config.each do |key, value|
-    if config[key].is_a?(Hash) && value.is_a?(Hash)
-      config[key] = config[key].merge(value)
+    config[key] = if config[key].is_a?(Hash) && value.is_a?(Hash)
+      config[key].merge(value)
     else
-      config[key] = value
+      value
     end
   end
 
