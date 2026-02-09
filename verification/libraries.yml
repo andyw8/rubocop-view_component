@@ -1,0 +1,7 @@
+primer:
+  tarball_url: https://github.com/primer/view_components/archive/refs/heads/main.tar.gz
+  display_name: primer/view_components
+
+govuk:
+  tarball_url: https://github.com/x-govuk/govuk-components/archive/refs/heads/main.tar.gz
+  display_name: x-govuk/govuk-components

@@ -1,0 +1,178 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require "json"
+require "yaml"
+require "tmpdir"
+require "fileutils"
+require "open3"
+require "bundler"
+
+GEM_DIR = File.expand_path("..", __dir__)
+LIBRARIES_CONFIG = File.join(GEM_DIR, "verification", "libraries.yml")
+
+def load_libraries
+  config = YAML.load_file(LIBRARIES_CONFIG)
+
+  # Build full paths for each library
+  config.transform_values do |library|
+    library_key = config.key(library)
+    {
+      tarball_url: library["tarball_url"],
+      verification_dir: File.join(GEM_DIR, "verification", library_key),
+      config_file: File.join(GEM_DIR, "verification", "#{library_key}_rubocop_config.yml"),
+      results_file: File.join(GEM_DIR, "spec", "expected_#{library_key}_failures.json"),
+      display_name: library["display_name"]
+    }
+  end
+end
+
+def main
+  libraries = load_libraries
+  library = parse_library_arg(libraries)
+
+  config = libraries[library]
+  mode = ARGV.include?("--regenerate") ? :regenerate : :verify
+  force_update = ARGV.include?("--update")
+
+  if force_update && Dir.exist?(config[:verification_dir])
+    puts "Removing existing #{config[:display_name]} source for update..."
+    FileUtils.rm_rf(config[:verification_dir])
+  end
+
+  if Dir.exist?(config[:verification_dir]) && !Dir.empty?(config[:verification_dir])
+    puts "Using existing #{config[:display_name]} source at #{config[:verification_dir]}"
+  else
+    FileUtils.mkdir_p(config[:verification_dir])
+    download_source(config[:verification_dir], config[:tarball_url], config[:display_name])
+  end
+
+  Dir.chdir(config[:verification_dir]) do
+    configure_rubocop(config[:config_file], config[:display_name])
+    add_gem_to_gemfile
+
+    Bundler.with_unbundled_env do
+      output = run_rubocop
+      offenses = extract_offenses(output)
+
+      case mode
+      when :regenerate then regenerate(offenses, config[:results_file])
+      when :verify then verify(offenses, config[:results_file])
+      end
+    end
+  end
+end
+
+def parse_library_arg(libraries)
+  # Find the library argument (not --flags)
+  library_arg = ARGV.find { |arg| !arg.start_with?("--") }
+
+  if library_arg.nil?
+    abort "Usage: #{$PROGRAM_NAME} <library> [--regenerate] [--update]\n" \
+          "  library: #{libraries.keys.join(", ")}"
+  end
+
+  unless libraries.key?(library_arg)
+    abort "ERROR: Unknown library '#{library_arg}'. Valid options: #{libraries.keys.join(", ")}"
+  end
+
+  library_arg
+end
+
+def system!(*args)
+  system(*args, exception: true)
+end
+
+def download_source(dir, tarball_url, display_name)
+  puts "Downloading #{display_name}..."
+  system!("curl", "-sL", tarball_url, "-o", "#{dir}/source.tar.gz")
+  system!("tar", "xz", "-C", dir, "--strip-components=1", "-f", "#{dir}/source.tar.gz")
+end
+
+def configure_rubocop(config_file, display_name)
+  puts "Configuring .rubocop.yml with #{display_name} overrides..."
+  config = File.exist?(".rubocop.yml") ? YAML.load_file(".rubocop.yml") : {}
+  library_config = YAML.load_file(config_file)
+
+  # Merge the library config into the existing config
+  library_config.each do |key, value|
+    config[key] = if config[key].is_a?(Hash) && value.is_a?(Hash)
+      config[key].merge(value)
+    else
+      value
+    end
+  end
+
+  File.write(".rubocop.yml", YAML.dump(config))
+end
+
+def add_gem_to_gemfile
+  puts "Adding rubocop-view_component gem to Gemfile..."
+  File.open("Gemfile", "a") { |f| f.puts "gem 'rubocop-view_component', path: '#{GEM_DIR}'" }
+end
+
+def run_rubocop
+  puts "Running bundle install..."
+  system!("bundle", "install")
+
+  puts "Running RuboCop (ViewComponent cops only)..."
+  output, status = Open3.capture2(
+    "bundle", "exec", "rubocop",
+    "--require", "rubocop-view_component",
+    "--only", "ViewComponent",
+    "--format", "json"
+  )
+
+  puts "RuboCop exit status: #{status.exitstatus}"
+
+  if output.strip.empty?
+    abort "ERROR: RuboCop produced no output (exit status: #{status.exitstatus})"
+  end
+
+  output
+end
+
+def extract_offenses(rubocop_output)
+  data = JSON.parse(rubocop_output)
+  data["files"].flat_map do |file|
+    file["offenses"].map do |offense|
+      {
+        "path" => file["path"],
+        "line" => offense["location"]["start_line"],
+        "cop" => offense["cop_name"],
+        "message" => offense["message"]
+      }
+    end
+  end
+end
+
+def regenerate(offenses, results_file)
+  json = "#{JSON.pretty_generate(offenses)}\n"
+  File.write(results_file, json)
+  puts "#{offenses.length} offense(s) written to #{results_file}"
+end
+
+def verify(offenses, results_file)
+  unless File.exist?(results_file)
+    abort "ERROR: #{results_file} not found. Run '#{$PROGRAM_NAME} --regenerate' first."
+  end
+
+  current_json = JSON.pretty_generate(offenses)
+  expected_json = File.read(results_file)
+
+  if current_json.strip == expected_json.strip
+    puts "Verification passed: output matches #{results_file}"
+  else
+    puts "Verification failed: output differs from #{results_file}"
+    expected = JSON.parse(expected_json)
+    added = offenses - expected
+    removed = expected - offenses
+
+    added.each { |o| puts "  + #{o["cop"]}: #{o["path"]}:#{o["line"]}" }
+    removed.each { |o| puts "  - #{o["cop"]}: #{o["path"]}:#{o["line"]}" }
+
+    exit 1
+  end
+end
+
+main

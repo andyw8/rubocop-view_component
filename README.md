@@ -72,50 +72,48 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Real-World Verification
 
-The cops are tested against real-world component libraries as baselines to catch regressions:
+The cops are tested against real-world component libraries as baselines to catch regressions.
+
+The [`script/verify`](script/verify) script downloads component libraries (cached in `verification/`), runs all ViewComponent cops against them, and compares the results to checked-in snapshots. This runs automatically in CI.
 
 ### Primer ViewComponents
 
-The script [`verify_against_primer`](script/verify_against_primer) downloads the [primer/view_components](https://github.com/primer/view_components) repo (cached in `verification/primer/`), runs all ViewComponent cops against it, and compares the results to a checked-in snapshot ([`expected_primer_failures.json`](spec/expected_primer_failures.json)). This runs automatically in CI.
-
-To verify locally:
+To verify against [primer/view_components](https://github.com/primer/view_components) locally:
 
 ```bash
-script/verify_against_primer
+script/verify primer
 ```
 
 If you intentionally change cop behavior, regenerate the snapshot:
 
 ```bash
-script/verify_against_primer --regenerate
+script/verify primer --regenerate
 ```
 
 To force download the latest Primer source:
 
 ```bash
-script/verify_against_primer --update
+script/verify primer --update
 ```
 
 ### x-govuk Components
 
-The script [`verify_against_govuk`](script/verify_against_govuk) downloads the [x-govuk/govuk-components](https://github.com/x-govuk/govuk-components) repo (cached in `verification/govuk/`), runs all ViewComponent cops against it, and compares the results to a checked-in snapshot ([`expected_govuk_failures.json`](spec/expected_govuk_failures.json)). This runs automatically in CI.
-
-To verify locally:
+To verify against [x-govuk/govuk-components](https://github.com/x-govuk/govuk-components) locally:
 
 ```bash
-script/verify_against_govuk
+script/verify govuk
 ```
 
 If you intentionally change cop behavior, regenerate the snapshot:
 
 ```bash
-script/verify_against_govuk --regenerate
+script/verify govuk --regenerate
 ```
 
 To force download the latest x-govuk source:
 
 ```bash
-script/verify_against_govuk --update
+script/verify govuk --update
 ```
 
 ## Contributing
