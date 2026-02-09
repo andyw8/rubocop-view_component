@@ -28,7 +28,7 @@ module RuboCop
         include ViewComponent::Base
         include TemplateAnalyzer
 
-        MSG = "Consider making this method private. " \
+        MSG = "Consider making `%<method_name>s` private. " \
               "Only ViewComponent interface methods should be public."
 
         def on_class(node)
@@ -59,7 +59,7 @@ module RuboCop
             next if allowed_public_method?(child.method_name)
             next if template_method_calls.include?(child.method_name)
 
-            add_offense(child)
+            add_offense(child, message: format(MSG, method_name: child.method_name))
           end
         end
 

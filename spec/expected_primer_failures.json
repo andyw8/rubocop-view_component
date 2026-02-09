@@ -27,55 +27,55 @@
     "path": "app/components/primer/alpha/action_list.rb",
     "line": 53,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+    "message": "Consider making `custom_element_name` private. Only ViewComponent interface methods should be public."
   },
   {
     "path": "app/components/primer/alpha/action_list.rb",
     "line": 189,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+    "message": "Consider making `build_item` private. Only ViewComponent interface methods should be public."
   },
   {
     "path": "app/components/primer/alpha/action_list.rb",
     "line": 217,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+    "message": "Consider making `build_avatar_item` private. Only ViewComponent interface methods should be public."
   },
   {
     "path": "app/components/primer/alpha/action_list.rb",
     "line": 228,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+    "message": "Consider making `single_select?` private. Only ViewComponent interface methods should be public."
   },
   {
     "path": "app/components/primer/alpha/action_list.rb",
     "line": 236,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+    "message": "Consider making `allows_selection?` private. Only ViewComponent interface methods should be public."
   },
   {
     "path": "app/components/primer/alpha/action_list.rb",
     "line": 240,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+    "message": "Consider making `acts_as_listbox?` private. Only ViewComponent interface methods should be public."
   },
   {
     "path": "app/components/primer/alpha/action_list.rb",
     "line": 244,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+    "message": "Consider making `acts_as_menu?` private. Only ViewComponent interface methods should be public."
   },
   {
     "path": "app/components/primer/alpha/action_list.rb",
     "line": 248,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+    "message": "Consider making `required_form_arguments_given?` private. Only ViewComponent interface methods should be public."
   },
   {
     "path": "app/components/primer/alpha/action_list.rb",
     "line": 257,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+    "message": "Consider making `will_add_item` private. Only ViewComponent interface methods should be public."
   },
   {
     "path": "app/components/primer/alpha/action_list/divider.rb",
@@ -87,7 +87,7 @@
     "path": "app/components/primer/alpha/action_list/divider.rb",
     "line": 33,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+    "message": "Consider making `active?` private. Only ViewComponent interface methods should be public."
   },
   {
     "path": "app/components/primer/alpha/action_list/form_wrapper.rb",
@@ -99,7 +99,7 @@
     "path": "app/components/primer/alpha/action_list/form_wrapper.rb",
     "line": 53,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+    "message": "Consider making `get?` private. Only ViewComponent interface methods should be public."
   },
   {
     "path": "app/components/primer/alpha/action_list/heading.rb",
@@ -207,7 +207,7 @@
     "path": "app/components/primer/alpha/dropdown/menu.rb",
     "line": 96,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+    "message": "Consider making `divider?` private. Only ViewComponent interface methods should be public."
   },
   {
     "path": "app/components/primer/alpha/form_button.rb",
@@ -225,13 +225,13 @@
     "path": "app/components/primer/alpha/form_control.rb",
     "line": 101,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+    "message": "Consider making `visually_hide_label?` private. Only ViewComponent interface methods should be public."
   },
   {
     "path": "app/components/primer/alpha/form_control.rb",
     "line": 107,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+    "message": "Consider making `full_width?` private. Only ViewComponent interface methods should be public."
   },
   {
     "path": "app/components/primer/alpha/hellip_button.rb",
@@ -429,13 +429,13 @@
     "path": "app/components/primer/alpha/toggle_switch.rb",
     "line": 91,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+    "message": "Consider making `on?` private. Only ViewComponent interface methods should be public."
   },
   {
     "path": "app/components/primer/alpha/toggle_switch.rb",
     "line": 95,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+    "message": "Consider making `enabled?` private. Only ViewComponent interface methods should be public."
   },
   {
     "path": "app/components/primer/alpha/tooltip.rb",
@@ -489,7 +489,7 @@
     "path": "app/components/primer/alpha/tree_view/node.rb",
     "line": 155,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+    "message": "Consider making `merge_system_arguments!` private. Only ViewComponent interface methods should be public."
   },
   {
     "path": "app/components/primer/alpha/tree_view/skeleton_loader.rb",
@@ -561,7 +561,7 @@
     "path": "app/components/primer/beta/avatar.rb",
     "line": 22,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+    "message": "Consider making `link?` private. Only ViewComponent interface methods should be public."
   },
   {
     "path": "app/components/primer/beta/avatar_stack.rb",
@@ -699,13 +699,13 @@
     "path": "app/components/primer/beta/nav_list.rb",
     "line": 116,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+    "message": "Consider making `build_item` private. Only ViewComponent interface methods should be public."
   },
   {
     "path": "app/components/primer/beta/nav_list.rb",
     "line": 139,
     "cop": "ViewComponent/PreferPrivateMethods",
-    "message": "Consider making this method private. Only ViewComponent interface methods should be public."
+    "message": "Consider making `build_avatar_item` private. Only ViewComponent interface methods should be public."
   },
   {
     "path": "app/components/primer/beta/nav_list/heading.rb",

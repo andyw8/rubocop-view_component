@@ -12,7 +12,7 @@ RSpec.describe RuboCop::Cop::ViewComponent::PreferPrivateMethods, :config do
           end
 
           def formatted_title
-          ^^^^^^^^^^^^^^^^^^^ ViewComponent/PreferPrivateMethods: Consider making this method private. Only ViewComponent interface methods should be public.
+          ^^^^^^^^^^^^^^^^^^^ ViewComponent/PreferPrivateMethods: Consider making `formatted_title` private. Only ViewComponent interface methods should be public.
             @title.upcase
           end
         end
@@ -23,12 +23,12 @@ RSpec.describe RuboCop::Cop::ViewComponent::PreferPrivateMethods, :config do
       expect_offense(<<~RUBY)
         class CardComponent < ViewComponent::Base
           def helper_one
-          ^^^^^^^^^^^^^^ ViewComponent/PreferPrivateMethods: Consider making this method private. Only ViewComponent interface methods should be public.
+          ^^^^^^^^^^^^^^ ViewComponent/PreferPrivateMethods: Consider making `helper_one` private. Only ViewComponent interface methods should be public.
             'one'
           end
 
           def helper_two
-          ^^^^^^^^^^^^^^ ViewComponent/PreferPrivateMethods: Consider making this method private. Only ViewComponent interface methods should be public.
+          ^^^^^^^^^^^^^^ ViewComponent/PreferPrivateMethods: Consider making `helper_two` private. Only ViewComponent interface methods should be public.
             'two'
           end
         end
@@ -174,7 +174,7 @@ RSpec.describe RuboCop::Cop::ViewComponent::PreferPrivateMethods, :config do
             end
 
             def formatted_title
-            ^^^^^^^^^^^^^^^^^^^ ViewComponent/PreferPrivateMethods: Consider making this method private. Only ViewComponent interface methods should be public.
+            ^^^^^^^^^^^^^^^^^^^ ViewComponent/PreferPrivateMethods: Consider making `formatted_title` private. Only ViewComponent interface methods should be public.
               @title.upcase
             end
           end
@@ -212,7 +212,7 @@ RSpec.describe RuboCop::Cop::ViewComponent::PreferPrivateMethods, :config do
           end
 
           def other_method
-          ^^^^^^^^^^^^^^^^ ViewComponent/PreferPrivateMethods: Consider making this method private. Only ViewComponent interface methods should be public.
+          ^^^^^^^^^^^^^^^^ ViewComponent/PreferPrivateMethods: Consider making `other_method` private. Only ViewComponent interface methods should be public.
             'other'
           end
         end
@@ -225,7 +225,7 @@ RSpec.describe RuboCop::Cop::ViewComponent::PreferPrivateMethods, :config do
       expect_offense(<<~RUBY)
         class CardComponent < ViewComponent::Base
           def public_helper
-          ^^^^^^^^^^^^^^^^^ ViewComponent/PreferPrivateMethods: Consider making this method private. Only ViewComponent interface methods should be public.
+          ^^^^^^^^^^^^^^^^^ ViewComponent/PreferPrivateMethods: Consider making `public_helper` private. Only ViewComponent interface methods should be public.
             'public'
           end
 
@@ -238,7 +238,7 @@ RSpec.describe RuboCop::Cop::ViewComponent::PreferPrivateMethods, :config do
           public
 
           def another_public
-          ^^^^^^^^^^^^^^^^^^ ViewComponent/PreferPrivateMethods: Consider making this method private. Only ViewComponent interface methods should be public.
+          ^^^^^^^^^^^^^^^^^^ ViewComponent/PreferPrivateMethods: Consider making `another_public` private. Only ViewComponent interface methods should be public.
             'public'
           end
         end
@@ -275,7 +275,7 @@ RSpec.describe RuboCop::Cop::ViewComponent::PreferPrivateMethods, :config do
           end
 
           def helper_not_used
-          ^^^^^^^^^^^^^^^^^^^ ViewComponent/PreferPrivateMethods: Consider making this method private. Only ViewComponent interface methods should be public.
+          ^^^^^^^^^^^^^^^^^^^ ViewComponent/PreferPrivateMethods: Consider making `helper_not_used` private. Only ViewComponent interface methods should be public.
             "not used"
           end
         end
