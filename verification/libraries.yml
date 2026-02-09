@@ -5,3 +5,7 @@ primer:
 govuk:
   tarball_url: https://github.com/x-govuk/govuk-components/archive/refs/heads/main.tar.gz
   display_name: x-govuk/govuk-components
+
+polaris:
+  tarball_url: https://github.com/baoagency/polaris_view_components/archive/refs/heads/main.tar.gz
+  display_name: baoagency/polaris_view_components

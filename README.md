@@ -116,6 +116,26 @@ To force download the latest x-govuk source:
 script/verify govuk --update
 ```
 
+### Polaris ViewComponents
+
+To verify against [baoagency/polaris_view_components](https://github.com/baoagency/polaris_view_components) locally:
+
+```bash
+script/verify polaris
+```
+
+If you intentionally change cop behavior, regenerate the snapshot:
+
+```bash
+script/verify polaris --regenerate
+```
+
+To force download the latest Polaris source:
+
+```bash
+script/verify polaris --update
+```
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/andyw8/rubocop-view_component.
