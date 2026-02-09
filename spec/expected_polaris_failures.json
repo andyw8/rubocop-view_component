@@ -6,30 +6,6 @@
     "message": "Consider making this method private. Only ViewComponent interface methods should be public."
   },
   {
-    "path": "app/components/polaris/autocomplete/action_component.rb",
-    "line": 2,
-    "cop": "ViewComponent/PreferComposition",
-    "message": "Avoid inheriting from another ViewComponent."
-  },
-  {
-    "path": "app/components/polaris/autocomplete/option_component.rb",
-    "line": 2,
-    "cop": "ViewComponent/PreferComposition",
-    "message": "Avoid inheriting from another ViewComponent."
-  },
-  {
-    "path": "app/components/polaris/autocomplete/section_component.rb",
-    "line": 2,
-    "cop": "ViewComponent/PreferComposition",
-    "message": "Avoid inheriting from another ViewComponent."
-  },
-  {
-    "path": "app/components/polaris/autocomplete_component.rb",
-    "line": 2,
-    "cop": "ViewComponent/PreferComposition",
-    "message": "Avoid inheriting from another ViewComponent."
-  },
-  {
     "path": "app/components/polaris/avatar_component.rb",
     "line": 43,
     "cop": "ViewComponent/PreferPrivateMethods",
