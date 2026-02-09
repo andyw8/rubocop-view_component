@@ -28,14 +28,6 @@ This gem provides several cops to enforce ViewComponent best practices:
 - **ViewComponent/PreferComposition** - Avoid inheriting one ViewComponent from another (prefer composition)
 - **ViewComponent/TestRenderedOutput** - Encourage testing rendered output over private methods
 
-## Usage
-
-Run RuboCop as usual:
-
-```bash
-bundle exec rubocop
-```
-
 ## Optional Configuration
 
 ## Base Class
