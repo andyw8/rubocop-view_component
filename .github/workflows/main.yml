@@ -57,3 +57,18 @@ jobs:
           bundler-cache: true
       - name: Verify against x-govuk Components
         run: script/verify govuk
+
+  polaris_verification:
+    runs-on: ubuntu-latest
+    name: Polaris ViewComponents Verification
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.4.7'
+          bundler-cache: true
+      - name: Verify against Polaris ViewComponents
+        run: script/verify polaris
