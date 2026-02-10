@@ -1,4 +1,4 @@
-# ruboCop-view_component
+# rubocop-view_component
 
 A RuboCop extension that enforces [ViewComponent best practices](https://viewcomponent.org/best_practices.html).
 
@@ -30,7 +30,7 @@ This gem provides several cops to enforce ViewComponent best practices:
 
 ## Optional Configuration
 
-## Base Class
+### Base Class
 
 By default, the cops detect classes that inherit from `ViewComponent::Base` or `ApplicationComponent`. If your project uses a different base class (e.g. `Primer::Component`), you can configure additional parent classes under `AllCops`, for example:
 
