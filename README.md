@@ -1,6 +1,6 @@
 # rubocop-view_component
 
-A RuboCop extension that enforces [ViewComponent best practices](https://viewcomponent.org/best_practices.html).
+A RuboCop extension that encourages [ViewComponent best practices](https://viewcomponent.org/best_practices.html).
 
 ## Installation
 
