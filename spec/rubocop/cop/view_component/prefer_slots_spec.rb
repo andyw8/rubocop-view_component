@@ -3,7 +3,7 @@
 RSpec.describe RuboCop::Cop::ViewComponent::PreferSlots, :config do
   let(:config) { RuboCop::Config.new }
 
-  context "when initialize has HTML parameter names" do
+  context "when initialize has _html parameter suffix" do
     it "registers offense for _html suffix" do
       expect_offense(<<~RUBY)
         class ModalComponent < ViewComponent::Base
@@ -11,42 +11,6 @@ RSpec.describe RuboCop::Cop::ViewComponent::PreferSlots, :config do
                                  ^^^^^^^^^^ ViewComponent/PreferSlots: Consider using `renders_one :body` instead of passing HTML as a parameter. This maintains Rails' automatic HTML escaping.
             @title = title
             @body_html = body_html
-          end
-        end
-      RUBY
-    end
-
-    it "registers offense for _content suffix" do
-      expect_offense(<<~RUBY)
-        class ModalComponent < ViewComponent::Base
-          def initialize(title:, body_content:)
-                                 ^^^^^^^^^^^^^ ViewComponent/PreferSlots: Consider using `renders_one :body` instead of passing HTML as a parameter. This maintains Rails' automatic HTML escaping.
-            @title = title
-            @body_content = body_content
-          end
-        end
-      RUBY
-    end
-
-    it "registers offense for html_ prefix" do
-      expect_offense(<<~RUBY)
-        class ModalComponent < ViewComponent::Base
-          def initialize(title:, html_body:)
-                                 ^^^^^^^^^^ ViewComponent/PreferSlots: Consider using `renders_one :body` instead of passing HTML as a parameter. This maintains Rails' automatic HTML escaping.
-            @title = title
-            @html_body = html_body
-          end
-        end
-      RUBY
-    end
-
-    it "registers offense for content parameter" do
-      expect_offense(<<~RUBY)
-        class ModalComponent < ViewComponent::Base
-          def initialize(title:, content:)
-                                 ^^^^^^^^ ViewComponent/PreferSlots: Consider using `renders_one :content` instead of passing HTML as a parameter. This maintains Rails' automatic HTML escaping.
-            @title = title
-            @content = content
           end
         end
       RUBY
@@ -79,12 +43,34 @@ RSpec.describe RuboCop::Cop::ViewComponent::PreferSlots, :config do
       RUBY
     end
 
-    it "does not register offense for html_class" do
+    it "does not register offense for _content suffix" do
+      expect_no_offenses(<<~RUBY)
+        class CardComponent < ViewComponent::Base
+          def initialize(title:, fit_content: false)
+            @title = title
+            @fit_content = fit_content
+          end
+        end
+      RUBY
+    end
+
+    it "does not register offense for html_ prefix" do
       expect_no_offenses(<<~RUBY)
         class CardComponent < ViewComponent::Base
           def initialize(title:, html_class:)
             @title = title
             @html_class = html_class
+          end
+        end
+      RUBY
+    end
+
+    it "does not register offense for content parameter" do
+      expect_no_offenses(<<~RUBY)
+        class CardComponent < ViewComponent::Base
+          def initialize(title:, content:)
+            @title = title
+            @content = content
           end
         end
       RUBY

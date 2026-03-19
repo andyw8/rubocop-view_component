@@ -29,20 +29,7 @@ module RuboCop
         MSG = "Consider using `%<slot_method>s` instead of passing HTML " \
               "as a parameter. This maintains Rails' automatic HTML escaping."
 
-        HTML_PARAM_PATTERNS = [
-          /_html$/,
-          /_content$/,
-          /^html_/,
-          /^content$/
-        ].freeze
-
-        # Exclude common non-HTML parameters
-        EXCLUDED_PARAMS = %i[
-          html_class
-          html_classes
-          html_id
-          html_tag
-        ].freeze
+        HTML_PARAM_PATTERN = /_html$/
 
         def_node_search :html_safe_call?, "(send _ :html_safe)"
 
@@ -69,9 +56,6 @@ module RuboCop
 
             param_name = arg.children[0]
 
-            # Skip excluded parameters
-            next if EXCLUDED_PARAMS.include?(param_name)
-
             # Check parameter name patterns
             if html_param_name?(param_name)
               suggested_slot = suggest_slot_name(param_name)
@@ -88,15 +72,11 @@ module RuboCop
         end
 
         def html_param_name?(name)
-          HTML_PARAM_PATTERNS.any? { |pattern| pattern.match?(name.to_s) }
+          HTML_PARAM_PATTERN.match?(name.to_s)
         end
 
         def suggest_slot_name(param_name)
-          clean_name = param_name.to_s
-            .sub(/_html$/, "")
-            .sub(/_content$/, "")
-            .sub(/^html_/, "")
-
+          clean_name = param_name.to_s.sub(/_html$/, "")
           "renders_one :#{clean_name}"
         end
       end
