@@ -72,12 +72,6 @@
     "message": "Consider making `indeterminate?` private. Only ViewComponent interface methods should be public."
   },
   {
-    "path": "app/components/polaris/choice_component.rb",
-    "line": 11,
-    "cop": "ViewComponent/PreferSlots",
-    "message": "Consider using `renders_one :children` instead of passing HTML as a parameter. This maintains Rails' automatic HTML escaping."
-  },
-  {
     "path": "app/components/polaris/choice_list_component.rb",
     "line": 58,
     "cop": "ViewComponent/PreferPrivateMethods",
@@ -265,21 +259,9 @@
   },
   {
     "path": "app/components/polaris/popover_component.rb",
-    "line": 23,
-    "cop": "ViewComponent/PreferSlots",
-    "message": "Consider using `renders_one :fluid` instead of passing HTML as a parameter. This maintains Rails' automatic HTML escaping."
-  },
-  {
-    "path": "app/components/polaris/popover_component.rb",
     "line": 112,
     "cop": "ViewComponent/PreferPrivateMethods",
     "message": "Consider making `popover_placement` private. Only ViewComponent interface methods should be public."
-  },
-  {
-    "path": "app/components/polaris/resource_item/shortcut_actions_component.rb",
-    "line": 62,
-    "cop": "ViewComponent/PreferSlots",
-    "message": "Consider using `renders_one :content` instead of passing HTML as a parameter. This maintains Rails' automatic HTML escaping."
   },
   {
     "path": "app/components/polaris/resource_item/shortcut_actions_component.rb",

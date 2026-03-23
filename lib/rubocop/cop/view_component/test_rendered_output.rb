@@ -50,26 +50,13 @@ module RuboCop
           node.each_descendant(:send).any? do |send_node|
             next unless send_node.method_name == :new
 
-            receiver = send_node.receiver
-            next unless receiver&.const_type?
-
-            const_name(receiver).end_with?("Component")
+            send_node.receiver&.const_type?
           end
         end
 
         def contains_render_method?(node)
           node.each_descendant(:send).any? do |send_node|
             %i[render_inline render_preview].include?(send_node.method_name)
-          end
-        end
-
-        def const_name(node)
-          return "" unless node.const_type?
-
-          if node.namespace
-            "#{const_name(node.namespace)}::#{node.children.last}"
-          else
-            node.children.last.to_s
           end
         end
 

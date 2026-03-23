@@ -318,12 +318,6 @@
     "message": "ViewComponent class names should end with `Component`."
   },
   {
-    "path": "app/components/primer/alpha/overlay/footer.rb",
-    "line": 22,
-    "cop": "ViewComponent/PreferSlots",
-    "message": "Consider using `renders_one :align` instead of passing HTML as a parameter. This maintains Rails' automatic HTML escaping."
-  },
-  {
     "path": "app/components/primer/alpha/overlay/header.rb",
     "line": 8,
     "cop": "ViewComponent/ComponentSuffix",
@@ -427,13 +421,13 @@
   },
   {
     "path": "app/components/primer/alpha/toggle_switch.rb",
-    "line": 91,
+    "line": 94,
     "cop": "ViewComponent/PreferPrivateMethods",
     "message": "Consider making `on?` private. Only ViewComponent interface methods should be public."
   },
   {
     "path": "app/components/primer/alpha/toggle_switch.rb",
-    "line": 95,
+    "line": 98,
     "cop": "ViewComponent/PreferPrivateMethods",
     "message": "Consider making `enabled?` private. Only ViewComponent interface methods should be public."
   },
@@ -552,6 +546,12 @@
     "message": "ViewComponent class names should end with `Component`."
   },
   {
+    "path": "app/components/primer/beta/auto_complete/no_result_item.rb",
+    "line": 8,
+    "cop": "ViewComponent/ComponentSuffix",
+    "message": "ViewComponent class names should end with `Component`."
+  },
+  {
     "path": "app/components/primer/beta/avatar.rb",
     "line": 19,
     "cop": "ViewComponent/ComponentSuffix",
@@ -610,12 +610,6 @@
     "line": 11,
     "cop": "ViewComponent/ComponentSuffix",
     "message": "ViewComponent class names should end with `Component`."
-  },
-  {
-    "path": "app/components/primer/beta/button.rb",
-    "line": 120,
-    "cop": "ViewComponent/PreferSlots",
-    "message": "Consider using `renders_one :align` instead of passing HTML as a parameter. This maintains Rails' automatic HTML escaping."
   },
   {
     "path": "app/components/primer/beta/button_group.rb",
@@ -820,5 +814,17 @@
     "line": 5,
     "cop": "ViewComponent/ComponentSuffix",
     "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "test/components/alpha/action_list_test.rb",
+    "line": 253,
+    "cop": "ViewComponent/TestRenderedOutput",
+    "message": "Test instantiates a component but doesn't use `render_inline` or `render_preview`. Test the rendered output instead of component methods directly."
+  },
+  {
+    "path": "test/components/alpha/action_list_test.rb",
+    "line": 268,
+    "cop": "ViewComponent/TestRenderedOutput",
+    "message": "Test instantiates a component but doesn't use `render_inline` or `render_preview`. Test the rendered output instead of component methods directly."
   }
 ]
