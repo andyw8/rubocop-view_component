@@ -53,5 +53,5 @@ ViewComponent/TestRenderedOutput:
   Severity: convention
   StyleGuide: 'https://viewcomponent.org/guide/testing.html'
   Include:
-    - '**/*_test.rb'
-    - '**/*_spec.rb'
+    - 'spec/components/**/*_spec.rb'
+    - 'test/components/**/*_test.rb'

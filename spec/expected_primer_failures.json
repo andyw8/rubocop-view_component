@@ -814,5 +814,17 @@
     "line": 5,
     "cop": "ViewComponent/ComponentSuffix",
     "message": "ViewComponent class names should end with `Component`."
+  },
+  {
+    "path": "test/components/alpha/action_list_test.rb",
+    "line": 253,
+    "cop": "ViewComponent/TestRenderedOutput",
+    "message": "Test instantiates a component but doesn't use `render_inline` or `render_preview`. Test the rendered output instead of component methods directly."
+  },
+  {
+    "path": "test/components/alpha/action_list_test.rb",
+    "line": 268,
+    "cop": "ViewComponent/TestRenderedOutput",
+    "message": "Test instantiates a component but doesn't use `render_inline` or `render_preview`. Test the rendered output instead of component methods directly."
   }
 ]

@@ -114,8 +114,86 @@
     "message": "Test instantiates a component but doesn't use `render_inline` or `render_preview`. Test the rendered output instead of component methods directly. (https://viewcomponent.org/guide/testing.html)"
   },
   {
+    "path": "spec/components/govuk_component/configuration/footer_component_configuration_spec.rb",
+    "line": 42,
+    "cop": "ViewComponent/TestRenderedOutput",
+    "message": "Test instantiates a component but doesn't use `render_inline` or `render_preview`. Test the rendered output instead of component methods directly. (https://viewcomponent.org/guide/testing.html)"
+  },
+  {
     "path": "spec/components/govuk_component/footer_component_spec.rb",
     "line": 123,
+    "cop": "ViewComponent/TestRenderedOutput",
+    "message": "Test instantiates a component but doesn't use `render_inline` or `render_preview`. Test the rendered output instead of component methods directly. (https://viewcomponent.org/guide/testing.html)"
+  },
+  {
+    "path": "spec/components/govuk_component/footer_component_spec.rb",
+    "line": 182,
+    "cop": "ViewComponent/TestRenderedOutput",
+    "message": "Test instantiates a component but doesn't use `render_inline` or `render_preview`. Test the rendered output instead of component methods directly. (https://viewcomponent.org/guide/testing.html)"
+  },
+  {
+    "path": "spec/components/govuk_component/footer_component_spec.rb",
+    "line": 235,
+    "cop": "ViewComponent/TestRenderedOutput",
+    "message": "Test instantiates a component but doesn't use `render_inline` or `render_preview`. Test the rendered output instead of component methods directly. (https://viewcomponent.org/guide/testing.html)"
+  },
+  {
+    "path": "spec/components/govuk_component/footer_component_spec.rb",
+    "line": 254,
+    "cop": "ViewComponent/TestRenderedOutput",
+    "message": "Test instantiates a component but doesn't use `render_inline` or `render_preview`. Test the rendered output instead of component methods directly. (https://viewcomponent.org/guide/testing.html)"
+  },
+  {
+    "path": "spec/components/govuk_component/footer_component_spec.rb",
+    "line": 274,
+    "cop": "ViewComponent/TestRenderedOutput",
+    "message": "Test instantiates a component but doesn't use `render_inline` or `render_preview`. Test the rendered output instead of component methods directly. (https://viewcomponent.org/guide/testing.html)"
+  },
+  {
+    "path": "spec/components/govuk_component/footer_component_spec.rb",
+    "line": 294,
+    "cop": "ViewComponent/TestRenderedOutput",
+    "message": "Test instantiates a component but doesn't use `render_inline` or `render_preview`. Test the rendered output instead of component methods directly. (https://viewcomponent.org/guide/testing.html)"
+  },
+  {
+    "path": "spec/components/govuk_component/footer_component_spec.rb",
+    "line": 312,
+    "cop": "ViewComponent/TestRenderedOutput",
+    "message": "Test instantiates a component but doesn't use `render_inline` or `render_preview`. Test the rendered output instead of component methods directly. (https://viewcomponent.org/guide/testing.html)"
+  },
+  {
+    "path": "spec/components/govuk_component/footer_component_spec.rb",
+    "line": 336,
+    "cop": "ViewComponent/TestRenderedOutput",
+    "message": "Test instantiates a component but doesn't use `render_inline` or `render_preview`. Test the rendered output instead of component methods directly. (https://viewcomponent.org/guide/testing.html)"
+  },
+  {
+    "path": "spec/components/govuk_component/notification_banner_component_spec.rb",
+    "line": 59,
+    "cop": "ViewComponent/TestRenderedOutput",
+    "message": "Test instantiates a component but doesn't use `render_inline` or `render_preview`. Test the rendered output instead of component methods directly. (https://viewcomponent.org/guide/testing.html)"
+  },
+  {
+    "path": "spec/components/govuk_component/pagination_component_spec.rb",
+    "line": 317,
+    "cop": "ViewComponent/TestRenderedOutput",
+    "message": "Test instantiates a component but doesn't use `render_inline` or `render_preview`. Test the rendered output instead of component methods directly. (https://viewcomponent.org/guide/testing.html)"
+  },
+  {
+    "path": "spec/components/govuk_component/task_list_component_spec.rb",
+    "line": 139,
+    "cop": "ViewComponent/TestRenderedOutput",
+    "message": "Test instantiates a component but doesn't use `render_inline` or `render_preview`. Test the rendered output instead of component methods directly. (https://viewcomponent.org/guide/testing.html)"
+  },
+  {
+    "path": "spec/components/govuk_component/warning_text_component_spec.rb",
+    "line": 11,
+    "cop": "ViewComponent/TestRenderedOutput",
+    "message": "Test instantiates a component but doesn't use `render_inline` or `render_preview`. Test the rendered output instead of component methods directly. (https://viewcomponent.org/guide/testing.html)"
+  },
+  {
+    "path": "spec/components/govuk_component/warning_text_component_spec.rb",
+    "line": 41,
     "cop": "ViewComponent/TestRenderedOutput",
     "message": "Test instantiates a component but doesn't use `render_inline` or `render_preview`. Test the rendered output instead of component methods directly. (https://viewcomponent.org/guide/testing.html)"
   }

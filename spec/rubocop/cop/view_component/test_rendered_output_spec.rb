@@ -16,6 +16,18 @@ RSpec.describe RuboCop::Cop::ViewComponent::TestRenderedOutput, :config do
       end
     end
 
+    context "when test instantiates a non-Component-suffixed class" do
+      it "registers an offense" do
+        expect_offense(<<~RUBY)
+          def test_toggle
+          ^^^^^^^^^^^^^^^ ViewComponent/TestRenderedOutput: Test instantiates a component but doesn't use `render_inline` or `render_preview`. Test the rendered output instead of component methods directly.
+            component = V2::Toggle.new
+            assert component.active?
+          end
+        RUBY
+      end
+    end
+
     context "when test instantiates a component and uses render_inline" do
       it "does not register an offense" do
         expect_no_offenses(<<~RUBY)
@@ -38,12 +50,12 @@ RSpec.describe RuboCop::Cop::ViewComponent::TestRenderedOutput, :config do
       end
     end
 
-    context "when test doesn't instantiate any components" do
+    context "when test doesn't instantiate any constants" do
       it "does not register an offense" do
         expect_no_offenses(<<~RUBY)
           def test_helper_method
-            user = User.new("hello")
-            assert_equal "HELLO", user.formatted_name
+            result = some_method("hello")
+            assert_equal "HELLO", result
           end
         RUBY
       end
@@ -112,8 +124,8 @@ RSpec.describe RuboCop::Cop::ViewComponent::TestRenderedOutput, :config do
       it "does not register an offense" do
         expect_no_offenses(<<~RUBY)
           it "formats the name" do
-            user = User.new("hello")
-            expect(user.formatted_name).to eq("HELLO")
+            result = some_method("hello")
+            expect(result).to eq("HELLO")
           end
         RUBY
       end
