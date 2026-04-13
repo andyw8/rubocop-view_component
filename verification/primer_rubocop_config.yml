@@ -3,6 +3,11 @@ AllCops:
     - Primer::Component
     - Primer::BaseComponent
 
+# Primer seems to intentionally omit the Component suffix from most class names
+# (116 out of 131 components), so this cop is not useful here.
+ViewComponent/ComponentSuffix:
+  Enabled: false
+
 # Primer::Forms::BaseComponent is not a ViewComponent - it's a custom base class
 # for a forms framework that mimics the component interface but doesn't inherit
 # from ViewComponent::Base
