@@ -27,6 +27,7 @@ module RuboCop
 
         # Check Minitest-style test methods
         def on_def(node)
+          return unless within_test_paths?
           method_name = node.method_name.to_s
           return unless method_name.start_with?("test_")
           return unless instantiates_component?(node)
@@ -37,6 +38,7 @@ module RuboCop
 
         # Check RSpec-style it blocks
         def on_block(node)
+          return unless within_test_paths?
           return unless rspec_it_block?(node)
           return unless instantiates_component?(node)
           return if contains_render_method?(node)
@@ -45,6 +47,14 @@ module RuboCop
         end
 
         private
+
+        def within_test_paths?
+          test_paths = cop_config["TestPaths"]
+          return true if test_paths.nil? || test_paths.empty?
+
+          file_path = processed_source.path
+          test_paths.any? { |path| file_path.include?(path) }
+        end
 
         def instantiates_component?(node)
           node.each_descendant(:send).any? do |send_node|

@@ -96,6 +96,40 @@ RSpec.describe RuboCop::Cop::ViewComponent::TestRenderedOutput, :config do
     end
   end
 
+  context "with TestPaths configured" do
+    let(:config) do
+      RuboCop::Config.new(
+        "AllCops" => {"DisplayCopNames" => true},
+        "ViewComponent/TestRenderedOutput" => {
+          "TestPaths" => ["spec/components/v2/"]
+        }
+      )
+    end
+
+    context "when file is within a configured TestPath" do
+      it "registers an offense" do
+        expect_offense(<<~RUBY, "spec/components/v2/button_component_spec.rb")
+          def test_formatted_title
+          ^^^^^^^^^^^^^^^^^^^^^^^^ ViewComponent/TestRenderedOutput: Test instantiates a component but doesn't use `render_inline` or `render_preview`. Test the rendered output instead of component methods directly.
+            component = UserComponent.new("hello")
+            assert_equal "HELLO", component.formatted_title
+          end
+        RUBY
+      end
+    end
+
+    context "when file is outside all configured TestPaths" do
+      it "does not register an offense" do
+        expect_no_offenses(<<~RUBY, "spec/components/v1/button_component_spec.rb")
+          def test_formatted_title
+            component = UserComponent.new("hello")
+            assert_equal "HELLO", component.formatted_title
+          end
+        RUBY
+      end
+    end
+  end
+
   context "with RSpec-style tests" do
     context "when it block instantiates a component but doesn't render" do
       it "registers an offense" do
