@@ -55,3 +55,4 @@ ViewComponent/TestRenderedOutput:
   Include:
     - 'spec/components/**/*_spec.rb'
     - 'test/components/**/*_test.rb'
+  TestPaths: []
