@@ -5,6 +5,11 @@ module RuboCop
     module ViewComponent
       # Prevents direct access to global state within ViewComponent classes.
       #
+      # ViewComponent's own documentation notes that accessing `request` directly
+      # "introduces coupling that inhibits encapsulation & reuse, often making
+      # testing difficult." The same principle applies to `params`, `session`,
+      # `cookies`, and `flash`.
+      #
       # @example
       #   # bad
       #   class UserComponent < ViewComponent::Base
