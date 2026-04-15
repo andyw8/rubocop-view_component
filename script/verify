@@ -2,7 +2,6 @@
 # frozen_string_literal: true
 
 require "json"
-require "set"
 require "yaml"
 require "tmpdir"
 require "fileutils"
