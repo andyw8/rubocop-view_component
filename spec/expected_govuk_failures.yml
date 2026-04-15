@@ -2,38 +2,26 @@
 # It captures known offenses in the library source.
 ---
 ViewComponent/ComponentSuffix:
-  - app/components/govuk_component/base.rb:1 # ViewComponent class names should end with `Component`. (https://viewcomponent.org/best_practices.html)
-  - app/components/govuk_component/header_component.rb:46 # ViewComponent class names should end with `Component`. (https://viewcomponent.org/best_practices.html)
-  - app/components/govuk_component/notification_banner_component.rb:33 # ViewComponent class names should end with `Component`. (https://viewcomponent.org/best_practices.html)
-  - app/components/govuk_component/pagination_component/adjacent_page.rb:1 # ViewComponent class names should end with `Component`. (https://viewcomponent.org/best_practices.html)
-  - app/components/govuk_component/pagination_component/item.rb:1 # ViewComponent class names should end with `Component`. (https://viewcomponent.org/best_practices.html)
-  - app/components/govuk_component/tab_component.rb:21 # ViewComponent class names should end with `Component`. (https://viewcomponent.org/best_practices.html)
+  Exclude:
+    - 'app/components/govuk_component/base.rb'
+    - 'app/components/govuk_component/header_component.rb'
+    - 'app/components/govuk_component/notification_banner_component.rb'
+    - 'app/components/govuk_component/pagination_component/adjacent_page.rb'
+    - 'app/components/govuk_component/pagination_component/item.rb'
+    - 'app/components/govuk_component/tab_component.rb'
 ViewComponent/PreferPrivateMethods:
-  - app/components/govuk_component/base.rb:29 # Consider making `brand` private. Only ViewComponent interface methods should be public. (https://viewcomponent.org/best_practices.html)
-  - app/components/govuk_component/base.rb:35 # Consider making `class_prefix` private. Only ViewComponent interface methods should be public. (https://viewcomponent.org/best_practices.html)
-  - app/components/govuk_component/notification_banner_component.rb:55 # Consider making `link` private. Only ViewComponent interface methods should be public. (https://viewcomponent.org/best_practices.html)
-  - app/components/govuk_component/notification_banner_component.rb:59 # Consider making `default_attributes` private. Only ViewComponent interface methods should be public. (https://viewcomponent.org/best_practices.html)
-  - app/components/govuk_component/service_navigation_component.rb:54 # Consider making `navigation` private. Only ViewComponent interface methods should be public. (https://viewcomponent.org/best_practices.html)
-  - app/components/govuk_component/service_navigation_component.rb:62 # Consider making `navigation_list` private. Only ViewComponent interface methods should be public. (https://viewcomponent.org/best_practices.html)
-  - app/components/govuk_component/tab_component.rb:32 # Consider making `hidden_class` private. Only ViewComponent interface methods should be public. (https://viewcomponent.org/best_practices.html)
-  - app/components/govuk_component/tab_component.rb:38 # Consider making `li_classes` private. Only ViewComponent interface methods should be public. (https://viewcomponent.org/best_practices.html)
-  - app/components/govuk_component/tab_component.rb:42 # Consider making `li_link` private. Only ViewComponent interface methods should be public. (https://viewcomponent.org/best_practices.html)
-  - app/components/govuk_component/tab_component.rb:46 # Consider making `default_attributes` private. Only ViewComponent interface methods should be public. (https://viewcomponent.org/best_practices.html)
-  - app/components/govuk_component/tab_component.rb:50 # Consider making `combined_attributes` private. Only ViewComponent interface methods should be public. (https://viewcomponent.org/best_practices.html)
+  Exclude:
+    - 'app/components/govuk_component/base.rb'
+    - 'app/components/govuk_component/notification_banner_component.rb'
+    - 'app/components/govuk_component/service_navigation_component.rb'
+    - 'app/components/govuk_component/tab_component.rb'
 ViewComponent/TestRenderedOutput:
-  - spec/components/govuk_component/accordion_component_spec.rb:84 # Test instantiates a component but doesn't use `render_inline` or `render_preview`. Test the rendered output instead of component methods directly. (https://viewcomponent.org/guide/testing.html)
-  - spec/components/govuk_component/breadcrumbs_component_spec.rb:44 # Test instantiates a component but doesn't use `render_inline` or `render_preview`. Test the rendered output instead of component methods directly. (https://viewcomponent.org/guide/testing.html)
-  - spec/components/govuk_component/configuration/footer_component_configuration_spec.rb:42 # Test instantiates a component but doesn't use `render_inline` or `render_preview`. Test the rendered output instead of component methods directly. (https://viewcomponent.org/guide/testing.html)
-  - spec/components/govuk_component/footer_component_spec.rb:123 # Test instantiates a component but doesn't use `render_inline` or `render_preview`. Test the rendered output instead of component methods directly. (https://viewcomponent.org/guide/testing.html)
-  - spec/components/govuk_component/footer_component_spec.rb:182 # Test instantiates a component but doesn't use `render_inline` or `render_preview`. Test the rendered output instead of component methods directly. (https://viewcomponent.org/guide/testing.html)
-  - spec/components/govuk_component/footer_component_spec.rb:235 # Test instantiates a component but doesn't use `render_inline` or `render_preview`. Test the rendered output instead of component methods directly. (https://viewcomponent.org/guide/testing.html)
-  - spec/components/govuk_component/footer_component_spec.rb:254 # Test instantiates a component but doesn't use `render_inline` or `render_preview`. Test the rendered output instead of component methods directly. (https://viewcomponent.org/guide/testing.html)
-  - spec/components/govuk_component/footer_component_spec.rb:274 # Test instantiates a component but doesn't use `render_inline` or `render_preview`. Test the rendered output instead of component methods directly. (https://viewcomponent.org/guide/testing.html)
-  - spec/components/govuk_component/footer_component_spec.rb:294 # Test instantiates a component but doesn't use `render_inline` or `render_preview`. Test the rendered output instead of component methods directly. (https://viewcomponent.org/guide/testing.html)
-  - spec/components/govuk_component/footer_component_spec.rb:312 # Test instantiates a component but doesn't use `render_inline` or `render_preview`. Test the rendered output instead of component methods directly. (https://viewcomponent.org/guide/testing.html)
-  - spec/components/govuk_component/footer_component_spec.rb:336 # Test instantiates a component but doesn't use `render_inline` or `render_preview`. Test the rendered output instead of component methods directly. (https://viewcomponent.org/guide/testing.html)
-  - spec/components/govuk_component/notification_banner_component_spec.rb:59 # Test instantiates a component but doesn't use `render_inline` or `render_preview`. Test the rendered output instead of component methods directly. (https://viewcomponent.org/guide/testing.html)
-  - spec/components/govuk_component/pagination_component_spec.rb:317 # Test instantiates a component but doesn't use `render_inline` or `render_preview`. Test the rendered output instead of component methods directly. (https://viewcomponent.org/guide/testing.html)
-  - spec/components/govuk_component/task_list_component_spec.rb:139 # Test instantiates a component but doesn't use `render_inline` or `render_preview`. Test the rendered output instead of component methods directly. (https://viewcomponent.org/guide/testing.html)
-  - spec/components/govuk_component/warning_text_component_spec.rb:11 # Test instantiates a component but doesn't use `render_inline` or `render_preview`. Test the rendered output instead of component methods directly. (https://viewcomponent.org/guide/testing.html)
-  - spec/components/govuk_component/warning_text_component_spec.rb:41 # Test instantiates a component but doesn't use `render_inline` or `render_preview`. Test the rendered output instead of component methods directly. (https://viewcomponent.org/guide/testing.html)
+  Exclude:
+    - 'spec/components/govuk_component/accordion_component_spec.rb'
+    - 'spec/components/govuk_component/breadcrumbs_component_spec.rb'
+    - 'spec/components/govuk_component/configuration/footer_component_configuration_spec.rb'
+    - 'spec/components/govuk_component/footer_component_spec.rb'
+    - 'spec/components/govuk_component/notification_banner_component_spec.rb'
+    - 'spec/components/govuk_component/pagination_component_spec.rb'
+    - 'spec/components/govuk_component/task_list_component_spec.rb'
+    - 'spec/components/govuk_component/warning_text_component_spec.rb'

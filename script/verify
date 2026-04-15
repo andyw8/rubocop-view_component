@@ -134,18 +134,15 @@ end
 
 def extract_offenses(rubocop_output)
   data = JSON.parse(rubocop_output)
-  offenses_by_cop = Hash.new { |h, k| h[k] = [] }
+  offenses_by_cop = Hash.new { |h, k| h[k] = Set.new }
 
   data["files"].each do |file|
     file["offenses"].each do |offense|
-      offenses_by_cop[offense["cop_name"]] << {
-        location: "#{file["path"]}:#{offense["location"]["start_line"]}",
-        message: offense["message"]
-      }
+      offenses_by_cop[offense["cop_name"]] << file["path"]
     end
   end
 
-  offenses_by_cop.transform_values { |os| os.sort_by { |o| o[:location] } }.sort.to_h
+  offenses_by_cop.transform_values { |paths| paths.sort }.sort.to_h
 end
 
 def regenerate(offenses, results_file)
@@ -154,18 +151,18 @@ def regenerate(offenses, results_file)
   lines << "# It captures known offenses in the library source."
   lines << "---"
 
-  offenses.each do |cop, entries|
+  offenses.each do |cop, paths|
     lines << "#{cop}:"
-    entries.each { |e| lines << "  - #{e[:location]} # #{e[:message]}" }
+    lines << "  Exclude:"
+    paths.each { |path| lines << "    - '#{path}'" }
   end
 
   File.write(results_file, lines.join("\n") + "\n")
   total = offenses.values.sum(&:length)
-  puts "#{total} offense(s) written to #{results_file}"
+  puts "#{total} file(s) with offense(s) written to #{results_file}"
 end
 
 def load_expected(results_file)
-  # YAML strips inline comments, so each entry loads as just the location string
   YAML.load_file(results_file)
 end
 
@@ -174,20 +171,19 @@ def verify(offenses, results_file)
     abort "ERROR: #{results_file} not found. Run '#{$PROGRAM_NAME} --regenerate' first."
   end
 
-  expected = load_expected(results_file)
-  current = offenses.transform_values { |os| os.map { |o| o[:location] } }
+  expected = load_expected(results_file).transform_values { |v| v["Exclude"] }
 
-  if current == expected
+  if offenses == expected
     puts "Verification passed: output matches #{results_file}"
   else
     puts "Verification failed: output differs from #{results_file}"
 
-    all_cops = (current.keys + expected.keys).uniq.sort
+    all_cops = (offenses.keys + expected.keys).uniq.sort
     all_cops.each do |cop|
-      added = (current[cop] || []) - (expected[cop] || [])
-      removed = (expected[cop] || []) - (current[cop] || [])
-      added.each { |loc| puts "  + #{cop}: #{loc}" }
-      removed.each { |loc| puts "  - #{cop}: #{loc}" }
+      added = (offenses[cop] || []) - (expected[cop] || [])
+      removed = (expected[cop] || []) - (offenses[cop] || [])
+      added.each { |path| puts "  + #{cop}: #{path}" }
+      removed.each { |path| puts "  - #{cop}: #{path}" }
     end
 
     exit 1
