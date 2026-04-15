@@ -2,26 +2,16 @@
 # It captures known offenses in the library source.
 ---
 ViewComponent/PreferPrivateMethods:
-  - app/components/primer/alpha/action_list.rb:189 # Consider making `build_item` private. Only ViewComponent interface methods should be public.
-  - app/components/primer/alpha/action_list.rb:217 # Consider making `build_avatar_item` private. Only ViewComponent interface methods should be public.
-  - app/components/primer/alpha/action_list.rb:228 # Consider making `single_select?` private. Only ViewComponent interface methods should be public.
-  - app/components/primer/alpha/action_list.rb:236 # Consider making `allows_selection?` private. Only ViewComponent interface methods should be public.
-  - app/components/primer/alpha/action_list.rb:240 # Consider making `acts_as_listbox?` private. Only ViewComponent interface methods should be public.
-  - app/components/primer/alpha/action_list.rb:244 # Consider making `acts_as_menu?` private. Only ViewComponent interface methods should be public.
-  - app/components/primer/alpha/action_list.rb:248 # Consider making `required_form_arguments_given?` private. Only ViewComponent interface methods should be public.
-  - app/components/primer/alpha/action_list.rb:257 # Consider making `will_add_item` private. Only ViewComponent interface methods should be public.
-  - app/components/primer/alpha/action_list.rb:53 # Consider making `custom_element_name` private. Only ViewComponent interface methods should be public.
-  - app/components/primer/alpha/action_list/divider.rb:33 # Consider making `active?` private. Only ViewComponent interface methods should be public.
-  - app/components/primer/alpha/action_list/form_wrapper.rb:53 # Consider making `get?` private. Only ViewComponent interface methods should be public.
-  - app/components/primer/alpha/dropdown/menu.rb:96 # Consider making `divider?` private. Only ViewComponent interface methods should be public.
-  - app/components/primer/alpha/form_control.rb:101 # Consider making `visually_hide_label?` private. Only ViewComponent interface methods should be public.
-  - app/components/primer/alpha/form_control.rb:107 # Consider making `full_width?` private. Only ViewComponent interface methods should be public.
-  - app/components/primer/alpha/toggle_switch.rb:94 # Consider making `on?` private. Only ViewComponent interface methods should be public.
-  - app/components/primer/alpha/toggle_switch.rb:98 # Consider making `enabled?` private. Only ViewComponent interface methods should be public.
-  - app/components/primer/alpha/tree_view/node.rb:155 # Consider making `merge_system_arguments!` private. Only ViewComponent interface methods should be public.
-  - app/components/primer/beta/avatar.rb:22 # Consider making `link?` private. Only ViewComponent interface methods should be public.
-  - app/components/primer/beta/nav_list.rb:116 # Consider making `build_item` private. Only ViewComponent interface methods should be public.
-  - app/components/primer/beta/nav_list.rb:139 # Consider making `build_avatar_item` private. Only ViewComponent interface methods should be public.
+  Exclude:
+    - 'app/components/primer/alpha/action_list.rb'
+    - 'app/components/primer/alpha/action_list/divider.rb'
+    - 'app/components/primer/alpha/action_list/form_wrapper.rb'
+    - 'app/components/primer/alpha/dropdown/menu.rb'
+    - 'app/components/primer/alpha/form_control.rb'
+    - 'app/components/primer/alpha/toggle_switch.rb'
+    - 'app/components/primer/alpha/tree_view/node.rb'
+    - 'app/components/primer/beta/avatar.rb'
+    - 'app/components/primer/beta/nav_list.rb'
 ViewComponent/TestRenderedOutput:
-  - test/components/alpha/action_list_test.rb:253 # Test instantiates a component but doesn't use `render_inline` or `render_preview`. Test the rendered output instead of component methods directly.
-  - test/components/alpha/action_list_test.rb:268 # Test instantiates a component but doesn't use `render_inline` or `render_preview`. Test the rendered output instead of component methods directly.
+  Exclude:
+    - 'test/components/alpha/action_list_test.rb'
