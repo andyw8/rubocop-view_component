@@ -12,7 +12,7 @@ ViewComponent/ComponentSuffix:
 ViewComponent/MissingPreview:
   Description: 'Ensure every ViewComponent has a corresponding preview file.'
   Enabled: true
-  VersionAdded: '<<next>>'
+  VersionAdded: '0.5.0'
   Severity: convention
   Include:
     - 'app/components/**/*_component.rb'
