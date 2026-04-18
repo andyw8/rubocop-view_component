@@ -8,15 +8,6 @@ module RuboCop
       # Looks for previews in the configured PreviewPaths, supporting both
       # naming conventions: `user_preview.rb` and `user_component_preview.rb`.
       #
-      # @example
-      #   # bad - no preview file found for UserComponent
-      #   class UserComponent < ViewComponent::Base
-      #   end
-      #
-      #   # good - previews/user_preview.rb or previews/user_component_preview.rb exists
-      #   class UserComponent < ViewComponent::Base
-      #   end
-      #
       class MissingPreview < RuboCop::Cop::Base
         include ViewComponent::Base
 
