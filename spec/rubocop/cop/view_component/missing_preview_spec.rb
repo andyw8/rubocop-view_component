@@ -33,6 +33,39 @@ RSpec.describe RuboCop::Cop::ViewComponent::MissingPreview, :config do
     end
   end
 
+  context "when ComponentNamespaces is configured" do
+    let(:config) do
+      RuboCop::Config.new(
+        "ViewComponent/MissingPreview" => {
+          "Enabled" => true,
+          "PreviewPaths" => ["/previews"]
+        },
+        "AllCops" => {
+          "ComponentNamespaces" => ["V2::"]
+        }
+      )
+    end
+
+    it "registers an offense for a component in a configured namespace" do
+      allow(File).to receive(:exist?).and_return(false)
+
+      expect_offense(<<~RUBY, "/app/components/v2/table.rb")
+        class V2::Table < SomeBase
+              ^^^^^^^^^ No preview found for V2::Table (looked in: /previews).
+        end
+      RUBY
+    end
+
+    it "does not register an offense for a non-component class in a configured namespace" do
+      allow(File).to receive(:exist?).and_return(false)
+
+      expect_no_offenses(<<~RUBY, "/app/models/user.rb")
+        class User < SomeBase
+        end
+      RUBY
+    end
+  end
+
   context "when not a ViewComponent" do
     it "does not register an offense" do
       allow(File).to receive(:exist?).and_return(false)
