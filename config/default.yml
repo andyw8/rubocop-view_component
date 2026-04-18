@@ -21,7 +21,8 @@ ViewComponent/MissingPreview:
   ComponentNamespaces: []
 
 ViewComponent/NoGlobalState:
-  Description: 'Avoid accessing global state (params, request, session, cookies, flash) directly.'
+  Description: 'Avoid accessing global state (params, request, session, cookies,
+    flash) directly.'
   Enabled: true
   VersionAdded: '0.1'
   Severity: convention
@@ -53,7 +54,7 @@ ViewComponent/PreferComposition:
   Enabled: true
   VersionAdded: '0.3'
   Severity: convention
-  StyleGuide: 'https://viewcomponent.org/best_practices.html'
+  StyleGuide: 'https://viewcomponent.org/best_practices.html#avoid-inheritance'
   ViewComponentParentClasses: []
   ComponentNamespaces: []
 

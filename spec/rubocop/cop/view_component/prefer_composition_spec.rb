@@ -64,6 +64,31 @@ RSpec.describe RuboCop::Cop::ViewComponent::PreferComposition, :config do
     end
   end
 
+  context "when ComponentNamespaces is configured" do
+    let(:config) do
+      RuboCop::Config.new(
+        "ViewComponent/PreferComposition" => {
+          "ComponentNamespaces" => ["V2::"]
+        }
+      )
+    end
+
+    it "registers an offense for a class in a configured namespace" do
+      expect_offense(<<~RUBY)
+        class UserCard < V2::Table
+                         ^^^^^^^^^ Avoid inheriting from another ViewComponent.
+        end
+      RUBY
+    end
+
+    it "does not register an offense for a class outside configured namespaces" do
+      expect_no_offenses(<<~RUBY)
+        class UserCard < SomeOtherBase
+        end
+      RUBY
+    end
+  end
+
   context "when ViewComponentParentClasses is configured" do
     let(:config) do
       RuboCop::Config.new(
