@@ -24,5 +24,7 @@ ViewComponent/TestRenderedOutput:
     - test/lib/primer/attributes_helper_test.rb
 
 ViewComponent/MissingPreview:
+  PreviewPaths:
+    - previews
   Exclude:
     - app/components/primer/base_component.rb
