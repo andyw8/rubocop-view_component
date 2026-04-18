@@ -67,7 +67,7 @@ RSpec.describe RuboCop::Cop::ViewComponent::PreferComposition, :config do
   context "when ViewComponentParentClasses is configured" do
     let(:config) do
       RuboCop::Config.new(
-        "AllCops" => {
+        "ViewComponent/PreferComposition" => {
           "ViewComponentParentClasses" => ["Primer::Component"]
         }
       )

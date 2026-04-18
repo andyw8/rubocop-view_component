@@ -38,9 +38,7 @@ RSpec.describe RuboCop::Cop::ViewComponent::MissingPreview, :config do
       RuboCop::Config.new(
         "ViewComponent/MissingPreview" => {
           "Enabled" => true,
-          "PreviewPaths" => ["/previews"]
-        },
-        "AllCops" => {
+          "PreviewPaths" => ["/previews"],
           "ComponentNamespaces" => ["V2::"]
         }
       )

@@ -1,13 +1,11 @@
-AllCops:
-  ViewComponentParentClasses: []
-  ComponentNamespaces: []
-
 ViewComponent/ComponentSuffix:
   Description: 'Enforce -Component suffix for ViewComponent classes.'
   Enabled: true
   VersionAdded: '0.1'
   Severity: convention
   StyleGuide: 'https://viewcomponent.org/best_practices.html'
+  ViewComponentParentClasses: []
+  ComponentNamespaces: []
 
 ViewComponent/MissingPreview:
   Description: 'Ensure every ViewComponent has a corresponding preview file.'
@@ -19,6 +17,8 @@ ViewComponent/MissingPreview:
   PreviewPaths:
     - test/components/previews
     - spec/components/previews
+  ViewComponentParentClasses: []
+  ComponentNamespaces: []
 
 ViewComponent/NoGlobalState:
   Description: 'Avoid accessing global state (params, request, session, cookies, flash) directly.'
@@ -26,6 +26,8 @@ ViewComponent/NoGlobalState:
   VersionAdded: '0.1'
   Severity: convention
   StyleGuide: 'https://viewcomponent.org/best_practices.html'
+  ViewComponentParentClasses: []
+  ComponentNamespaces: []
 
 ViewComponent/PreferPrivateMethods:
   Description: 'Suggest making helper methods private.'
@@ -43,6 +45,8 @@ ViewComponent/PreferPrivateMethods:
     - around_render
   AllowedPublicMethodPatterns:
     - "^with_"
+  ViewComponentParentClasses: []
+  ComponentNamespaces: []
 
 ViewComponent/PreferComposition:
   Description: 'Prefer composition over inheritance for ViewComponents.'
@@ -50,6 +54,8 @@ ViewComponent/PreferComposition:
   VersionAdded: '0.3'
   Severity: convention
   StyleGuide: 'https://viewcomponent.org/best_practices.html'
+  ViewComponentParentClasses: []
+  ComponentNamespaces: []
 
 ViewComponent/PreferSlots:
   Description: 'Prefer slots over HTML string parameters.'
@@ -57,6 +63,8 @@ ViewComponent/PreferSlots:
   VersionAdded: '0.1'
   Severity: convention
   StyleGuide: 'https://viewcomponent.org/best_practices.html'
+  ViewComponentParentClasses: []
+  ComponentNamespaces: []
 
 ViewComponent/TestRenderedOutput:
   Description: 'Test rendered output instead of component instance methods.'

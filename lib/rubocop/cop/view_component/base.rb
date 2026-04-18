@@ -26,12 +26,12 @@ module RuboCop
           source = node.source
           return true if source == "ViewComponent::Base" || source == "ApplicationComponent"
 
-          additional = config.for_all_cops["ViewComponentParentClasses"] || []
+          additional = cop_config["ViewComponentParentClasses"] || []
           additional.include?(source)
         end
 
         def component_namespaces
-          config.for_all_cops["ComponentNamespaces"] || []
+          cop_config["ComponentNamespaces"] || []
         end
 
         # Find the enclosing class node

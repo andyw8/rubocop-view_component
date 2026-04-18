@@ -77,7 +77,7 @@ RSpec.describe RuboCop::Cop::ViewComponent::ComponentSuffix, :config do
   context "when ViewComponentParentClasses is configured" do
     let(:config) do
       RuboCop::Config.new(
-        "AllCops" => {
+        "ViewComponent/ComponentSuffix" => {
           "ViewComponentParentClasses" => ["Primer::Component"]
         }
       )
