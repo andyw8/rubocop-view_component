@@ -2,16 +2,14 @@
 # It captures known offenses in the library source.
 ---
 ViewComponent/PreferPrivateMethods:
-  Exclude:
-    - 'app/components/primer/alpha/action_list.rb'
-    - 'app/components/primer/alpha/action_list/divider.rb'
-    - 'app/components/primer/alpha/action_list/form_wrapper.rb'
-    - 'app/components/primer/alpha/dropdown/menu.rb'
-    - 'app/components/primer/alpha/form_control.rb'
-    - 'app/components/primer/alpha/toggle_switch.rb'
-    - 'app/components/primer/alpha/tree_view/node.rb'
-    - 'app/components/primer/beta/avatar.rb'
-    - 'app/components/primer/beta/nav_list.rb'
+  - 'app/components/primer/alpha/action_list.rb'
+  - 'app/components/primer/alpha/action_list/divider.rb'
+  - 'app/components/primer/alpha/action_list/form_wrapper.rb'
+  - 'app/components/primer/alpha/dropdown/menu.rb'
+  - 'app/components/primer/alpha/form_control.rb'
+  - 'app/components/primer/alpha/toggle_switch.rb'
+  - 'app/components/primer/alpha/tree_view/node.rb'
+  - 'app/components/primer/beta/avatar.rb'
+  - 'app/components/primer/beta/nav_list.rb'
 ViewComponent/TestRenderedOutput:
-  Exclude:
-    - 'test/components/alpha/action_list_test.rb'
+  - 'test/components/alpha/action_list_test.rb'

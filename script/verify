@@ -153,8 +153,7 @@ def regenerate(offenses, results_file)
 
   offenses.each do |cop, paths|
     lines << "#{cop}:"
-    lines << "  Exclude:"
-    paths.each { |path| lines << "    - '#{path}'" }
+    paths.each { |path| lines << "  - '#{path}'" }
   end
 
   File.write(results_file, lines.join("\n") + "\n")
@@ -171,7 +170,7 @@ def verify(offenses, results_file)
     abort "ERROR: #{results_file} not found. Run '#{$PROGRAM_NAME} --regenerate' first."
   end
 
-  expected = load_expected(results_file).transform_values { |v| v["Exclude"] }
+  expected = load_expected(results_file)
 
   if offenses == expected
     puts "Verification passed: output matches #{results_file}"

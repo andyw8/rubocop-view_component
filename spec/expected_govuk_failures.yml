@@ -2,26 +2,23 @@
 # It captures known offenses in the library source.
 ---
 ViewComponent/ComponentSuffix:
-  Exclude:
-    - 'app/components/govuk_component/base.rb'
-    - 'app/components/govuk_component/header_component.rb'
-    - 'app/components/govuk_component/notification_banner_component.rb'
-    - 'app/components/govuk_component/pagination_component/adjacent_page.rb'
-    - 'app/components/govuk_component/pagination_component/item.rb'
-    - 'app/components/govuk_component/tab_component.rb'
+  - 'app/components/govuk_component/base.rb'
+  - 'app/components/govuk_component/header_component.rb'
+  - 'app/components/govuk_component/notification_banner_component.rb'
+  - 'app/components/govuk_component/pagination_component/adjacent_page.rb'
+  - 'app/components/govuk_component/pagination_component/item.rb'
+  - 'app/components/govuk_component/tab_component.rb'
 ViewComponent/PreferPrivateMethods:
-  Exclude:
-    - 'app/components/govuk_component/base.rb'
-    - 'app/components/govuk_component/notification_banner_component.rb'
-    - 'app/components/govuk_component/service_navigation_component.rb'
-    - 'app/components/govuk_component/tab_component.rb'
+  - 'app/components/govuk_component/base.rb'
+  - 'app/components/govuk_component/notification_banner_component.rb'
+  - 'app/components/govuk_component/service_navigation_component.rb'
+  - 'app/components/govuk_component/tab_component.rb'
 ViewComponent/TestRenderedOutput:
-  Exclude:
-    - 'spec/components/govuk_component/accordion_component_spec.rb'
-    - 'spec/components/govuk_component/breadcrumbs_component_spec.rb'
-    - 'spec/components/govuk_component/configuration/footer_component_configuration_spec.rb'
-    - 'spec/components/govuk_component/footer_component_spec.rb'
-    - 'spec/components/govuk_component/notification_banner_component_spec.rb'
-    - 'spec/components/govuk_component/pagination_component_spec.rb'
-    - 'spec/components/govuk_component/task_list_component_spec.rb'
-    - 'spec/components/govuk_component/warning_text_component_spec.rb'
+  - 'spec/components/govuk_component/accordion_component_spec.rb'
+  - 'spec/components/govuk_component/breadcrumbs_component_spec.rb'
+  - 'spec/components/govuk_component/configuration/footer_component_configuration_spec.rb'
+  - 'spec/components/govuk_component/footer_component_spec.rb'
+  - 'spec/components/govuk_component/notification_banner_component_spec.rb'
+  - 'spec/components/govuk_component/pagination_component_spec.rb'
+  - 'spec/components/govuk_component/task_list_component_spec.rb'
+  - 'spec/components/govuk_component/warning_text_component_spec.rb'
