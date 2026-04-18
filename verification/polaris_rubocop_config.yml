@@ -11,3 +11,35 @@ ViewComponent/MissingPreview:
     - app/components/polaris/base_button.rb
     - app/components/polaris/base_checkbox.rb
     - app/components/polaris/base_radio_button.rb
+    # Sub-components are rendered as part of their parent component's preview
+    # rather than having dedicated preview files
+    - app/components/polaris/action_list/item_component.rb
+    - app/components/polaris/action_list/section_component.rb
+    - app/components/polaris/autocomplete/action_component.rb
+    - app/components/polaris/autocomplete/option_component.rb
+    - app/components/polaris/autocomplete/section_component.rb
+    - app/components/polaris/card/header_component.rb
+    - app/components/polaris/card/section_component.rb
+    - app/components/polaris/data_table/cell_component.rb
+    - app/components/polaris/data_table/column_component.rb
+    - app/components/polaris/exception_list/item_component.rb
+    - app/components/polaris/form_layout/group_component.rb
+    - app/components/polaris/form_layout/item_component.rb
+    - app/components/polaris/frame/save_bar_component.rb
+    - app/components/polaris/frame/top_bar_component.rb
+    - app/components/polaris/index_table/cell_component.rb
+    - app/components/polaris/index_table/column_component.rb
+    - app/components/polaris/modal/section_component.rb
+    - app/components/polaris/navigation/item_component.rb
+    - app/components/polaris/navigation/section_component.rb
+    - app/components/polaris/new_tabs/tab_component.rb
+    - app/components/polaris/option_list/checkbox_component.rb
+    - app/components/polaris/option_list/option_component.rb
+    - app/components/polaris/option_list/radio_button_component.rb
+    - app/components/polaris/option_list/section_component.rb
+    - app/components/polaris/popover/pane_component.rb
+    - app/components/polaris/popover/section_component.rb
+    - app/components/polaris/resource_item/shortcut_actions_component.rb
+    - app/components/polaris/stack/item_component.rb
+    - app/components/polaris/tabs/tab_component.rb
+    - app/components/polaris/top_bar/user_menu_component.rb
