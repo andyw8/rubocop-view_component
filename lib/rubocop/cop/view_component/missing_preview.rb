@@ -33,7 +33,8 @@ module RuboCop
         end
 
         def candidate_filenames(class_name)
-          base = class_name.gsub(/Component$/, "").gsub(/([A-Z])/, '_\1').downcase.delete_prefix("_")
+          base = class_name.gsub(/Component$/, "").gsub("::", "/").gsub(/([A-Z])/, '_\1').downcase.gsub("/_", "/")
+          base = base.delete_prefix("_").delete_prefix("/")
           [
             "#{base}_preview.rb",
             "#{base}_component_preview.rb"

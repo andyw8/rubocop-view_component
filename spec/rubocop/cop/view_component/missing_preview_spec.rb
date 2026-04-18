@@ -56,6 +56,26 @@ RSpec.describe RuboCop::Cop::ViewComponent::MissingPreview, :config do
       RUBY
     end
 
+    it "checks the correct preview path for namespaced classes" do
+      allow(File).to receive(:exist?).and_return(false)
+      allow(File).to receive(:exist?).with("/previews/v2/grouped_multi_select_preview.rb").and_return(true)
+
+      expect_no_offenses(<<~RUBY, "/app/components/v2/grouped_multi_select.rb")
+        class V2::GroupedMultiSelect < V2::MultiSelect
+        end
+      RUBY
+    end
+
+    it "checks the correct preview path for deeply namespaced classes" do
+      allow(File).to receive(:exist?).and_return(false)
+      allow(File).to receive(:exist?).with("/previews/v2/catalogs/index_table_preview.rb").and_return(true)
+
+      expect_no_offenses(<<~RUBY, "/app/components/v2/catalogs/index_table.rb")
+        class V2::Catalogs::IndexTable < V2::Table
+        end
+      RUBY
+    end
+
     it "does not register an offense for a non-component class in a configured namespace" do
       allow(File).to receive(:exist?).and_return(false)
 
