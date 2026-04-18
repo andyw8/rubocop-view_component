@@ -2,7 +2,6 @@
 # It captures known offenses in the library source.
 ---
 ViewComponent/MissingPreview:
-  - 'app/components/primer/base_component.rb'
   - 'app/components/primer/blankslate_component.rb'
   - 'app/components/primer/button_component.rb'
   - 'app/components/primer/layout_component.rb'

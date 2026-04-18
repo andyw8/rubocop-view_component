@@ -6,3 +6,8 @@ AllCops:
 ViewComponent/MissingPreview:
   PreviewPaths:
     - demo/app/previews
+  Exclude:
+    - app/components/polaris/base_component.rb
+    - app/components/polaris/base_button.rb
+    - app/components/polaris/base_checkbox.rb
+    - app/components/polaris/base_radio_button.rb

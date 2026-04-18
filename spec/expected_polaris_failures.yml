@@ -15,7 +15,6 @@ ViewComponent/MissingPreview:
   - 'app/components/polaris/autocomplete/action_component.rb'
   - 'app/components/polaris/autocomplete/option_component.rb'
   - 'app/components/polaris/autocomplete/section_component.rb'
-  - 'app/components/polaris/base_component.rb'
   - 'app/components/polaris/button_group_component.rb'
   - 'app/components/polaris/card/header_component.rb'
   - 'app/components/polaris/card/section_component.rb'
