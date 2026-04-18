@@ -2,3 +2,7 @@ AllCops:
   ViewComponentParentClasses:
     - Polaris::Component
     - Component
+
+ViewComponent/MissingPreview:
+  PreviewPaths:
+    - demo/app/previews

@@ -8,6 +8,17 @@ ViewComponent/ComponentSuffix:
   Severity: convention
   StyleGuide: 'https://viewcomponent.org/best_practices.html'
 
+ViewComponent/MissingPreview:
+  Description: 'Ensure every ViewComponent has a corresponding preview file.'
+  Enabled: true
+  VersionAdded: '<<next>>'
+  Severity: convention
+  Include:
+    - 'app/components/**/*_component.rb'
+  PreviewPaths:
+    - test/components/previews
+    - spec/components/previews
+
 ViewComponent/NoGlobalState:
   Description: 'Avoid accessing global state (params, request, session, cookies, flash) directly.'
   Enabled: true
