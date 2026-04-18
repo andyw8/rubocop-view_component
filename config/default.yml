@@ -37,7 +37,7 @@ ViewComponent/PreferComposition:
   Enabled: true
   VersionAdded: '0.3'
   Severity: convention
-  StyleGuide: 'https://viewcomponent.org/best_practices.html'
+  StyleGuide: 'https://viewcomponent.org/best_practices.html#avoid-inheritance'
   ComponentNamespaces: []
 
 ViewComponent/PreferSlots:
