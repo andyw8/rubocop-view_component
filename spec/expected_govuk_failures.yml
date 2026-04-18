@@ -3,8 +3,16 @@
 ---
 ViewComponent/ComponentSuffix:
   - 'app/components/govuk_component/base.rb'
+  - 'app/components/govuk_component/header_component.rb'
+  - 'app/components/govuk_component/notification_banner_component.rb'
+  - 'app/components/govuk_component/pagination_component/adjacent_page.rb'
+  - 'app/components/govuk_component/pagination_component/item.rb'
+  - 'app/components/govuk_component/tab_component.rb'
 ViewComponent/PreferPrivateMethods:
   - 'app/components/govuk_component/base.rb'
+  - 'app/components/govuk_component/notification_banner_component.rb'
+  - 'app/components/govuk_component/service_navigation_component.rb'
+  - 'app/components/govuk_component/tab_component.rb'
 ViewComponent/TestRenderedOutput:
   - 'spec/components/govuk_component/accordion_component_spec.rb'
   - 'spec/components/govuk_component/breadcrumbs_component_spec.rb'

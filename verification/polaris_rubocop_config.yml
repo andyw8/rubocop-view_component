@@ -1,4 +1,4 @@
-AllCops:
+ViewComponent:
   ViewComponentParentClasses:
     - Polaris::Component
     - Component
