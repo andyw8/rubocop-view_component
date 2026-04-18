@@ -38,6 +38,7 @@ ViewComponent/PreferComposition:
   VersionAdded: '0.3'
   Severity: convention
   StyleGuide: 'https://viewcomponent.org/best_practices.html'
+  ComponentNamespaces: []
 
 ViewComponent/PreferSlots:
   Description: 'Prefer slots over HTML string parameters.'

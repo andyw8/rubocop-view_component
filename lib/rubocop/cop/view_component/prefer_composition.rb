@@ -36,7 +36,13 @@ module RuboCop
         def component_like_parent?(node)
           return false unless node.const_type?
 
-          node.source.end_with?("Component")
+          source = node.source
+          source.end_with?("Component") ||
+            component_namespaces.any? { |ns| source.start_with?(ns) }
+        end
+
+        def component_namespaces
+          cop_config.fetch("ComponentNamespaces", [])
         end
       end
     end
