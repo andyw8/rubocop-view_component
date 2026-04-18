@@ -20,7 +20,7 @@ module RuboCop
       class MissingPreview < RuboCop::Cop::Base
         include ViewComponent::Base
 
-        MSG = "No preview found for %<component>s."
+        MSG = "No preview found for %<component>s (looked in: %<paths>s)."
 
         def on_class(node)
           return unless view_component_class?(node)
@@ -28,7 +28,7 @@ module RuboCop
           class_name = node.identifier.source
           return if preview_exists?(class_name)
 
-          add_offense(node.identifier, message: format(MSG, component: class_name))
+          add_offense(node.identifier, message: format(MSG, component: class_name, paths: preview_paths.join(", ")))
         end
 
         private

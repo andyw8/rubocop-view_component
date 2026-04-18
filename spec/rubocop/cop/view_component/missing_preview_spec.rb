@@ -27,7 +27,7 @@ RSpec.describe RuboCop::Cop::ViewComponent::MissingPreview, :config do
 
       expect_offense(<<~RUBY, "/app/components/user_component.rb")
         class UserComponent < ViewComponent::Base
-              ^^^^^^^^^^^^^ No preview found for UserComponent.
+              ^^^^^^^^^^^^^ No preview found for UserComponent (looked in: /previews).
         end
       RUBY
     end
