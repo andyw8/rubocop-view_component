@@ -1,3 +1,7 @@
-AllCops:
+ViewComponent:
   ViewComponentParentClasses:
     - GovukComponent::Base
+
+# x-govuk components do not use ViewComponent previews
+ViewComponent/MissingPreview:
+  Enabled: false

@@ -9,6 +9,20 @@ ViewComponent/ComponentSuffix:
   - 'app/components/polaris/layout/annotated_section.rb'
   - 'app/components/polaris/layout/section.rb'
   - 'app/components/polaris/text_field_component.rb'
+ViewComponent/MissingPreview:
+  - 'app/components/polaris/button_group_component.rb'
+  - 'app/components/polaris/choice_component.rb'
+  - 'app/components/polaris/description_list_component.rb'
+  - 'app/components/polaris/filters_component.rb'
+  - 'app/components/polaris/inline_code_component.rb'
+  - 'app/components/polaris/label_component.rb'
+  - 'app/components/polaris/labelled_component.rb'
+  - 'app/components/polaris/list_component.rb'
+  - 'app/components/polaris/page_component.rb'
+  - 'app/components/polaris/placeholder_component.rb'
+  - 'app/components/polaris/shopify_navigation_component.rb'
+  - 'app/components/polaris/text_field_component.rb'
+  - 'app/components/polaris/toast_component.rb'
 ViewComponent/NoGlobalState:
   - 'app/components/polaris/shopify_navigation_component.rb'
 ViewComponent/PreferPrivateMethods:

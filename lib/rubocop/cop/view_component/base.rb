@@ -9,6 +9,9 @@ module RuboCop
         def view_component_class?(node)
           return false unless node&.class_type?
 
+          class_source = node.identifier.source
+          return true if component_namespaces.any? { |ns| class_source.start_with?(ns) }
+
           parent_class = node.parent_class
           return false unless parent_class
 
@@ -23,8 +26,12 @@ module RuboCop
           source = node.source
           return true if source == "ViewComponent::Base" || source == "ApplicationComponent"
 
-          additional = config.for_all_cops["ViewComponentParentClasses"] || []
+          additional = cop_config["ViewComponentParentClasses"] || []
           additional.include?(source)
+        end
+
+        def component_namespaces
+          cop_config["ComponentNamespaces"] || []
         end
 
         # Find the enclosing class node
