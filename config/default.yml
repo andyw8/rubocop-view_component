@@ -19,6 +19,7 @@ ViewComponent/MissingPreview:
   PreviewPaths:
     - test/components/previews
     - spec/components/previews
+  ComponentNamespaces: []
 
 ViewComponent/NoGlobalState:
   Description: 'Avoid accessing global state (params, request, session, cookies,
@@ -51,6 +52,7 @@ ViewComponent/PreferComposition:
   VersionAdded: '0.3'
   Severity: convention
   StyleGuide: 'https://viewcomponent.org/best_practices.html#avoid-inheritance'
+  ComponentNamespaces: []
 
 ViewComponent/PreferSlots:
   Description: 'Prefer slots over HTML string parameters.'
