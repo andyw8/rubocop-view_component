@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rubocop-view_component (0.5.0)
+    rubocop-view_component (0.5.1)
       herb
       lint_roller (~> 1.1)
       parser
