@@ -58,9 +58,15 @@ module RuboCop
 
           method_name = global_state_access?(node)
           return unless method_name
-          return if node.each_ancestor(:block).any? { |ancestor| sorbet_sig_block?(ancestor) }
+          return if sorbet_signature?(node)
 
           add_offense(node, message: format(MSG, method: method_name))
+        end
+
+        private
+
+        def sorbet_signature?(node)
+          node.each_ancestor(:block).any? { |ancestor| sorbet_sig_block?(ancestor) }
         end
       end
     end
