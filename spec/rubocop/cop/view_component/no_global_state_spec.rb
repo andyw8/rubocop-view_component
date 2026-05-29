@@ -105,6 +105,19 @@ RSpec.describe RuboCop::Cop::ViewComponent::NoGlobalState, :config do
     end
   end
 
+  context "with Sorbet signatures" do
+    it "does not register offense for params in sig block" do
+      expect_no_offenses(<<~RUBY)
+        class UserComponent < ViewComponent::Base
+          sig { params(descriptor: String, admin_view: T::Boolean).returns(T.nilable(String)) }
+          def call(descriptor:, admin_view:)
+            @descriptor = descriptor
+          end
+        end
+      RUBY
+    end
+  end
+
   context "when not in a ViewComponent" do
     it "does not register offense in regular classes" do
       expect_no_offenses(<<~RUBY)

@@ -49,11 +49,16 @@ module RuboCop
           (send nil? ${:params :request :session :cookies :flash} ...)
         PATTERN
 
+        def_node_matcher :sorbet_sig_block?, <<~PATTERN
+          (block (send nil? :sig) ...)
+        PATTERN
+
         def on_send(node)
           return unless inside_view_component?(node)
 
           method_name = global_state_access?(node)
           return unless method_name
+          return if node.each_ancestor(:block).any? { |ancestor| sorbet_sig_block?(ancestor) }
 
           add_offense(node, message: format(MSG, method: method_name))
         end
