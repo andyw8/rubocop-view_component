@@ -43,11 +43,11 @@ module RuboCop
         end
 
         def candidate_filenames(class_name)
-          base = ActiveSupport::Inflector.underscore(class_name.delete_suffix("Component"))
-          [
-            "#{base}_preview.rb",
-            "#{base}_component_preview.rb"
-          ]
+          bases = [ActiveSupport::Inflector.underscore(class_name.delete_suffix("Component"))]
+          short_name = class_name.split("::").last
+          short_base = ActiveSupport::Inflector.underscore(short_name.delete_suffix("Component"))
+          bases << short_base if short_base != bases.first
+          bases.flat_map { |base| ["#{base}_preview.rb", "#{base}_component_preview.rb"] }
         end
 
         def preview_paths
