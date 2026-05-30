@@ -28,6 +28,7 @@ module RuboCop
         # Check Minitest-style test methods
         def on_def(node)
           return unless within_test_paths?
+
           method_name = node.method_name.to_s
           return unless method_name.start_with?("test_")
           return unless instantiates_component?(node)
@@ -45,6 +46,7 @@ module RuboCop
 
           add_offense(node)
         end
+        alias on_numblock on_block
 
         private
 
@@ -58,7 +60,7 @@ module RuboCop
 
         def instantiates_component?(node)
           node.each_descendant(:send).any? do |send_node|
-            next unless send_node.method_name == :new
+            next unless send_node.method?(:new)
 
             send_node.receiver&.const_type?
           end

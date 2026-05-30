@@ -45,10 +45,12 @@ module RuboCop
 
         RESTRICT_ON_SEND = GLOBAL_STATE_METHODS
 
+        # @!method global_state_access?(node)
         def_node_matcher :global_state_access?, <<~PATTERN
           (send nil? ${:params :request :session :cookies :flash} ...)
         PATTERN
 
+        # @!method sorbet_sig_block?(node)
         def_node_matcher :sorbet_sig_block?, <<~PATTERN
           (block (send nil? :sig) ...)
         PATTERN
@@ -62,6 +64,7 @@ module RuboCop
 
           add_offense(node, message: format(MSG, method: method_name))
         end
+        alias on_csend on_send
 
         private
 

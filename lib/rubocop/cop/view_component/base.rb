@@ -24,7 +24,7 @@ module RuboCop
           return false unless node.const_type?
 
           source = node.source
-          return true if source == "ViewComponent::Base" || source == "ApplicationComponent"
+          return true if ["ViewComponent::Base", "ApplicationComponent"].include?(source)
 
           additional = cop_config["ViewComponentParentClasses"] || []
           additional.include?(source)

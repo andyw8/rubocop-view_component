@@ -31,6 +31,7 @@ module RuboCop
 
         HTML_PARAM_PATTERN = /_html$/
 
+        # @!method html_safe_call?(node)
         def_node_search :html_safe_call?, "(send _ :html_safe)"
 
         def on_class(node)
@@ -46,29 +47,23 @@ module RuboCop
 
         def find_initialize(class_node)
           class_node.each_descendant(:def).find do |def_node|
-            def_node.method_name == :initialize
+            def_node.method?(:initialize)
           end
         end
 
         def check_initialize_params(initialize_node)
           initialize_node.arguments.each do |arg|
-            next unless arg.kwoptarg_type? || arg.kwarg_type?
+            next unless arg.type?(:kwoptarg, :kwarg)
 
-            param_name = arg.children[0]
-
-            # Check parameter name patterns
-            if html_param_name?(param_name)
-              suggested_slot = suggest_slot_name(param_name)
-              add_offense(arg, message: format(MSG, slot_method: suggested_slot))
-              next
-            end
-
-            # Check for html_safe in default value
-            if arg.kwoptarg_type? && html_safe_call?(arg)
-              suggested_slot = suggest_slot_name(param_name)
-              add_offense(arg, message: format(MSG, slot_method: suggested_slot))
-            end
+            check_param(arg)
           end
+        end
+
+        def check_param(arg)
+          param_name = arg.children[0]
+          return unless html_param_name?(param_name) || (arg.kwoptarg_type? && html_safe_call?(arg))
+
+          add_offense(arg, message: format(MSG, slot_method: suggest_slot_name(param_name)))
         end
 
         def html_param_name?(name)

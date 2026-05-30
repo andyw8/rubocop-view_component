@@ -1,5 +1,3 @@
-inherit_from: .rubocop_todo.yml
-
 plugins:
   - rubocop-internal_affairs
   - rubocop-view_component
@@ -9,12 +7,22 @@ AllCops:
   NewCops: enable
   Exclude:
     - 'verification/**/*'
+    - 'script/verify'
+    - 'spec/fixtures/**/*'
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
+    - '*.gemspec'
 
 Style/StringLiterals:
   EnforcedStyle: double_quotes
 
 Style/StringLiteralsInInterpolation:
   EnforcedStyle: double_quotes
+
+InternalAffairs/RedundantLetRuboCopConfigNew:
+  Enabled: false
 
 Naming/FileName:
   Exclude:
