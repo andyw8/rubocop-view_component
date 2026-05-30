@@ -9,7 +9,7 @@ module RuboCop
         def view_component_class?(node)
           return false unless node&.class_type?
 
-          class_source = node.identifier.source
+          class_source = fully_qualified_name(node)
           return true if component_namespaces.any? { |ns| class_source.start_with?(ns) }
 
           parent_class = node.parent_class

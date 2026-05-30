@@ -88,6 +88,56 @@ RSpec.describe RuboCop::Cop::ViewComponent::MissingPreview, :config do
         end
       RUBY
     end
+
+    it "registers an offense for a component declared with nested module form when no preview exists" do
+      allow(File).to receive(:exist?).and_return(false)
+
+      expect_offense(<<~RUBY, "/app/components/v2/table.rb")
+        module V2
+          class Table < SomeBase
+                ^^^^^ No preview found for V2::Table (looked in: /previews).
+          end
+        end
+      RUBY
+    end
+
+    it "does not register an offense for a component declared with nested module form when preview exists" do
+      allow(File).to receive(:exist?).and_return(false)
+      allow(File).to receive(:exist?).with("/previews/v2/grouped_multi_select_preview.rb").and_return(true)
+
+      expect_no_offenses(<<~RUBY, "/app/components/v2/grouped_multi_select.rb")
+        module V2
+          class GroupedMultiSelect < V2::MultiSelect
+          end
+        end
+      RUBY
+    end
+  end
+
+  context "when the component is declared with nested module form" do
+    it "does not register an offense when preview exists at the namespaced path" do
+      allow(File).to receive(:exist?).and_return(false)
+      allow(File).to receive(:exist?).with("/previews/admin/page_component_preview.rb").and_return(true)
+
+      expect_no_offenses(<<~RUBY, "/app/components/admin/page_component.rb")
+        module Admin
+          class PageComponent < ApplicationComponent
+          end
+        end
+      RUBY
+    end
+
+    it "registers an offense when no preview exists" do
+      allow(File).to receive(:exist?).and_return(false)
+
+      expect_offense(<<~RUBY, "/app/components/admin/page_component.rb")
+        module Admin
+          class PageComponent < ApplicationComponent
+                ^^^^^^^^^^^^^ No preview found for Admin::PageComponent (looked in: /previews).
+          end
+        end
+      RUBY
+    end
   end
 
   context "when the namespace contains an acronym" do
