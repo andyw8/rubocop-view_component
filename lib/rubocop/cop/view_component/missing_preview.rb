@@ -18,6 +18,7 @@ module RuboCop
         def on_class(node)
           return unless view_component_class?(node)
           return if view_component_parent_class?(node)
+          return if allow_slot_subcomponents? && slot_subcomponent?(node)
 
           class_name = fully_qualified_name(node)
           return if preview_exists?(class_name)
@@ -26,6 +27,30 @@ module RuboCop
         end
 
         private
+
+        def allow_slot_subcomponents?
+          cop_config.fetch("AllowSlotSubcomponents", false)
+        end
+
+        def slot_subcomponent?(node)
+          nested_in_view_component?(node) || under_parent_component_dir?(node)
+        end
+
+        def nested_in_view_component?(node)
+          parent = node.each_ancestor(:class).first
+          parent && view_component_class?(parent)
+        end
+
+        def under_parent_component_dir?(node)
+          path = processed_source.path
+          return false unless path
+
+          parent_file = "#{File.dirname(path)}.rb"
+          return false unless File.exist?(parent_file)
+
+          short_name = node.identifier.source
+          File.read(parent_file).match?(/\brenders_(one|many)\b[^#\n]*\b#{Regexp.escape(short_name)}\b/)
+        end
 
         def preview_exists?(class_name)
           preview_paths.any? do |preview_path|
