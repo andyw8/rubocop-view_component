@@ -4,12 +4,15 @@ plugins:
   - rubocop-rspec
   - rubocop-view_component
 
+inherit_mode:
+  merge:
+    - Exclude
+
 AllCops:
   TargetRubyVersion: 3.2
   NewCops: enable
   SuggestExtensions: false
   Exclude:
-    - 'vendor/**/*'
     - 'verification/**/*'
     - 'script/verify'
     - 'spec/fixtures/**/*'
