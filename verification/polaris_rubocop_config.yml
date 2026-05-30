@@ -1,4 +1,7 @@
 ViewComponent:
+  inherit_mode:
+    merge:
+      - ViewComponentParentClasses
   ViewComponentParentClasses:
     - Polaris::Component
     - Component
