@@ -10,6 +10,8 @@ ViewComponent/ComponentSuffix:
   VersionAdded: '0.1'
   Severity: convention
   StyleGuide: 'https://viewcomponent.org/best_practices.html'
+  Include:
+    - 'app/components/**/*.rb'
 
 ViewComponent/MissingPreview:
   Description: 'Ensure every ViewComponent has a corresponding preview file.'
