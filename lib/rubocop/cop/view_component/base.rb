@@ -18,16 +18,11 @@ module RuboCop
           view_component_parent?(parent_class)
         end
 
-        # Check if node represents ViewComponent::Base, ApplicationComponent,
-        # or a configured additional parent class
+        # Check if node represents a configured parent class
         def view_component_parent?(node)
           return false unless node.const_type?
 
-          source = node.source
-          return true if source == "ViewComponent::Base" || source == "ApplicationComponent"
-
-          additional = cop_config["ViewComponentParentClasses"] || []
-          additional.include?(source)
+          (cop_config["ViewComponentParentClasses"] || []).include?(node.source)
         end
 
         def component_namespaces
