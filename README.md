@@ -69,7 +69,7 @@ ViewComponent/ComponentSuffix:
 
 ### No Super
 
-View Component convention is to not calling `super` in component initializers, but that may cause `Lint/MissingSuper` failures from RuboCop. We suggest disabling that rule for your view components directory, for example:
+ViewComponent convention is to not call `super` in component initializers, but that may cause `Lint/MissingSuper` failures from RuboCop. We suggest disabling that rule for your view components directory, for example:
 
 ```yaml
 # .rubocop.yml
