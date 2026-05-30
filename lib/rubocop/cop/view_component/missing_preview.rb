@@ -45,11 +45,12 @@ module RuboCop
           path = processed_source.path
           return false unless path
 
-          parent_file = "#{File.dirname(path)}.rb"
-          return false unless File.exist?(parent_file)
+          dir = File.dirname(path)
+          parent_file = ["#{dir}.rb", "#{dir}_component.rb"].find { |f| File.exist?(f) }
+          return false unless parent_file
 
           short_name = node.identifier.source
-          File.read(parent_file).match?(/\brenders_(one|many)\b[^#\n]*\b#{Regexp.escape(short_name)}\b/)
+          File.read(parent_file).match?(/\b#{Regexp.escape(short_name)}\b/)
         end
 
         def preview_exists?(class_name)
