@@ -229,6 +229,24 @@ RSpec.describe RuboCop::Cop::ViewComponent::MissingPreview, :config do
         RUBY
       end
 
+      it "does not register an offense when class is instantiated inside a renders_one lambda" do
+        allow(File).to receive(:exist?).and_return(false)
+        allow(File).to receive(:exist?)
+          .with("/app/components/polaris/frame_component.rb").and_return(true)
+        allow(File).to receive(:read)
+          .with("/app/components/polaris/frame_component.rb")
+          .and_return(<<~RUBY)
+            renders_one :save_bar, ->(**system_arguments) do
+              SaveBarComponent.new(**system_arguments)
+            end
+          RUBY
+
+        expect_no_offenses(<<~RUBY, "/app/components/polaris/frame_component/save_bar_component.rb")
+          class SaveBarComponent < ApplicationComponent
+          end
+        RUBY
+      end
+
       it "registers an offense when parent file does not declare a matching slot" do
         allow(File).to receive(:exist?).and_return(false)
         allow(File).to receive(:exist?)

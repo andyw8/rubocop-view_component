@@ -50,7 +50,17 @@ module RuboCop
           return false unless parent_file
 
           short_name = node.identifier.source
-          File.read(parent_file).match?(/\b#{Regexp.escape(short_name)}\b/)
+          parent_source = cached_file_read(parent_file)
+          # Match class name on the same line as renders_one/many OR within a
+          # short lambda block on the following lines (covers .new(...) inside
+          # ->(...) do ... end). We allow up to ~5 lines after renders_ to avoid
+          # false positives from unrelated later occurrences of the class name.
+          parent_source.match?(/renders_(one|many)\b[^\n]*(?:\n[^\n]*){0,5}\b#{Regexp.escape(short_name)}\b/)
+        end
+
+        def cached_file_read(path)
+          @file_cache ||= {}
+          @file_cache[path] ||= File.read(path)
         end
 
         def preview_exists?(class_name)
