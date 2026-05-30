@@ -55,6 +55,18 @@ ViewComponent:
     - MyApp::BaseComponent
 ```
 
+### Components Directory
+
+Several cops (`ComponentSuffix`, `PreferComposition`, `MissingPreview`, `TestRenderedOutput`) default to running only on files under `app/components/`. If your project uses a different path, override `Include` in your `.rubocop.yml`:
+
+```yaml
+# .rubocop.yml
+ViewComponent/ComponentSuffix:
+  Include:
+    - 'app/components/**/*.rb'
+    - 'engines/*/app/components/**/*.rb'
+```
+
 ### No Super
 
 View Component convention is to not calling `super` in component initializers, but that may cause `Lint/MissingSuper` failures from RuboCop. We suggest disabling that rule for your view components directory, for example:
