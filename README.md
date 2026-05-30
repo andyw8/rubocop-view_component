@@ -27,7 +27,7 @@ This gem provides several cops to enforce ViewComponent best practices:
 - **ViewComponent/PreferSlots** - Detect HTML parameters that should be slots
 - **ViewComponent/PreferComposition** - Avoid inheriting one ViewComponent from another (prefer composition)
 - **ViewComponent/TestRenderedOutput** - Encourage testing rendered output over private methods
-- **ViewComponent/MissingPreview** - Ensure every ViewComponent has a corresponding preview file (requires `PreviewPaths` configuration). Classes listed in `ViewComponentParentClasses` are automatically exempt, as abstract base classes are not rendered standalone.
+- **ViewComponent/MissingPreview** - Ensure every ViewComponent has a corresponding preview file (requires `PreviewPaths` configuration). Classes listed in `ViewComponentParentClasses` are automatically exempt, as abstract base classes are not rendered standalone. Set `AllowSlotSubcomponents: true` to also exempt slot subcomponents — nested classes inside a parent ViewComponent, or files in a sidecar directory whose parent component references them via `renders_one`/`renders_many`.
 
 ## Optional Configuration
 
