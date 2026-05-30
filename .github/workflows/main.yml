@@ -11,6 +11,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     name: Ruby ${{ matrix.ruby }}
+    timeout-minutes: 10
     strategy:
       matrix:
         ruby:
