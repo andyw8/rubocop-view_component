@@ -22,7 +22,6 @@ ViewComponent/MissingPreview:
   - 'app/components/polaris/placeholder_component.rb'
   - 'app/components/polaris/shopify_navigation_component.rb'
   - 'app/components/polaris/text_field_component.rb'
-  - 'app/components/polaris/toast_component.rb'
 ViewComponent/NoGlobalState:
   - 'app/components/polaris/shopify_navigation_component.rb'
 ViewComponent/PreferPrivateMethods:
