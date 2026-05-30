@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class TemplateMethodComponent < ViewComponent::Base
-  def initialize(title)
+  def initialize(title) # rubocop:disable Lint/MissingSuper
     @title = title
   end
 

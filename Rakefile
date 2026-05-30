@@ -5,9 +5,11 @@ require "minitest/test_task"
 
 Minitest::TestTask.create
 
-require "standard/rake"
+require "rubocop/rake_task"
 
-task default: %i[spec standard]
+RuboCop::RakeTask.new
+
+task default: %i[spec rubocop]
 
 require "rspec/core/rake_task"
 

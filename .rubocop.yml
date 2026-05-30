@@ -1,6 +1,20 @@
+inherit_from: .rubocop_todo.yml
+
 plugins:
   - rubocop-internal_affairs
   - rubocop-view_component
+
+AllCops:
+  TargetRubyVersion: 3.2
+  NewCops: enable
+  Exclude:
+    - 'verification/**/*'
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+Style/StringLiteralsInInterpolation:
+  EnforcedStyle: double_quotes
 
 Naming/FileName:
   Exclude:
