@@ -65,6 +65,16 @@ RSpec.describe RuboCop::Cop::ViewComponent::PreferSlots, :config do
       RUBY
     end
 
+    it "does not register offense for html_attributes parameter" do
+      expect_no_offenses(<<~RUBY)
+        class AccordionComponent < ViewComponent::Base
+          def initialize(heading_level: 2, html_attributes: {})
+            @heading_level = heading_level
+          end
+        end
+      RUBY
+    end
+
     it "does not register offense for content parameter" do
       expect_no_offenses(<<~RUBY)
         class CardComponent < ViewComponent::Base
