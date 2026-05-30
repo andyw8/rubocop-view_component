@@ -18,18 +18,18 @@ module RuboCop
           view_component_parent?(parent_class)
         end
 
-        # Check if node represents a configured parent class
+        # Check if node represents a known ViewComponent parent class
         def view_component_parent?(node)
           return false unless node.const_type?
 
-          (cop_config["ViewComponentParentClasses"] || []).include?(node.source)
+          RuboCop::ViewComponent::ParentClassIndex.known_parent?(node.source, cop_config)
         end
 
         # Check if a class node is itself one of the registered parent classes.
         def view_component_parent_class?(node)
           return false unless node&.class_type?
 
-          (cop_config["ViewComponentParentClasses"] || []).include?(fully_qualified_name(node))
+          RuboCop::ViewComponent::ParentClassIndex.known_parent?(fully_qualified_name(node), cop_config)
         end
 
         def fully_qualified_name(node)

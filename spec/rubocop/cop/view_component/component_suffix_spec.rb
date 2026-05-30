@@ -107,7 +107,7 @@ RSpec.describe RuboCop::Cop::ViewComponent::ComponentSuffix, :config do
     end
   end
 
-  context "when ViewComponentParentClasses is configured replacing defaults" do
+  context "when ViewComponentParentClasses is configured with additional classes" do
     let(:config) do
       RuboCop::Config.new(
         "ViewComponent/ComponentSuffix" => {
@@ -124,9 +124,10 @@ RSpec.describe RuboCop::Cop::ViewComponent::ComponentSuffix, :config do
       RUBY
     end
 
-    it "does not recognize default parent classes that were replaced" do
-      expect_no_offenses(<<~RUBY)
+    it "still recognizes ViewComponent::Base" do
+      expect_offense(<<~RUBY)
         class FooBar < ViewComponent::Base
+              ^^^^^^ ViewComponent class names should end with `Component`.
         end
       RUBY
     end

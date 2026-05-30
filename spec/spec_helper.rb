@@ -11,4 +11,10 @@ RSpec.configure do |config|
 
   config.order = :random
   Kernel.srand config.seed
+
+  config.before do
+    RuboCop::ViewComponent::ParentClassIndex.reset!
+    allow(Dir).to receive(:glob).and_call_original
+    allow(Dir).to receive(:glob).with("app/components/**/*.rb").and_return([])
+  end
 end

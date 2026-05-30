@@ -129,4 +129,29 @@ RSpec.describe RuboCop::Cop::ViewComponent::NoGlobalState, :config do
       RUBY
     end
   end
+
+  context "with a transitively-detected parent class" do
+    before do
+      source = RuboCop::ProcessedSource.new(
+        "class BaseComponent < ViewComponent::Base; end",
+        RUBY_VERSION.to_f,
+        "app/components/base_component.rb"
+      )
+      allow(Dir).to receive(:glob).with("app/components/**/*.rb").and_return(["app/components/base_component.rb"])
+      allow(RuboCop::ProcessedSource).to receive(:from_file)
+        .with("app/components/base_component.rb", RUBY_VERSION.to_f)
+        .and_return(source)
+    end
+
+    it "registers offense for a class inheriting from an auto-detected parent" do
+      expect_offense(<<~RUBY)
+        class CardComponent < BaseComponent
+          def admin?
+            params[:admin]
+            ^^^^^^ ViewComponent/NoGlobalState: Avoid accessing `params` directly in ViewComponents. Pass necessary data through the constructor instead.
+          end
+        end
+      RUBY
+    end
+  end
 end
