@@ -84,6 +84,22 @@ RSpec.describe RuboCop::Cop::ViewComponent::MissingPreview, :config do
     end
   end
 
+  context "when the namespace contains an acronym" do
+    it "does not register an offense when preview exists at the correct path" do
+      ActiveSupport::Inflector.inflections(:en) { |i| i.acronym "UI" }
+
+      allow(File).to receive(:exist?).and_return(false)
+      allow(File).to receive(:exist?).with("/previews/ui/button_component_preview.rb").and_return(true)
+
+      expect_no_offenses(<<~RUBY, "/app/components/ui/button_component.rb")
+        module UI
+          class ButtonComponent < ViewComponent::Base
+          end
+        end
+      RUBY
+    end
+  end
+
   context "when not a ViewComponent" do
     it "does not register an offense" do
       allow(File).to receive(:exist?).and_return(false)

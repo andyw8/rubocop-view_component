@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "active_support/inflector"
+
 module RuboCop
   module Cop
     module ViewComponent
@@ -16,13 +18,21 @@ module RuboCop
         def on_class(node)
           return unless view_component_class?(node)
 
-          class_name = node.identifier.source
+          class_name = fully_qualified_name(node)
           return if preview_exists?(class_name)
 
           add_offense(node.identifier, message: format(MSG, component: class_name, paths: preview_paths.join(", ")))
         end
 
         private
+
+        def fully_qualified_name(node)
+          namespace = node.parent_module_name
+          short_name = node.identifier.source
+          return short_name if namespace.nil? || namespace == "Object"
+
+          "#{namespace}::#{short_name}"
+        end
 
         def preview_exists?(class_name)
           preview_paths.any? do |preview_path|
@@ -33,8 +43,7 @@ module RuboCop
         end
 
         def candidate_filenames(class_name)
-          base = class_name.gsub(/Component$/, "").gsub("::", "/").gsub(/([A-Z])/, '_\1').downcase.gsub("/_", "/")
-          base = base.delete_prefix("_").delete_prefix("/")
+          base = ActiveSupport::Inflector.underscore(class_name.delete_suffix("Component"))
           [
             "#{base}_preview.rb",
             "#{base}_component_preview.rb"
