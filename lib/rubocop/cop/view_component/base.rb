@@ -25,6 +25,21 @@ module RuboCop
           (cop_config["ViewComponentParentClasses"] || []).include?(node.source)
         end
 
+        # Check if a class node is itself one of the registered parent classes.
+        def view_component_parent_class?(node)
+          return false unless node&.class_type?
+
+          (cop_config["ViewComponentParentClasses"] || []).include?(fully_qualified_name(node))
+        end
+
+        def fully_qualified_name(node)
+          namespace = node.parent_module_name
+          short_name = node.identifier.source
+          return short_name if namespace.nil? || namespace == "Object"
+
+          "#{namespace}::#{short_name}"
+        end
+
         def component_namespaces
           cop_config["ComponentNamespaces"] || []
         end

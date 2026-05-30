@@ -17,6 +17,7 @@ module RuboCop
 
         def on_class(node)
           return unless view_component_class?(node)
+          return if view_component_parent_class?(node)
 
           class_name = fully_qualified_name(node)
           return if preview_exists?(class_name)
@@ -25,14 +26,6 @@ module RuboCop
         end
 
         private
-
-        def fully_qualified_name(node)
-          namespace = node.parent_module_name
-          short_name = node.identifier.source
-          return short_name if namespace.nil? || namespace == "Object"
-
-          "#{namespace}::#{short_name}"
-        end
 
         def preview_exists?(class_name)
           preview_paths.any? do |preview_path|
