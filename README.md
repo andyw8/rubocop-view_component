@@ -33,12 +33,25 @@ This gem provides several cops to enforce ViewComponent best practices:
 
 ### Base Class
 
-By default, the cops detect classes that inherit from `ViewComponent::Base` or `ApplicationComponent`. If your project uses a different base class (e.g. `Primer::Component`), you can configure additional parent classes under `AllCops`, for example:
+By default, the cops detect classes that inherit from `ViewComponent::Base` or `ApplicationComponent`. To add extra parent classes, use `inherit_mode: merge` so the defaults are preserved:
 
 ```yaml
 # .rubocop.yml
-AllCops:
+ViewComponent:
+  inherit_mode:
+    merge:
+      - ViewComponentParentClasses
   ViewComponentParentClasses:
+    - MyApp::BaseComponent
+```
+
+To replace the defaults entirely (e.g. if your project has renamed `ApplicationComponent`), omit `inherit_mode`:
+
+```yaml
+# .rubocop.yml
+ViewComponent:
+  ViewComponentParentClasses:
+    - ViewComponent::Base
     - MyApp::BaseComponent
 ```
 
