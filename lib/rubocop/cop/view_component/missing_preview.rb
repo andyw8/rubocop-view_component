@@ -27,14 +27,6 @@ module RuboCop
 
         private
 
-        def fully_qualified_name(node)
-          namespace = node.parent_module_name
-          short_name = node.identifier.source
-          return short_name if namespace.nil? || namespace == "Object"
-
-          "#{namespace}::#{short_name}"
-        end
-
         def preview_exists?(class_name)
           preview_paths.any? do |preview_path|
             candidate_filenames(class_name).any? do |filename|
