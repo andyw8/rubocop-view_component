@@ -55,7 +55,7 @@ ViewComponent/PreferComposition:
   Severity: convention
   StyleGuide: 'https://viewcomponent.org/best_practices.html#avoid-inheritance'
   Include:
-    - 'app/components/**/*_component.rb'
+    - 'app/components/**/*.rb'
   ComponentNamespaces: []
 
 ViewComponent/PreferSlots:
