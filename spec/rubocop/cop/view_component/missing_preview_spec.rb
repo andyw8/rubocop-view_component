@@ -5,8 +5,7 @@ RSpec.describe RuboCop::Cop::ViewComponent::MissingPreview, :config do
     RuboCop::Config.new(
       "ViewComponent/MissingPreview" => {
         "Enabled" => true,
-        "PreviewPaths" => ["/previews"],
-        "ViewComponentParentClasses" => %w[ViewComponent::Base ApplicationComponent]
+        "PreviewPaths" => ["/previews"]
       }
     )
   end
@@ -179,7 +178,7 @@ RSpec.describe RuboCop::Cop::ViewComponent::MissingPreview, :config do
           "ViewComponent/MissingPreview" => {
             "Enabled" => true,
             "PreviewPaths" => ["/previews"],
-            "ViewComponentParentClasses" => %w[ViewComponent::Base ApplicationComponent BaseComponent]
+            "ViewComponentParentClasses" => %w[BaseComponent]
           }
         )
       end
@@ -198,7 +197,7 @@ RSpec.describe RuboCop::Cop::ViewComponent::MissingPreview, :config do
           "ViewComponent/MissingPreview" => {
             "Enabled" => true,
             "PreviewPaths" => ["/previews"],
-            "ViewComponentParentClasses" => %w[ViewComponent::Base ApplicationComponent MyApp::BaseComponent]
+            "ViewComponentParentClasses" => %w[MyApp::BaseComponent]
           }
         )
       end
