@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
   spec.description = "A RuboCop extension that enforces ViewComponent best practices and conventions"
   spec.homepage = "https://github.com/andyw8/rubocop-view_component"
   spec.license = "MIT"
-  spec.required_ruby_version = ">= 2.7.0"
+  spec.required_ruby_version = ">= 3.2.0"
   spec.metadata["homepage_uri"] = spec.homepage
   spec.metadata["source_code_uri"] = "https://github.com/andyw8/rubocop-view_component"
 
@@ -22,7 +22,7 @@ Gem::Specification.new do |spec|
   spec.files = IO.popen(%w[git ls-files -z], chdir: __dir__, err: IO::NULL) do |ls|
     ls.each_line("\x0", chomp: true).reject do |f|
       (f == gemspec) ||
-        f.start_with?(*%w[bin/ Gemfile .gitignore test/ .github/ .standard.yml])
+        f.start_with?(*%w[bin/ Gemfile .gitignore .github/])
     end
   end
   spec.bindir = "exe"
@@ -36,6 +36,7 @@ Gem::Specification.new do |spec|
   # guide at: https://bundler.io/guides/creating_gem.html
 
   spec.metadata["default_lint_roller_plugin"] = "RuboCop::ViewComponent::Plugin"
+  spec.metadata["rubygems_mfa_required"] = "true"
 
   spec.add_dependency "activesupport"
   spec.add_dependency "herb"

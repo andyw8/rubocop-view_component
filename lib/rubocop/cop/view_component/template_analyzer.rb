@@ -16,26 +16,26 @@ module RuboCop
           base_path = component_path.sub(/\.rb$/, "")
           component_dir = File.dirname(component_path)
           component_name = File.basename(component_path, ".rb")
+          sidecar_dir = File.join(component_dir, component_name)
 
-          paths = []
-
-          # Check for sibling template: same_name.html.erb
-          sibling_template = "#{base_path}.html.erb"
-          paths << sibling_template if File.exist?(sibling_template)
-
-          # Check for sidecar template: same_name/same_name.html.erb
-          sidecar_template = File.join(component_dir, component_name, "#{component_name}.html.erb")
-          paths << sidecar_template if File.exist?(sidecar_template)
-
-          # Check for variants: same_name.*.html.erb
-          variant_pattern = "#{base_path}.*.html.erb"
-          paths.concat(Dir.glob(variant_pattern))
-
-          # Check for sidecar variants: same_name/same_name.*.html.erb
-          sidecar_variant_pattern = File.join(component_dir, component_name, "#{component_name}.*.html.erb")
-          paths.concat(Dir.glob(sidecar_variant_pattern))
-
+          paths = sibling_templates(base_path) + sidecar_templates(sidecar_dir, component_name)
           paths.uniq
+        end
+
+        def sibling_templates(base_path)
+          paths = []
+          sibling = "#{base_path}.html.erb"
+          paths << sibling if File.exist?(sibling)
+          paths.concat(Dir.glob("#{base_path}.*.html.erb"))
+          paths
+        end
+
+        def sidecar_templates(sidecar_dir, component_name)
+          paths = []
+          sidecar = File.join(sidecar_dir, "#{component_name}.html.erb")
+          paths << sidecar if File.exist?(sidecar)
+          paths.concat(Dir.glob(File.join(sidecar_dir, "#{component_name}.*.html.erb")))
+          paths
         end
 
         # Extract method calls from an ERB template
@@ -49,7 +49,7 @@ module RuboCop
 
           # Parse the extracted Ruby code
           parse_ruby_for_method_calls(ruby_code)
-        rescue => e
+        rescue StandardError => e
           # Graceful degradation on parse errors
           warn "Warning: Failed to parse template #{template_path}: #{e.message}" if ENV["RUBOCOP_DEBUG"]
           Set.new
@@ -78,7 +78,7 @@ module RuboCop
           return unless node.respond_to?(:type)
 
           # Look for send nodes with nil receiver (local method calls)
-          if node.type == :send && node.receiver.nil?
+          if node.send_type? && node.receiver.nil?
             method_name = node.method_name
             method_calls.add(method_name)
           end

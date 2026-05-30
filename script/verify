@@ -68,8 +68,8 @@ def parse_library_arg(libraries)
   library_arg = ARGV.find { |arg| !arg.start_with?("--") }
 
   if library_arg.nil?
-    abort "Usage: #{$PROGRAM_NAME} <library> [--regenerate] [--update]\n" \
-          "  library: #{libraries.keys.join(", ")}"
+    abort "Usage: #{$PROGRAM_NAME} <library> [--regenerate] [--update]\n  " \
+          "library: #{libraries.keys.join(", ")}"
   end
 
   unless libraries.key?(library_arg)
@@ -79,8 +79,8 @@ def parse_library_arg(libraries)
   library_arg
 end
 
-def system!(*args)
-  system(*args, exception: true)
+def system!(*)
+  system(*, exception: true)
 end
 
 def download_source(dir, tarball_url, display_name)
@@ -97,10 +97,10 @@ def configure_rubocop(config_file, display_name)
   # Merge the library config into the existing config
   library_config.each do |key, value|
     config[key] = if config[key].is_a?(Hash) && value.is_a?(Hash)
-      config[key].merge(value)
-    else
-      value
-    end
+                    config[key].merge(value)
+                  else
+                    value
+                  end
   end
 
   File.write(".rubocop.yml", YAML.dump(config))
@@ -118,16 +118,15 @@ def run_rubocop
   puts "Running RuboCop (ViewComponent cops only)..."
   output, status = Open3.capture2(
     "bundle", "exec", "rubocop",
-    "--require", "rubocop-view_component",
+    "--plugin", "rubocop-view_component",
     "--only", "ViewComponent",
+    "--config", ".rubocop.yml",
     "--format", "json"
   )
 
   puts "RuboCop exit status: #{status.exitstatus}"
 
-  if output.strip.empty?
-    abort "ERROR: RuboCop produced no output (exit status: #{status.exitstatus})"
-  end
+  abort "ERROR: RuboCop produced no output (exit status: #{status.exitstatus})" if output.strip.empty?
 
   output
 end
@@ -166,11 +165,9 @@ def load_expected(results_file)
 end
 
 def verify(offenses, results_file)
-  unless File.exist?(results_file)
-    abort "ERROR: #{results_file} not found. Run '#{$PROGRAM_NAME} --regenerate' first."
-  end
+  abort "ERROR: #{results_file} not found. Run '#{$PROGRAM_NAME} --regenerate' first." unless File.exist?(results_file)
 
-  expected = load_expected(results_file)
+  expected = load_expected(results_file) || {}
 
   if offenses == expected
     puts "Verification passed: output matches #{results_file}"

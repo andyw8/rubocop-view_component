@@ -144,7 +144,7 @@ RSpec.describe RuboCop::Cop::ViewComponent::PreferPrivateMethods, :config do
     context "with custom patterns" do
       let(:config) do
         RuboCop::Config.new(
-          "AllCops" => {"DisplayCopNames" => true},
+          "AllCops" => { "DisplayCopNames" => true },
           "ViewComponent/PreferPrivateMethods" => {
             "AllowedPublicMethods" => %w[initialize call],
             "AllowedPublicMethodPatterns" => ["^render_", "^with_"],
@@ -187,7 +187,7 @@ RSpec.describe RuboCop::Cop::ViewComponent::PreferPrivateMethods, :config do
   context "with custom AllowedPublicMethods" do
     let(:config) do
       RuboCop::Config.new(
-        "AllCops" => {"DisplayCopNames" => true},
+        "AllCops" => { "DisplayCopNames" => true },
         "ViewComponent/PreferPrivateMethods" => {
           "AllowedPublicMethods" => %w[initialize call custom_public_method],
           "AllowedPublicMethodPatterns" => [],
@@ -263,7 +263,7 @@ RSpec.describe RuboCop::Cop::ViewComponent::PreferPrivateMethods, :config do
   context "with template files" do
     let(:component_file) { "spec/fixtures/components/template_method_component.rb" }
 
-    it "does not flag methods called in template, but flags unused methods" do
+    it "registers methods called in template, but flags unused methods" do
       expect_offense(<<~RUBY, component_file)
         # frozen_string_literal: true
 

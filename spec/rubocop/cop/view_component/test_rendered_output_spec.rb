@@ -99,7 +99,7 @@ RSpec.describe RuboCop::Cop::ViewComponent::TestRenderedOutput, :config do
   context "with TestPaths configured" do
     let(:config) do
       RuboCop::Config.new(
-        "AllCops" => {"DisplayCopNames" => true},
+        "AllCops" => { "DisplayCopNames" => true },
         "ViewComponent/TestRenderedOutput" => {
           "TestPaths" => ["spec/components/v2/"]
         }

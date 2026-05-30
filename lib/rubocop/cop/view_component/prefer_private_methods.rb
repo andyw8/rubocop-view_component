@@ -40,27 +40,30 @@ module RuboCop
         private
 
         def check_public_methods(class_node)
-          current_visibility = :public
-          template_method_calls = methods_called_in_templates
-
           body = class_node.body
           return unless body
 
           children = body.begin_type? ? body.children : [body]
+          check_children(children, methods_called_in_templates)
+        end
+
+        def check_children(children, template_method_calls)
+          current_visibility = :public
 
           children.each do |child|
             if visibility_modifier?(child)
               current_visibility = child.method_name
-              next
+            elsif should_flag?(child, current_visibility, template_method_calls)
+              add_offense(child, message: format(MSG, method_name: child.method_name))
             end
-
-            next unless child.def_type?
-            next unless current_visibility == :public
-            next if allowed_public_method?(child.method_name)
-            next if template_method_calls.include?(child.method_name)
-
-            add_offense(child, message: format(MSG, method_name: child.method_name))
           end
+        end
+
+        def should_flag?(child, visibility, template_method_calls)
+          child.def_type? &&
+            visibility == :public &&
+            !allowed_public_method?(child.method_name) &&
+            !template_method_calls.include?(child.method_name)
         end
 
         def allowed_public_method?(method_name)
@@ -84,8 +87,7 @@ module RuboCop
           template_paths.each_with_object(Set.new) do |path, methods|
             methods.merge(extract_method_calls(path))
           end
-        rescue => e
-          # Graceful degradation on errors
+        rescue StandardError => e
           warn "Warning: Failed to analyze templates: #{e.message}" if ENV["RUBOCOP_DEBUG"]
           Set.new
         end

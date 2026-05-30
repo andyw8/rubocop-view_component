@@ -1,6 +1,38 @@
 plugins:
   - rubocop-internal_affairs
+  - rubocop-rake
+  - rubocop-rspec
   - rubocop-view_component
+
+inherit_mode:
+  merge:
+    - Exclude
+
+AllCops:
+  TargetRubyVersion: 3.2
+  NewCops: enable
+  SuggestExtensions: false
+  Exclude:
+    - 'verification/**/*'
+    - 'script/verify'
+    - 'spec/fixtures/**/*'
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
+    - '*.gemspec'
+
+RSpec/ExampleLength:
+  Max: 20
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+Style/StringLiteralsInInterpolation:
+  EnforcedStyle: double_quotes
+
+InternalAffairs/RedundantLetRuboCopConfigNew:
+  Enabled: false
 
 Naming/FileName:
   Exclude:
