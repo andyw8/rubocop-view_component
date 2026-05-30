@@ -22,3 +22,5 @@ ViewComponent/TestRenderedOutput:
   - 'spec/components/govuk_component/pagination_component_spec.rb'
   - 'spec/components/govuk_component/task_list_component_spec.rb'
   - 'spec/components/govuk_component/warning_text_component_spec.rb'
+ViewComponent/UseWithRequestUrl:
+  - 'spec/components/govuk_component/configuration/header_component_configuration_spec.rb'

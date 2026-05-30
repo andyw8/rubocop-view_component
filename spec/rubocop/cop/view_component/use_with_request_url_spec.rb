@@ -146,4 +146,32 @@ RSpec.describe RuboCop::Cop::ViewComponent::UseWithRequestUrl, :config do
       end
     end
   end
+
+  context "with IgnoredMethods configured" do
+    let(:config) do
+      RuboCop::Config.new(
+        "AllCops" => { "DisplayCopNames" => true },
+        "ViewComponent/UseWithRequestUrl" => { "Enabled" => true, "IgnoredMethods" => ["homepage_url"] }
+      )
+    end
+
+    it "does not register an offense for an ignored method" do
+      expect_no_offenses(<<~RUBY)
+        it "renders a link" do
+          render_inline MyComponent.new
+          expect(rendered_content).to have_tag("a", href: homepage_url)
+        end
+      RUBY
+    end
+
+    it "still registers an offense for non-ignored URL helpers" do
+      expect_offense(<<~RUBY)
+        it "renders a link" do
+          render_inline MyComponent.new
+          expect(page).to have_selector("a[href='\#{root_path}']")
+                                                   ^^^^^^^^^ ViewComponent/UseWithRequestUrl: Wrap the render in `with_request_url` when using URL helpers in a component test.
+        end
+      RUBY
+    end
+  end
 end

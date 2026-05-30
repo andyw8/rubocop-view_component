@@ -40,6 +40,13 @@ module RuboCop
       #     end
       #   end
       #
+      # @example IgnoredMethods: [homepage_url]
+      #   # good - homepage_url is a let-defined helper, not a Rails URL helper
+      #   it "renders a link" do
+      #     render_inline MyComponent.new
+      #     expect(rendered_content).to have_tag("a", href: homepage_url)
+      #   end
+      #
       class UseWithRequestUrl < RuboCop::Cop::Base
         MSG = "Wrap the render in `with_request_url` when using URL helpers in a component test."
 
@@ -83,12 +90,18 @@ module RuboCop
         end
 
         def each_bare_url_helper(node, &block)
+          ignored = ignored_methods
           node.each_descendant(:send) do |send_node|
             next unless send_node.receiver.nil?
             next unless URL_HELPER_PATTERN.match?(send_node.method_name.to_s)
+            next if ignored.include?(send_node.method_name.to_s)
 
             block.call(send_node)
           end
+        end
+
+        def ignored_methods
+          cop_config.fetch("IgnoredMethods", [])
         end
 
         def rspec_example_block?(node)
