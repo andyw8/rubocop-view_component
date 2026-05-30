@@ -1,3 +1,13 @@
+ViewComponent/UseWithRequestUrl:
+  Description: 'Use `with_request_url` when calling URL helpers in component tests.'
+  Enabled: true
+  VersionAdded: '<<next>>'
+  Severity: convention
+  StyleGuide: 'https://viewcomponent.org/guide/testing.html'
+  Include:
+    - 'spec/components/**/*_spec.rb'
+    - 'test/components/**/*_test.rb'
+
 ViewComponent:
   ViewComponentParentClasses:
     - ViewComponent::Base
