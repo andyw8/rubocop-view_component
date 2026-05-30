@@ -17,6 +17,7 @@ module RuboCop
 
         def on_class(node)
           return unless view_component_class?(node)
+          return if view_component_parent_class?(node)
 
           class_name = fully_qualified_name(node)
           return if preview_exists?(class_name)

@@ -25,6 +25,19 @@ module RuboCop
           (cop_config["ViewComponentParentClasses"] || []).include?(node.source)
         end
 
+        # Check if a class node is itself one of the registered parent classes.
+        # Uses the fully-qualified name so namespaced parents (e.g. MyApp::BaseComponent)
+        # are matched correctly against the configured list.
+        def view_component_parent_class?(node)
+          return false unless node&.class_type?
+
+          fqn = node.parent_module_name
+          short = node.identifier.source
+          qualified = fqn.nil? || fqn == "Object" ? short : "#{fqn}::#{short}"
+
+          (cop_config["ViewComponentParentClasses"] || []).include?(qualified)
+        end
+
         def component_namespaces
           cop_config["ComponentNamespaces"] || []
         end
