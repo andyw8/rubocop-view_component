@@ -74,11 +74,11 @@ RSpec.describe RuboCop::Cop::ViewComponent::ComponentSuffix, :config do
     end
   end
 
-  context "when ViewComponentParentClasses is configured" do
+  context "when ViewComponentParentClasses is configured with merge" do
     let(:config) do
       RuboCop::Config.new(
         "ViewComponent/ComponentSuffix" => {
-          "ViewComponentParentClasses" => ["Primer::Component"]
+          "ViewComponentParentClasses" => ["ViewComponent::Base", "ApplicationComponent", "Primer::Component"]
         }
       )
     end
@@ -102,6 +102,31 @@ RSpec.describe RuboCop::Cop::ViewComponent::ComponentSuffix, :config do
       expect_offense(<<~RUBY)
         class FooBar < ViewComponent::Base
               ^^^^^^ ViewComponent class names should end with `Component`.
+        end
+      RUBY
+    end
+  end
+
+  context "when ViewComponentParentClasses is configured replacing defaults" do
+    let(:config) do
+      RuboCop::Config.new(
+        "ViewComponent/ComponentSuffix" => {
+          "ViewComponentParentClasses" => ["Primer::Component"]
+        }
+      )
+    end
+
+    it "registers an offense for classes inheriting from a configured parent" do
+      expect_offense(<<~RUBY)
+        class FooBar < Primer::Component
+              ^^^^^^ ViewComponent class names should end with `Component`.
+        end
+      RUBY
+    end
+
+    it "does not recognize default parent classes that were replaced" do
+      expect_no_offenses(<<~RUBY)
+        class FooBar < ViewComponent::Base
         end
       RUBY
     end
