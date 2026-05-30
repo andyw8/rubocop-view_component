@@ -11,7 +11,7 @@ This is a RuboCop extension that enforces ViewComponent best practices. It provi
 ### Testing
 - `rake spec` - Run all RSpec tests
 - `bundle exec rspec spec/rubocop/cop/view_component/FILENAME_spec.rb` - Run a specific spec file
-- `rake standard` - Run Standard (RuboCop) linting
+- `rake rubocop` - Run RuboCop linting
 - `rake` - Run both tests and linting (default task)
 
 ### Verification
@@ -52,17 +52,17 @@ All cops inherit from `RuboCop::Cop::Base` and are located in `lib/rubocop/cop/v
 
 ### Configuration
 
-The `AllCops` config supports `ViewComponentParentClasses` to configure additional base classes beyond `ViewComponent::Base` and `ApplicationComponent`:
+The `ViewComponent` config supports `ViewComponentParentClasses` to configure additional base classes beyond `ViewComponent::Base` and `ApplicationComponent`:
 
 ```yaml
-AllCops:
+ViewComponent:
   ViewComponentParentClasses:
     - MyApp::BaseComponent
 ```
 
 ### Verification System
 
-The `script/verify` script downloads real component libraries, runs all ViewComponent cops, and compares results to checked-in snapshots. This catches regressions when cop behavior changes. Libraries are configured in `verification/libraries.yml`, downloaded to `verification/LIBRARY/`, and expected results stored in `spec/expected_LIBRARY_failures.json`.
+The `script/verify` script downloads real component libraries, runs all ViewComponent cops, and compares results to checked-in snapshots. This catches regressions when cop behavior changes. Libraries are configured in `verification/libraries.yml`, downloaded to `verification/LIBRARY/`, and expected results stored in `spec/expected_LIBRARY_failures.yml`.
 
 ## Implementation Notes
 
