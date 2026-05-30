@@ -1,5 +1,7 @@
 plugins:
   - rubocop-internal_affairs
+  - rubocop-rake
+  - rubocop-rspec
   - rubocop-view_component
 
 AllCops:
@@ -15,6 +17,9 @@ Metrics/BlockLength:
   Exclude:
     - 'spec/**/*'
     - '*.gemspec'
+
+RSpec/ExampleLength:
+  Max: 20
 
 Style/StringLiterals:
   EnforcedStyle: double_quotes
