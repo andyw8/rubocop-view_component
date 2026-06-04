@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rubocop-view_component (0.5.1)
+    rubocop-view_component (0.6.0)
       activesupport
       herb
       lint_roller (~> 1.1)
