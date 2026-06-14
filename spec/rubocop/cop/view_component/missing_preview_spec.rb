@@ -165,6 +165,143 @@ RSpec.describe RuboCop::Cop::ViewComponent::MissingPreview, :config do
     end
   end
 
+  context "when AllowSlotSubcomponents is true" do
+    let(:config) do
+      RuboCop::Config.new(
+        "ViewComponent/MissingPreview" => {
+          "Enabled" => true,
+          "PreviewPaths" => ["/previews"],
+          "ViewComponentParentClasses" => %w[ViewComponent::Base ApplicationComponent],
+          "AllowSlotSubcomponents" => true
+        }
+      )
+    end
+
+    context "when a nested class inside a parent ViewComponent" do
+      it "registers an offense only for the parent, not the nested class" do
+        allow(File).to receive(:exist?).and_return(false)
+
+        expect_offense(<<~RUBY, "/app/components/ui/card_component.rb")
+          module UI
+            class CardComponent < ApplicationComponent
+                  ^^^^^^^^^^^^^ No preview found for UI::CardComponent (looked in: /previews).
+              renders_many :items, "ItemComponent"
+              class ItemComponent < ApplicationComponent
+              end
+            end
+          end
+        RUBY
+      end
+
+      it "does not register any offense when the parent has a preview" do
+        allow(File).to receive(:exist?).and_return(false)
+        allow(File).to receive(:exist?).with("/previews/ui/card_component_preview.rb").and_return(true)
+
+        expect_no_offenses(<<~RUBY, "/app/components/ui/card_component.rb")
+          module UI
+            class CardComponent < ApplicationComponent
+              renders_many :items, "ItemComponent"
+              class ItemComponent < ApplicationComponent
+              end
+            end
+          end
+        RUBY
+      end
+    end
+
+    context "when a sibling file under a parent component's directory" do
+      it "does not register an offense when parent file declares a slot referencing this class" do
+        allow(File).to receive(:exist?).and_return(false)
+        allow(File).to receive(:exist?).with("/app/components/polaris/action_list.rb").and_return(false)
+        allow(File).to receive(:exist?)
+          .with("/app/components/polaris/action_list_component.rb").and_return(true)
+        allow(File).to receive(:read)
+          .with("/app/components/polaris/action_list_component.rb")
+          .and_return('renders_many :items, "ItemComponent"')
+
+        expect_no_offenses(<<~RUBY, "/app/components/polaris/action_list_component/item_component.rb")
+          module Polaris
+            class ActionListComponent
+              class ItemComponent < ApplicationComponent
+              end
+            end
+          end
+        RUBY
+      end
+
+      it "does not register an offense when class is instantiated inside a renders_one lambda" do
+        allow(File).to receive(:exist?).and_return(false)
+        allow(File).to receive(:exist?)
+          .with("/app/components/polaris/frame_component.rb").and_return(true)
+        allow(File).to receive(:read)
+          .with("/app/components/polaris/frame_component.rb")
+          .and_return(<<~RUBY)
+            renders_one :save_bar, ->(**system_arguments) do
+              SaveBarComponent.new(**system_arguments)
+            end
+          RUBY
+
+        expect_no_offenses(<<~RUBY, "/app/components/polaris/frame_component/save_bar_component.rb")
+          class SaveBarComponent < ApplicationComponent
+          end
+        RUBY
+      end
+
+      it "registers an offense when parent file does not declare a matching slot" do
+        allow(File).to receive(:exist?).and_return(false)
+        allow(File).to receive(:exist?)
+          .with("/app/components/polaris/action_list_component.rb").and_return(true)
+        allow(File).to receive(:read)
+          .with("/app/components/polaris/action_list_component.rb")
+          .and_return("renders_many :sections, \"SectionComponent\"")
+
+        expect_offense(<<~RUBY, "/app/components/polaris/action_list_component/item_component.rb")
+          class ItemComponent < ApplicationComponent
+                ^^^^^^^^^^^^^ No preview found for ItemComponent (looked in: /previews).
+          end
+        RUBY
+      end
+
+      it "registers an offense when parent file does not exist" do
+        allow(File).to receive(:exist?).and_return(false)
+
+        expect_offense(<<~RUBY, "/app/components/polaris/action_list_component/item_component.rb")
+          class ItemComponent < ApplicationComponent
+                ^^^^^^^^^^^^^ No preview found for ItemComponent (looked in: /previews).
+          end
+        RUBY
+      end
+    end
+
+    context "when AllowSlotSubcomponents is false (default)" do
+      let(:config) do
+        RuboCop::Config.new(
+          "ViewComponent/MissingPreview" => {
+            "Enabled" => true,
+            "PreviewPaths" => ["/previews"],
+            "ViewComponentParentClasses" => %w[ViewComponent::Base ApplicationComponent],
+            "AllowSlotSubcomponents" => false
+          }
+        )
+      end
+
+      it "registers an offense for a nested class even when inside a parent component" do
+        allow(File).to receive(:exist?).and_return(false)
+
+        expect_offense(<<~RUBY, "/app/components/ui/card_component.rb")
+          module UI
+            class CardComponent < ApplicationComponent
+                  ^^^^^^^^^^^^^ No preview found for UI::CardComponent (looked in: /previews).
+              class ItemComponent < ApplicationComponent
+                    ^^^^^^^^^^^^^ No preview found for UI::CardComponent::ItemComponent (looked in: /previews).
+              end
+            end
+          end
+        RUBY
+      end
+    end
+  end
+
   context "when the class is itself a registered parent class" do
     it "does not register an offense for a built-in parent class" do
       expect_no_offenses(<<~RUBY, "/app/components/application_component.rb")

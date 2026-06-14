@@ -18,6 +18,7 @@ module RuboCop
         def on_class(node)
           return unless view_component_class?(node)
           return if view_component_parent_class?(node)
+          return if allow_slot_subcomponents? && slot_subcomponent?(node)
 
           class_name = fully_qualified_name(node)
           return if preview_exists?(class_name)
@@ -26,6 +27,41 @@ module RuboCop
         end
 
         private
+
+        def allow_slot_subcomponents?
+          cop_config.fetch("AllowSlotSubcomponents", false)
+        end
+
+        def slot_subcomponent?(node)
+          nested_in_view_component?(node) || under_parent_component_dir?(node)
+        end
+
+        def nested_in_view_component?(node)
+          parent = node.each_ancestor(:class).first
+          parent && view_component_class?(parent)
+        end
+
+        def under_parent_component_dir?(node)
+          path = processed_source.path
+          return false unless path
+
+          dir = File.dirname(path)
+          parent_file = ["#{dir}.rb", "#{dir}_component.rb"].find { |f| File.exist?(f) }
+          return false unless parent_file
+
+          short_name = node.identifier.source
+          parent_source = cached_file_read(parent_file)
+          # Match class name on the same line as renders_one/many OR within a
+          # short lambda block on the following lines (covers .new(...) inside
+          # ->(...) do ... end). We allow up to ~5 lines after renders_ to avoid
+          # false positives from unrelated later occurrences of the class name.
+          parent_source.match?(/renders_(one|many)\b[^\n]*(?:\n[^\n]*){0,5}\b#{Regexp.escape(short_name)}\b/)
+        end
+
+        def cached_file_read(path)
+          @file_cache ||= {}
+          @file_cache[path] ||= File.read(path)
+        end
 
         def preview_exists?(class_name)
           preview_paths.any? do |preview_path|
