@@ -59,7 +59,7 @@ GEM
     prism (1.9.0)
     racc (1.8.1)
     rainbow (3.1.1)
-    rake (13.3.1)
+    rake (13.4.2)
     rbs (4.1.2)
       logger
       prism (>= 1.6.0)
@@ -122,7 +122,7 @@ PLATFORMS
 
 DEPENDENCIES
   irb
-  rake (~> 13.0)
+  rake (~> 13.4)
   rspec
   rubocop
   rubocop-rake
