@@ -10,12 +10,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    name: Ruby ${{ matrix.ruby }}
+    name: Ruby latest
     timeout-minutes: 10
-    strategy:
-      matrix:
-        ruby:
-          - '3.4.7'
 
     steps:
       - uses: actions/checkout@v7
@@ -24,19 +20,15 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: ${{ matrix.ruby }}
+          ruby-version: ruby
           bundler-cache: true
       - name: Run the default task
         run: bundle exec rake
 
   minimum_rubocop:
     runs-on: ubuntu-latest
-    name: Minimum RuboCop ${{ matrix.ruby }}
+    name: Minimum RuboCop
     timeout-minutes: 10
-    strategy:
-      matrix:
-        ruby:
-          - '3.4.7'
 
     steps:
       - uses: actions/checkout@v7
@@ -45,7 +37,7 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: ${{ matrix.ruby }}
+          ruby-version: ruby
           bundler-cache: true
       - name: Install appraisal gemfiles
         run: bundle exec appraisal install
@@ -62,7 +54,7 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.4.7'
+          ruby-version: ruby
           bundler-cache: true
       - name: Verify against Primer ViewComponents
         run: script/verify primer
@@ -77,7 +69,7 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.4.7'
+          ruby-version: ruby
           bundler-cache: true
       - name: Verify against x-govuk Components
         run: script/verify govuk
@@ -92,7 +84,7 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.4.7'
+          ruby-version: ruby
           bundler-cache: true
       - name: Verify against Polaris ViewComponents
         run: script/verify polaris
