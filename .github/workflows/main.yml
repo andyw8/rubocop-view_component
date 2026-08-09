@@ -7,6 +7,9 @@ on:
 
   pull_request:
 
+  schedule:
+    - cron: '0 0 * * SAT'
+
 jobs:
   build:
     runs-on: ubuntu-latest
