@@ -18,7 +18,7 @@ jobs:
           - '3.4.7'
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           persist-credentials: false
       - name: Set up Ruby
@@ -33,7 +33,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Primer Verification
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           persist-credentials: false
       - name: Set up Ruby
@@ -48,7 +48,7 @@ jobs:
     runs-on: ubuntu-latest
     name: x-govuk Components Verification
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           persist-credentials: false
       - name: Set up Ruby
@@ -63,7 +63,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Polaris ViewComponents Verification
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           persist-credentials: false
       - name: Set up Ruby
