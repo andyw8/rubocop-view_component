@@ -29,6 +29,29 @@ jobs:
       - name: Run the default task
         run: bundle exec rake
 
+  minimum_rubocop:
+    runs-on: ubuntu-latest
+    name: Minimum RuboCop ${{ matrix.ruby }}
+    timeout-minutes: 10
+    strategy:
+      matrix:
+        ruby:
+          - '3.4.7'
+
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+          bundler-cache: true
+      - name: Install appraisal gemfiles
+        run: bundle exec appraisal install
+      - name: Run the default task against the oldest supported RuboCop
+        run: bundle exec appraisal rubocop-minimum rake
+
   primer_verification:
     runs-on: ubuntu-latest
     name: Primer Verification
