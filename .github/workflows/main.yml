@@ -65,6 +65,7 @@ jobs:
   govuk_verification:
     runs-on: ubuntu-latest
     name: x-govuk Components Verification
+    continue-on-error: true # https://github.com/alphagov/rubocop-govuk/issues/642
     steps:
       - uses: actions/checkout@v7
         with:
