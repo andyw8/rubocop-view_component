@@ -15,5 +15,8 @@ ViewComponent/PreferPrivateMethods:
   - 'app/components/primer/alpha/tree_view/node.rb'
   - 'app/components/primer/beta/avatar.rb'
   - 'app/components/primer/beta/nav_list.rb'
+  - 'app/components/primer/beta/nav_list/divider.rb'
+  - 'app/components/primer/beta/nav_list/group.rb'
+  - 'app/components/primer/beta/nav_list/item.rb'
 ViewComponent/TestRenderedOutput:
   - 'test/components/alpha/action_list_test.rb'

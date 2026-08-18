@@ -6,7 +6,8 @@ PATH
       herb
       lint_roller (~> 1.1)
       parser
-      rubocop (>= 1.72.2)
+      rubocop (>= 1.89.0)
+      rubydex
 
 GEM
   remote: https://rubygems.org/
@@ -38,6 +39,7 @@ GEM
     erb (6.0.7)
     herb (0.10.3)
     herb (0.10.3-arm64-darwin)
+    herb (0.10.3-x86_64-linux-gnu)
     i18n (1.15.2)
       concurrent-ruby (~> 1.0)
     io-console (0.9.1)
@@ -111,6 +113,9 @@ GEM
       regexp_parser (>= 2.0)
       rubocop (~> 1.86, >= 1.86.2)
     ruby-progressbar (1.13.0)
+    rubydex (0.3.0)
+    rubydex (0.3.0-arm64-darwin)
+    rubydex (0.3.0-x86_64-linux)
     securerandom (0.4.1)
     thor (1.5.0)
     tsort (0.2.0)
@@ -122,8 +127,10 @@ GEM
     uri (1.1.1)
 
 PLATFORMS
+  arm64-darwin-23
   arm64-darwin-24
   ruby
+  x86_64-linux
 
 DEPENDENCIES
   appraisal

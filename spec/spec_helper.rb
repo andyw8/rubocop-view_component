@@ -2,6 +2,7 @@
 
 require "rubocop-view_component"
 require "rubocop/rspec/support"
+require_relative "support/project_index_helpers"
 
 RSpec.configure do |config|
   config.disable_monkey_patching!
@@ -11,4 +12,13 @@ RSpec.configure do |config|
 
   config.order = :random
   Kernel.srand config.seed
+
+  config.include ViewComponent::ProjectIndexHelpers
+
+  config.before do |example|
+    next unless example.metadata[:config]
+
+    graph = build_index
+    cop.project_index = ViewComponent::ProjectIndexHelpers::LazyIndex.new(graph, cop)
+  end
 end

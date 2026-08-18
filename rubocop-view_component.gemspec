@@ -29,9 +29,6 @@ Gem::Specification.new do |spec|
   spec.executables = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
-  # Uncomment to register a new dependency of your gem
-  # spec.add_dependency "example-gem", "~> 1.0"
-
   # For more information and examples about making a new gem, check out our
   # guide at: https://bundler.io/guides/creating_gem.html
 
@@ -42,6 +39,8 @@ Gem::Specification.new do |spec|
   spec.add_dependency "herb"
   spec.add_dependency "lint_roller", "~> 1.1"
   spec.add_dependency "parser"
+  spec.add_dependency "rubydex"
   # Keep in sync with the rubocop-minimum appraisal in Appraisals
-  spec.add_dependency "rubocop", ">= 1.72.2"
+  # Requires 1.89+ for project_index support (rubydex integration)
+  spec.add_dependency "rubocop", ">= 1.89.0"
 end

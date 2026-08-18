@@ -5,8 +5,7 @@ RSpec.describe RuboCop::Cop::ViewComponent::MissingPreview, :config do
     RuboCop::Config.new(
       "ViewComponent/MissingPreview" => {
         "Enabled" => true,
-        "PreviewPaths" => ["/previews"],
-        "ViewComponentParentClasses" => %w[ViewComponent::Base ApplicationComponent]
+        "PreviewPaths" => ["/previews"]
       }
     )
   end
@@ -171,46 +170,6 @@ RSpec.describe RuboCop::Cop::ViewComponent::MissingPreview, :config do
         class ApplicationComponent < ViewComponent::Base
         end
       RUBY
-    end
-
-    context "when a custom parent class is configured" do
-      let(:config) do
-        RuboCop::Config.new(
-          "ViewComponent/MissingPreview" => {
-            "Enabled" => true,
-            "PreviewPaths" => ["/previews"],
-            "ViewComponentParentClasses" => %w[ViewComponent::Base ApplicationComponent BaseComponent]
-          }
-        )
-      end
-
-      it "does not register an offense for the custom parent class" do
-        expect_no_offenses(<<~RUBY, "/app/components/base_component.rb")
-          class BaseComponent < ViewComponent::Base
-          end
-        RUBY
-      end
-    end
-
-    context "when a namespaced custom parent class is configured" do
-      let(:config) do
-        RuboCop::Config.new(
-          "ViewComponent/MissingPreview" => {
-            "Enabled" => true,
-            "PreviewPaths" => ["/previews"],
-            "ViewComponentParentClasses" => %w[ViewComponent::Base ApplicationComponent MyApp::BaseComponent]
-          }
-        )
-      end
-
-      it "does not register an offense for the namespaced custom parent class" do
-        expect_no_offenses(<<~RUBY, "/app/components/my_app/base_component.rb")
-          module MyApp
-            class BaseComponent < ViewComponent::Base
-            end
-          end
-        RUBY
-      end
     end
   end
 end

@@ -112,8 +112,10 @@ def add_gem_to_gemfile
 end
 
 def run_rubocop
+  FileUtils.rm_f("Gemfile.lock")
   puts "Running bundle install..."
-  system!("bundle", "install")
+  system!({ "BUNDLE_WITHOUT" => "development" }, "bundle", "install")
+  system!("bundle", "add", "rubocop")
 
   puts "Running RuboCop (ViewComponent cops only)..."
   output, status = Open3.capture2(

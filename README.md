@@ -4,7 +4,7 @@ A RuboCop extension that encourages [ViewComponent best practices](https://viewc
 
 ## Installation
 
-Add to your Gemfile:
+This gem requires [rubydex](https://github.com/Shopify/rubydex) for project-wide class ancestry resolution. Add to your Gemfile:
 
 ```ruby
 gem 'rubocop-view_component', require: false
@@ -15,7 +15,15 @@ Add to your `.rubocop.yml`:
 ```yaml
 require:
   - rubocop-view_component
+
+AllCops:
+  UseProjectIndex: true
+  ProjectIndexIncludesGems: true
 ```
+
+`ProjectIndexIncludesGems` is required so the cops can resolve ancestry chains that pass through gem classes (e.g. `ViewComponent::Base`). Without it, the cops cannot detect ViewComponent inheritance and fall back to conservative behavior.
+
+For more background on how RuboCop uses rubydex for cross-file analysis, see [RuboCop 1.89: Project-Wide Analysis with Rubydex](https://metaredux.com/posts/2026/08/05/rubocop-1-89.html).
 
 ## Cops
 
@@ -27,33 +35,9 @@ This gem provides several cops to enforce ViewComponent best practices:
 - **ViewComponent/PreferSlots** - Detect HTML parameters that should be slots
 - **ViewComponent/PreferComposition** - Avoid inheriting one ViewComponent from another (prefer composition)
 - **ViewComponent/TestRenderedOutput** - Encourage testing rendered output over private methods
-- **ViewComponent/MissingPreview** - Ensure every ViewComponent has a corresponding preview file (requires `PreviewPaths` configuration). Classes listed in `ViewComponentParentClasses` are automatically exempt, as abstract base classes are not rendered standalone.
+- **ViewComponent/MissingPreview** - Ensure every ViewComponent has a corresponding preview file (requires `PreviewPaths` configuration). Abstract base classes with descendants are automatically exempt.
 
 ## Optional Configuration
-
-### Base Class
-
-By default, the cops detect classes that inherit from `ViewComponent::Base` or `ApplicationComponent`. To add extra parent classes, use `inherit_mode: merge` so the defaults are preserved:
-
-```yaml
-# .rubocop.yml
-ViewComponent:
-  inherit_mode:
-    merge:
-      - ViewComponentParentClasses
-  ViewComponentParentClasses:
-    - MyApp::BaseComponent
-```
-
-To replace the defaults entirely (e.g. if your project has renamed `ApplicationComponent`), omit `inherit_mode`:
-
-```yaml
-# .rubocop.yml
-ViewComponent:
-  ViewComponentParentClasses:
-    - ViewComponent::Base
-    - MyApp::BaseComponent
-```
 
 ### Components Directory
 

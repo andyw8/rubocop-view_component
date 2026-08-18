@@ -1,11 +1,18 @@
 # frozen_string_literal: true
 
+require "rubydex"
+
 module RuboCop
   module Cop
     module ViewComponent
-      # Shared helper methods for ViewComponent cops
+      # Shared helper methods for ViewComponent cops.
+      # Requires rubydex with UseProjectIndex: true for ancestry resolution.
       module Base
-        # Check if a class node inherits from ViewComponent::Base or ApplicationComponent
+        include ProjectIndexHelp
+
+        VC_BASE = "ViewComponent::Base"
+
+        # Check if a class node inherits from ViewComponent::Base
         def view_component_class?(node)
           return false unless node&.class_type?
 
@@ -18,18 +25,28 @@ module RuboCop
           view_component_parent?(parent_class)
         end
 
-        # Check if node represents a configured parent class
+        # Check if a constant node resolves to a class with ViewComponent::Base as ancestor
         def view_component_parent?(node)
           return false unless node.const_type?
+          return false unless project_index
 
-          (cop_config["ViewComponentParentClasses"] || []).include?(node.source)
+          declaration = resolve_constant_in_index(node)
+          return false unless declaration.respond_to?(:has_ancestor?)
+
+          declaration.name == VC_BASE || declaration.has_ancestor?(VC_BASE)
         end
 
-        # Check if a class node is itself one of the registered parent classes.
+        # Check if a class node is itself an abstract parent class
+        # (has ViewComponent::Base as ancestor and has descendants in the project)
         def view_component_parent_class?(node)
           return false unless node&.class_type?
+          return false unless project_index
 
-          (cop_config["ViewComponentParentClasses"] || []).include?(fully_qualified_name(node))
+          declaration = resolve_constant_in_index(node.identifier)
+          return false unless declaration.respond_to?(:has_ancestor?)
+
+          declaration.has_ancestor?(VC_BASE) &&
+            declaration.descendants.any? { |d| d.name != declaration.name }
         end
 
         def fully_qualified_name(node)
