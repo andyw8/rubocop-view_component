@@ -1,10 +1,6 @@
-ViewComponent:
-  inherit_mode:
-    merge:
-      - ViewComponentParentClasses
-  ViewComponentParentClasses:
-    - Polaris::Component
-    - Component
+AllCops:
+  UseProjectIndex: true
+  ProjectIndexIncludesGems: true
 
 ViewComponent/MissingPreview:
   PreviewPaths:

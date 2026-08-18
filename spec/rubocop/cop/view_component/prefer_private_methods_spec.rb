@@ -147,8 +147,7 @@ RSpec.describe RuboCop::Cop::ViewComponent::PreferPrivateMethods, :config do
           "AllCops" => { "DisplayCopNames" => true },
           "ViewComponent/PreferPrivateMethods" => {
             "AllowedPublicMethods" => %w[initialize call],
-            "AllowedPublicMethodPatterns" => ["^render_", "^with_"],
-            "ViewComponentParentClasses" => %w[ViewComponent::Base ApplicationComponent]
+            "AllowedPublicMethodPatterns" => ["^render_", "^with_"]
           }
         )
       end
@@ -190,8 +189,7 @@ RSpec.describe RuboCop::Cop::ViewComponent::PreferPrivateMethods, :config do
         "AllCops" => { "DisplayCopNames" => true },
         "ViewComponent/PreferPrivateMethods" => {
           "AllowedPublicMethods" => %w[initialize call custom_public_method],
-          "AllowedPublicMethodPatterns" => [],
-          "ViewComponentParentClasses" => %w[ViewComponent::Base ApplicationComponent]
+          "AllowedPublicMethodPatterns" => []
         }
       )
     end

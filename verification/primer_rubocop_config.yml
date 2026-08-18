@@ -1,10 +1,6 @@
-ViewComponent:
-  inherit_mode:
-    merge:
-      - ViewComponentParentClasses
-  ViewComponentParentClasses:
-    - Primer::Component
-    - Primer::BaseComponent
+AllCops:
+  UseProjectIndex: true
+  ProjectIndexIncludesGems: true
 
 # Primer seems to intentionally omit the Component suffix from most class names
 # (116 out of 131 components), so this cop is not useful here.
@@ -31,3 +27,5 @@ ViewComponent/MissingPreview:
     - previews
   Exclude:
     - app/components/primer/base_component.rb
+    # Deprecated wrapper with no preview
+    - app/components/primer/navigation/tab_component.rb

@@ -88,21 +88,4 @@ RSpec.describe RuboCop::Cop::ViewComponent::PreferComposition, :config do
       RUBY
     end
   end
-
-  context "when ViewComponentParentClasses is configured" do
-    let(:config) do
-      RuboCop::Config.new(
-        "ViewComponent/PreferComposition" => {
-          "ViewComponentParentClasses" => ["Primer::Component"]
-        }
-      )
-    end
-
-    it "does not register an offense for configured parent classes" do
-      expect_no_offenses(<<~RUBY)
-        class FooBarComponent < Primer::Component
-        end
-      RUBY
-    end
-  end
 end

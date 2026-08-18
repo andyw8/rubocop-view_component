@@ -40,8 +40,10 @@ All cops inherit from `RuboCop::Cop::Base` and are located in `lib/rubocop/cop/v
 ### Shared Modules
 
 **`ViewComponent::Base`** (`lib/rubocop/cop/view_component/base.rb`)
-- Provides `view_component_class?(node)` - Detects ViewComponent classes
-- Provides `view_component_parent?(node)` - Checks if inheriting from ViewComponent::Base, ApplicationComponent, or configured parent classes
+- Includes `RuboCop::Cop::ProjectIndexHelp` for rubydex integration
+- Provides `view_component_class?(node)` - Detects ViewComponent classes via ancestry resolution
+- Provides `view_component_parent?(node)` - Checks if inheriting from ViewComponent::Base
+- Provides `view_component_parent_class?(node)` - Checks if a class is an abstract parent (has descendants)
 - Provides `inside_view_component?(node)` - Checks if code is within a ViewComponent
 
 **`TemplateAnalyzer`** (`lib/rubocop/cop/view_component/template_analyzer.rb`)
@@ -49,16 +51,6 @@ All cops inherit from `RuboCop::Cop::Base` and are located in `lib/rubocop/cop/v
 - Extracts method calls from templates to avoid flagging template-used methods as private candidates
 - Handles both sibling templates (`component.html.erb`) and sidecar templates (`component/component.html.erb`)
 - Uses the `herb` gem to parse ERB and extract Ruby code
-
-### Configuration
-
-The `ViewComponent` config supports `ViewComponentParentClasses` to configure additional base classes beyond `ViewComponent::Base` and `ApplicationComponent`:
-
-```yaml
-ViewComponent:
-  ViewComponentParentClasses:
-    - MyApp::BaseComponent
-```
 
 ### Verification System
 

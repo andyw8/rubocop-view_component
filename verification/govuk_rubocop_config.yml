@@ -1,9 +1,6 @@
-ViewComponent:
-  inherit_mode:
-    merge:
-      - ViewComponentParentClasses
-  ViewComponentParentClasses:
-    - GovukComponent::Base
+AllCops:
+  UseProjectIndex: true
+  ProjectIndexIncludesGems: true
 
 # x-govuk components do not use ViewComponent previews
 ViewComponent/MissingPreview:

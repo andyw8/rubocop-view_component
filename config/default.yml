@@ -1,7 +1,4 @@
 ViewComponent:
-  ViewComponentParentClasses:
-    - ViewComponent::Base
-    - ApplicationComponent
   ComponentNamespaces: []
 
 ViewComponent/ComponentSuffix:
