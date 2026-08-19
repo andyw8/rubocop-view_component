@@ -4,7 +4,7 @@ A RuboCop extension that encourages [ViewComponent best practices](https://viewc
 
 ## Installation
 
-This gem requires [rubydex](https://github.com/Shopify/rubydex) for project-wide class ancestry resolution. Add to your Gemfile:
+Add to your Gemfile:
 
 ```ruby
 gem 'rubocop-view_component', require: false
@@ -15,13 +15,15 @@ Add to your `.rubocop.yml`:
 ```yaml
 require:
   - rubocop-view_component
+```
+**Note:** From v0.7.0 onwards, this gem makes use of [rubydex](https://github.com/Shopify/rubydex) to discover which classes inherit from `ViewComponent::Base`. `UseProjectIndex` is required. Without it, cops that depend on ancestry detection will raise an error.
 
+```yaml
 AllCops:
   UseProjectIndex: true
-  ProjectIndexIncludesGems: true
 ```
 
-`ProjectIndexIncludesGems` is required so the cops can resolve ancestry chains that pass through gem classes (e.g. `ViewComponent::Base`). Without it, the cops cannot detect ViewComponent inheritance and fall back to conservative behavior.
+If you use a ViewComponent library such as [primer](https://github.com/primer/view_components) then you'll also need to set `ProjectIndexIncludesGems: true` so the cops can resolve ancestry chains that pass through gem classes.
 
 For more background on how RuboCop uses rubydex for cross-file analysis, see [RuboCop 1.89: Project-Wide Analysis with Rubydex](https://metaredux.com/posts/2026/08/05/rubocop-1-89.html).
 

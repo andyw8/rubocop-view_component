@@ -19,6 +19,8 @@ module RuboCop
           class_source = fully_qualified_name(node)
           return true if component_namespaces.any? { |ns| class_source.start_with?(ns) }
 
+          require_project_index!
+
           parent_class = node.parent_class
           return false unless parent_class
 
@@ -28,7 +30,8 @@ module RuboCop
         # Check if a constant node resolves to a class with ViewComponent::Base as ancestor
         def view_component_parent?(node)
           return false unless node.const_type?
-          return false unless project_index
+
+          require_project_index!
 
           declaration = resolve_constant_in_index(node)
           return false unless declaration.respond_to?(:has_ancestor?)
@@ -40,7 +43,8 @@ module RuboCop
         # (has ViewComponent::Base as ancestor and has descendants in the project)
         def view_component_parent_class?(node)
           return false unless node&.class_type?
-          return false unless project_index
+
+          require_project_index!
 
           declaration = resolve_constant_in_index(node.identifier)
           return false unless declaration.respond_to?(:has_ancestor?)
@@ -68,10 +72,21 @@ module RuboCop
 
         # Check if node is within a ViewComponent class
         def inside_view_component?(node)
+          require_project_index!
+
           klass = enclosing_class(node)
           return false unless klass
 
           view_component_class?(klass)
+        end
+
+        def require_project_index!
+          return if project_index
+
+          raise <<~MSG
+            ViewComponent cops require `AllCops/UseProjectIndex: true` in your .rubocop.yml
+            for ancestry-based class detection.
+          MSG
         end
       end
     end
