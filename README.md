@@ -15,15 +15,15 @@ Add to your `.rubocop.yml`:
 ```yaml
 require:
   - rubocop-view_component
+```
+**Note:** From v0.7.0 onwards, this gem makes use of [rubydex](https://github.com/Shopify/rubydex) to discover which classes inherit from `ViewComponent::Base`. `UseProjectIndex` is required. Without it, cops that depend on ancestry detection will raise an error.
 
+```yaml
 AllCops:
   UseProjectIndex: true
-  ProjectIndexIncludesGems: true
 ```
 
-This gem makes use of [rubydex](https://github.com/Shopify/rubydex) to discover which classes inherit from `ViewComponent::Base`. Enable `ProjectIndexIncludesGems` so the cops can resolve ancestry chains that pass through gem classes.
-
-> **Note:** From v0.7.0 onwards, `UseProjectIndex: true` is required. Without it, cops that depend on ancestry detection will raise an error.
+If you use a ViewComponent library such as [primer](https://github.com/primer/view_components) then you'll also need to set `ProjectIndexIncludesGems: true` so the cops can resolve ancestry chains that pass through gem classes.
 
 For more background on how RuboCop uses rubydex for cross-file analysis, see [RuboCop 1.89: Project-Wide Analysis with Rubydex](https://metaredux.com/posts/2026/08/05/rubocop-1-89.html).
 
