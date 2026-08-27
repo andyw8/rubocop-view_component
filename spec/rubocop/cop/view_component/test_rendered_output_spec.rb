@@ -1,7 +1,10 @@
 # frozen_string_literal: true
 
 RSpec.describe RuboCop::Cop::ViewComponent::TestRenderedOutput, :config do
+  include ViewComponent::ProjectIndexHelpers
+
   let(:config) { RuboCop::Config.new }
+  let(:project_index) { build_index }
 
   context "with Minitest-style tests" do
     context "when test instantiates a component but doesn't render" do
@@ -17,12 +20,32 @@ RSpec.describe RuboCop::Cop::ViewComponent::TestRenderedOutput, :config do
     end
 
     context "when test instantiates a non-Component-suffixed class" do
-      it "registers an offense" do
+      it "registers an offense for an indexed component" do
         expect_offense(<<~RUBY)
           def test_toggle
           ^^^^^^^^^^^^^^^ ViewComponent/TestRenderedOutput: Test instantiates a component but doesn't use `render_inline` or `render_preview`. Test the rendered output instead of component methods directly.
-            component = V2::Toggle.new
+            component = UserComponent.new
             assert component.active?
+          end
+        RUBY
+      end
+    end
+
+    context "when test instantiates a non-ViewComponent value object" do
+      let(:project_index) do
+        build_index(
+          "file:///month.rb" => <<~RUBY
+            class Month
+            end
+          RUBY
+        )
+      end
+
+      it "does not register an offense" do
+        expect_no_offenses(<<~RUBY)
+          def test_month
+            month = Month.new
+            assert month.active?
           end
         RUBY
       end
@@ -84,11 +107,11 @@ RSpec.describe RuboCop::Cop::ViewComponent::TestRenderedOutput, :config do
     end
 
     context "when test instantiates a namespaced component" do
-      it "registers an offense" do
+      it "registers an offense for an indexed component" do
         expect_offense(<<~RUBY)
           def test_namespaced
           ^^^^^^^^^^^^^^^^^^^ ViewComponent/TestRenderedOutput: Test instantiates a component but doesn't use `render_inline` or `render_preview`. Test the rendered output instead of component methods directly.
-            component = Admin::UserComponent.new("hello")
+            component = UserComponent.new("hello")
             assert_equal "HELLO", component.formatted_title
           end
         RUBY
@@ -99,7 +122,7 @@ RSpec.describe RuboCop::Cop::ViewComponent::TestRenderedOutput, :config do
   context "with TestPaths configured" do
     let(:config) do
       RuboCop::Config.new(
-        "AllCops" => { "DisplayCopNames" => true },
+        "AllCops" => {"DisplayCopNames" => true},
         "ViewComponent/TestRenderedOutput" => {
           "TestPaths" => ["spec/components/v2/"]
         }
