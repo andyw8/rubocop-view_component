@@ -136,6 +136,9 @@ def run_rubocop
 
   puts "RuboCop exit status: #{status.exitstatus}"
 
+  # Exit status 0 means no offenses, 1 means offenses found (expected, since
+  # the libraries have known offenses). 2 means RuboCop itself failed.
+  abort "ERROR: RuboCop failed (exit status: #{status.exitstatus})" if status.exitstatus == 2
   abort "ERROR: RuboCop produced no output (exit status: #{status.exitstatus})" if output.strip.empty?
 
   output
