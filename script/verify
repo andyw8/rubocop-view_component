@@ -89,24 +89,13 @@ def download_source(dir, tarball_url, display_name)
   system!("tar", "xz", "-C", dir, "--strip-components=1", "-f", "#{dir}/source.tar.gz")
 end
 
+# Replace the library's .rubocop.yml with a config that only runs our
+# ViewComponent cops. The library's own config may reference gems outside the
+# minimal bundle (see replace_gemfile), e.g. inherit_gem, require, or config
+# for cops from other RuboCop extensions.
 def configure_rubocop(config_file, display_name)
-  puts "Configuring .rubocop.yml with #{display_name} overrides..."
-  config = File.exist?(".rubocop.yml") ? YAML.load_file(".rubocop.yml") : {}
-  library_config = YAML.load_file(config_file)
-
-  # Keep only settings relevant to the ViewComponent cops. Anything else may
-  # reference gems outside the minimal bundle (see replace_gemfile), e.g.
-  # inherit_gem, require, or config for cops from other RuboCop extensions.
-  config.select! { |key, _| key == "AllCops" || key.start_with?("ViewComponent") }
-
-  # Merge the library config into the existing config
-  library_config.each do |key, value|
-    config[key] = if config[key].is_a?(Hash) && value.is_a?(Hash)
-                    config[key].merge(value)
-                  else
-                    value
-                  end
-  end
+  puts "Replacing .rubocop.yml with #{display_name} overrides..."
+  config = YAML.load_file(config_file)
 
   # Silence warnings about unconfigured new cops - only ViewComponent cops run
   config["AllCops"] ||= {}
