@@ -1,0 +1,8 @@
+AllCops:
+  UseProjectIndex: true
+  ProjectIndexIncludesGems: true
+  Exclude:
+    - demo/**/*
+
+ViewComponent/ComponentSuffix:
+  Enabled: false
