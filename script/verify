@@ -49,7 +49,7 @@ def main
 
   Dir.chdir(config[:verification_dir]) do
     configure_rubocop(config[:config_file], config[:display_name])
-    add_gem_to_gemfile
+    replace_gemfile
 
     Bundler.with_unbundled_env do
       output = run_rubocop
@@ -89,33 +89,41 @@ def download_source(dir, tarball_url, display_name)
   system!("tar", "xz", "-C", dir, "--strip-components=1", "-f", "#{dir}/source.tar.gz")
 end
 
+# Replace the library's .rubocop.yml with a config that only runs our
+# ViewComponent cops. The library's own config may reference gems outside the
+# minimal bundle (see replace_gemfile), e.g. inherit_gem, require, or config
+# for cops from other RuboCop extensions.
 def configure_rubocop(config_file, display_name)
-  puts "Configuring .rubocop.yml with #{display_name} overrides..."
-  config = File.exist?(".rubocop.yml") ? YAML.load_file(".rubocop.yml") : {}
-  library_config = YAML.load_file(config_file)
+  puts "Replacing .rubocop.yml with #{display_name} overrides..."
+  config = YAML.load_file(config_file)
 
-  # Merge the library config into the existing config
-  library_config.each do |key, value|
-    config[key] = if config[key].is_a?(Hash) && value.is_a?(Hash)
-                    config[key].merge(value)
-                  else
-                    value
-                  end
-  end
+  # Silence warnings about unconfigured new cops - only ViewComponent cops run
+  config["AllCops"] ||= {}
+  config["AllCops"]["NewCops"] = "disable"
 
   File.write(".rubocop.yml", YAML.dump(config))
 end
 
-def add_gem_to_gemfile
-  puts "Adding rubocop-view_component gem to Gemfile..."
-  File.open("Gemfile", "a") { |f| f.puts "gem 'rubocop-view_component', path: '#{GEM_DIR}'" }
+# Replace the library's Gemfile with a minimal one. This avoids installing the
+# library's own dependencies, which are not needed for static analysis and can
+# fail to install or conflict with the rubocop version we require.
+# `view_component` must be present so the project index can resolve
+# `ViewComponent::Base` for ancestry-based detection.
+def replace_gemfile
+  puts "Replacing Gemfile with minimal setup..."
+  File.write("Gemfile", <<~RUBY)
+    source "https://rubygems.org"
+
+    gem "rubocop"
+    gem "rubocop-view_component", path: "#{GEM_DIR}"
+    gem "view_component"
+  RUBY
 end
 
 def run_rubocop
   FileUtils.rm_f("Gemfile.lock")
   puts "Running bundle install..."
-  system!({ "BUNDLE_WITHOUT" => "development" }, "bundle", "install")
-  system!("bundle", "add", "rubocop")
+  system!("bundle", "install")
 
   puts "Running RuboCop (ViewComponent cops only)..."
   output, status = Open3.capture2(
@@ -128,6 +136,9 @@ def run_rubocop
 
   puts "RuboCop exit status: #{status.exitstatus}"
 
+  # Exit status 0 means no offenses, 1 means offenses found (expected, since
+  # the libraries have known offenses). 2 means RuboCop itself failed.
+  abort "ERROR: RuboCop failed (exit status: #{status.exitstatus})" if status.exitstatus == 2
   abort "ERROR: RuboCop produced no output (exit status: #{status.exitstatus})" if output.strip.empty?
 
   output
