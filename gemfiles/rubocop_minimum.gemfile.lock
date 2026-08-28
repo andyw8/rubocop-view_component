@@ -1,12 +1,12 @@
 PATH
   remote: ..
   specs:
-    rubocop-view_component (0.6.0)
+    rubocop-view_component (0.7.0)
       activesupport
       herb
       lint_roller (~> 1.1)
       parser
-      rubocop (>= 1.89.0)
+      rubocop (>= 1.90.0)
       rubydex
 
 GEM
@@ -99,8 +99,8 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.13.0)
     rspec-support (3.13.7)
-    rubocop (1.89.0)
-      json (~> 2.3)
+    rubocop (1.90.0)
+      json (>= 2.3)
       language_server-protocol (~> 3.17.0.2)
       lint_roller (~> 1.1.0)
       parallel (>= 1.10)
@@ -153,7 +153,7 @@ DEPENDENCIES
   irb
   rake (~> 13.4)
   rspec
-  rubocop (= 1.89.0)
+  rubocop (= 1.90.0)
   rubocop-rake
   rubocop-rspec
   rubocop-view_component!

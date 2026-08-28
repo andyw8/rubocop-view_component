@@ -41,6 +41,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency "parser"
   spec.add_dependency "rubydex"
   # Keep in sync with the rubocop-minimum appraisal in Appraisals
-  # Requires 1.89+ for project_index support (rubydex integration)
-  spec.add_dependency "rubocop", ">= 1.89.0"
+  # Requires 1.90+ for project_index support (rubydex integration)
+  spec.add_dependency "rubocop", ">= 1.90.0"
 end

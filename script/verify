@@ -123,6 +123,7 @@ def run_rubocop
     "--plugin", "rubocop-view_component",
     "--only", "ViewComponent",
     "--config", ".rubocop.yml",
+    "--report-unused-todo-entries",
     "--format", "json"
   )
 
