@@ -49,7 +49,7 @@ def main
 
   Dir.chdir(config[:verification_dir]) do
     configure_rubocop(config[:config_file], config[:display_name])
-    add_gem_to_gemfile
+    replace_gemfile
 
     Bundler.with_unbundled_env do
       output = run_rubocop
@@ -94,6 +94,11 @@ def configure_rubocop(config_file, display_name)
   config = File.exist?(".rubocop.yml") ? YAML.load_file(".rubocop.yml") : {}
   library_config = YAML.load_file(config_file)
 
+  # Keep only settings relevant to the ViewComponent cops. Anything else may
+  # reference gems outside the minimal bundle (see replace_gemfile), e.g.
+  # inherit_gem, require, or config for cops from other RuboCop extensions.
+  config.select! { |key, _| key == "AllCops" || key.start_with?("ViewComponent") }
+
   # Merge the library config into the existing config
   library_config.each do |key, value|
     config[key] = if config[key].is_a?(Hash) && value.is_a?(Hash)
@@ -103,19 +108,33 @@ def configure_rubocop(config_file, display_name)
                   end
   end
 
+  # Silence warnings about unconfigured new cops - only ViewComponent cops run
+  config["AllCops"] ||= {}
+  config["AllCops"]["NewCops"] = "disable"
+
   File.write(".rubocop.yml", YAML.dump(config))
 end
 
-def add_gem_to_gemfile
-  puts "Adding rubocop-view_component gem to Gemfile..."
-  File.open("Gemfile", "a") { |f| f.puts "gem 'rubocop-view_component', path: '#{GEM_DIR}'" }
+# Replace the library's Gemfile with a minimal one. This avoids installing the
+# library's own dependencies, which are not needed for static analysis and can
+# fail to install or conflict with the rubocop version we require.
+# `view_component` must be present so the project index can resolve
+# `ViewComponent::Base` for ancestry-based detection.
+def replace_gemfile
+  puts "Replacing Gemfile with minimal setup..."
+  File.write("Gemfile", <<~RUBY)
+    source "https://rubygems.org"
+
+    gem "rubocop"
+    gem "rubocop-view_component", path: "#{GEM_DIR}"
+    gem "view_component"
+  RUBY
 end
 
 def run_rubocop
   FileUtils.rm_f("Gemfile.lock")
   puts "Running bundle install..."
-  system!({ "BUNDLE_WITHOUT" => "development" }, "bundle", "install")
-  system!("bundle", "add", "rubocop")
+  system!("bundle", "install")
 
   puts "Running RuboCop (ViewComponent cops only)..."
   output, status = Open3.capture2(
