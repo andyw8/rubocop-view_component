@@ -22,7 +22,3 @@ ViewComponent/PreferPrivateMethods:
   - 'app/components/flowbite/pagination/link.rb'
   - 'app/components/flowbite/pagination/next_link.rb'
   - 'app/components/flowbite/pagination/previous_link.rb'
-  - 'demo/app/components/docs/headline/h1.rb'
-  - 'demo/app/components/docs/headline/h2.rb'
-  - 'demo/app/components/docs/headline/h3.rb'
-  - 'demo/app/components/docs/headline/h4.rb'
