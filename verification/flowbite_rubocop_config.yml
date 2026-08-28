@@ -1,3 +1,6 @@
 AllCops:
   UseProjectIndex: true
   ProjectIndexIncludesGems: true
+
+ViewComponent/ComponentSuffix:
+  Enabled: false
