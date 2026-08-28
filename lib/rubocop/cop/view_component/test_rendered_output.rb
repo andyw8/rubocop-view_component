@@ -22,6 +22,8 @@ module RuboCop
       #   end
       #
       class TestRenderedOutput < RuboCop::Cop::Base
+        include ViewComponent::Base
+
         MSG = "Test instantiates a component but doesn't use `render_inline` or `render_preview`. " \
               "Test the rendered output instead of component methods directly."
 
@@ -63,7 +65,8 @@ module RuboCop
           node.each_descendant(:send).any? do |send_node|
             next unless send_node.method?(:new)
 
-            send_node.receiver&.const_type?
+            receiver = send_node.receiver
+            receiver&.const_type? && view_component_parent?(receiver)
           end
         end
 
