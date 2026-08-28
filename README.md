@@ -143,6 +143,26 @@ To force download the latest Polaris source:
 script/verify polaris --update
 ```
 
+### Flowbite Components
+
+To verify against [substancelab/flowbite-components](https://github.com/substancelab/flowbite-components) locally:
+
+```bash
+script/verify flowbite
+```
+
+If you intentionally change cop behavior, regenerate the snapshot:
+
+```bash
+script/verify flowbite --regenerate
+```
+
+To force download the latest Flowbite source:
+
+```bash
+script/verify flowbite --update
+```
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/andyw8/rubocop-view_component.
