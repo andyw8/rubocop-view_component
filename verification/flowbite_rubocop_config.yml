@@ -1,0 +1,3 @@
+AllCops:
+  UseProjectIndex: true
+  ProjectIndexIncludesGems: true

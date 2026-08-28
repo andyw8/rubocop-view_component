@@ -9,3 +9,7 @@ govuk:
 polaris:
   tarball_url: https://github.com/baoagency/polaris_view_components/archive/refs/heads/main.tar.gz
   display_name: baoagency/polaris_view_components
+
+flowbite:
+  tarball_url: https://github.com/substancelab/flowbite-components/archive/refs/heads/main.tar.gz
+  display_name: substancelab/flowbite-components
