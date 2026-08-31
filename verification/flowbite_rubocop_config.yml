@@ -6,3 +6,7 @@ AllCops:
 
 ViewComponent/ComponentSuffix:
   Enabled: false
+
+ViewComponent/MissingPreview:
+  PreviewPaths:
+    - demo/test/components/previews
