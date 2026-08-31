@@ -37,13 +37,13 @@ This gem provides several cops to enforce ViewComponent best practices:
 - **ViewComponent/PreferSlots** - Detect HTML parameters that should be slots
 - **ViewComponent/PreferComposition** - Avoid inheriting one ViewComponent from another (prefer composition)
 - **ViewComponent/TestRenderedOutput** - Encourage testing rendered output over private methods
-- **ViewComponent/MissingPreview** - Ensure every ViewComponent has a corresponding preview file (requires `PreviewPaths` configuration). Abstract base classes with descendants are automatically exempt.
+- **ViewComponent/MissingPreview** - Ensure every ViewComponent has a corresponding preview file (defaults to `test/components/previews` and `spec/components/previews` if `PreviewPaths` is not configured). Abstract base classes with descendants are automatically exempt.
 
 ## Optional Configuration
 
 ### Components Directory
 
-Several cops (`ComponentSuffix`, `PreferComposition`, `MissingPreview`, `TestRenderedOutput`) default to running only on files under `app/components/`. If your project uses a different path, override `Include` in your `.rubocop.yml`:
+Several cops (`ComponentSuffix`, `PreferComposition`, `TestRenderedOutput`) default to running only on files under `app/components/`. If your project uses a different path, override `Include` in your `.rubocop.yml`:
 
 ```yaml
 # .rubocop.yml
