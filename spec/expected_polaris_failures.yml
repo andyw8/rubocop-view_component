@@ -17,6 +17,8 @@ ViewComponent/MissingPreview:
   - 'app/components/polaris/inline_code_component.rb'
   - 'app/components/polaris/label_component.rb'
   - 'app/components/polaris/labelled_component.rb'
+  - 'app/components/polaris/layout/annotated_section.rb'
+  - 'app/components/polaris/layout/section.rb'
   - 'app/components/polaris/list_component.rb'
   - 'app/components/polaris/page_component.rb'
   - 'app/components/polaris/placeholder_component.rb'
