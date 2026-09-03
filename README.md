@@ -13,7 +13,7 @@ gem 'rubocop-view_component', require: false
 Add to your `.rubocop.yml`:
 
 ```yaml
-require:
+plugins:
   - rubocop-view_component
 ```
 **Note:** From v0.7.0 onwards, this gem makes use of [rubydex](https://github.com/Shopify/rubydex) to discover which classes inherit from `ViewComponent::Base`. `UseProjectIndex` is required. Without it, cops that depend on ancestry detection will raise an error.
