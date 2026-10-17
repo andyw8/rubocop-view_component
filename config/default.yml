@@ -1,5 +1,11 @@
 ViewComponent:
   ComponentNamespaces: []
+  # Source directories the cops index themselves, in addition to RuboCop's
+  # project index. Use this when ancestry passes through a gem RuboCop does not
+  # index (notably a Rails engine's app/components, which
+  # AllCops/ProjectIndexIncludesGems misses because it only covers a gem's lib).
+  # Paths are relative to the config file that sets them.
+  AdditionalSourcePaths: []
 
 ViewComponent/ComponentSuffix:
   Description: 'Enforce -Component suffix for ViewComponent classes.'

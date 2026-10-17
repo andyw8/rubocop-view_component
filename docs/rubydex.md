@@ -79,6 +79,25 @@ AllCops:
   ProjectIndexIncludesGems: true
 ```
 
+### Rails engines
+
+Gem indexing only covers a gem's `lib`. A Rails engine's components live under `app/components`,
+so a chain that passes through one — such as a project's components inheriting
+`MyEngine::ApplicationComponent` — stays unresolved even with the flag on. List the engine's
+sources in `ViewComponent/AdditionalSourcePaths` and the cops index them in a small supplementary
+graph of their own, used as a fallback when RuboCop's index can't resolve a constant:
+
+```yaml
+ViewComponent:
+  AdditionalSourcePaths:
+    - ../my_engine/app/components
+```
+
+Paths are relative to the config file that sets them, and the supplementary files take part in the
+result cache's checksum, so changing one invalidates a cached run. `ComponentNamespaces` is not a
+substitute here: it treats *every* class under the namespace as a component, which is wrong for a
+namespace that also holds helpers, tests, or other application code.
+
 ## Performance notes
 
 - The index always covers the whole project (rooted at the directory of the config that

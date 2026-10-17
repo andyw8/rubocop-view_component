@@ -53,6 +53,23 @@ ViewComponent/ComponentSuffix:
     - 'engines/*/app/components/**/*.rb'
 ```
 
+### Additional Source Paths
+
+`AllCops/ProjectIndexIncludesGems` only indexes a gem's `lib`, so a class that inherits through a
+Rails engine's `app/components` stays unresolved. If your components inherit from an engine gem,
+point the cops at its sources:
+
+```yaml
+# .rubocop.yml
+ViewComponent:
+  AdditionalSourcePaths:
+    - ../my_engine/app/components
+```
+
+Paths are relative to the config file that sets them. The cops index those directories themselves
+and fall back to them when RuboCop's index can't resolve a constant. Unlike `ComponentNamespaces`,
+this only adds declarations to the index — it does not treat a whole namespace as components.
+
 ### No Super
 
 ViewComponent convention is to not call `super` in component initializers, but that may cause `Lint/MissingSuper` failures from RuboCop. We suggest disabling that rule for your view components directory, for example:
