@@ -44,26 +44,66 @@ module RuboCop
           return unless body
 
           children = body.begin_type? ? body.children : [body]
-          check_children(children, methods_called_in_templates)
+          check_children(children, methods_called_in_templates, indexed_visibilities(class_node))
         end
 
-        def check_children(children, template_method_calls)
+        def check_children(children, template_method_calls, indexed_visibilities)
           current_visibility = :public
 
           children.each do |child|
-            if visibility_modifier?(child)
+            if bare_visibility_modifier?(child)
               current_visibility = child.method_name
-            elsif should_flag?(child, current_visibility, template_method_calls)
+            elsif child.def_type?
+              visibility = indexed_visibilities.fetch(child.method_name, current_visibility)
+              next unless should_flag?(child, visibility, template_method_calls)
+
               add_offense(child, message: format(MSG, method_name: child.method_name))
             end
           end
         end
 
         def should_flag?(child, visibility, template_method_calls)
-          child.def_type? &&
-            visibility == :public &&
+          visibility == :public &&
             !allowed_public_method?(child.method_name) &&
             !template_method_calls.include?(child.method_name)
+        end
+
+        # The effective visibility of each method defined in the class, taken
+        # from the project index. This covers the forms an in-file walk cannot
+        # see: `private :name`, `private def name`, `public :name`, and
+        # visibility applied in another file. Empty when the class is not in
+        # the index (for example with `ComponentNamespaces`, which does not
+        # require one), in which case the in-file keyword below is used
+        # instead.
+        def indexed_visibilities(class_node)
+          return {} unless project_index && class_node.identifier
+
+          declaration = resolved_index_declaration(class_node.identifier)
+          return {} unless declaration.is_a?(Rubydex::Namespace)
+
+          declaration.members.each_with_object({}) do |member, visibilities|
+            next unless member.is_a?(Rubydex::Method)
+
+            visibilities[member_method_name(member)] = member.visibility
+          end
+        rescue StandardError
+          {}
+        end
+
+        def member_method_name(member)
+          member.unqualified_name.sub(/\(.*\)\z/, "").to_sym
+        end
+
+        # A `private`/`protected`/`public` call with no arguments, which
+        # changes the visibility of every method that follows it. Forms that
+        # name their methods do not change it: `private :name` and
+        # `private def name` are handled by the index above.
+        def bare_visibility_modifier?(node)
+          return false unless node.send_type?
+          return false unless node.receiver.nil?
+          return false unless %i[private protected public].include?(node.method_name)
+
+          node.arguments.empty?
         end
 
         def allowed_public_method?(method_name)
@@ -90,13 +130,6 @@ module RuboCop
         rescue StandardError => e
           warn "Warning: Failed to analyze templates: #{e.message}" if ENV["RUBOCOP_DEBUG"]
           Set.new
-        end
-
-        def visibility_modifier?(node)
-          return false unless node.send_type?
-          return false unless node.receiver.nil?
-
-          %i[private protected public].include?(node.method_name)
         end
       end
     end
