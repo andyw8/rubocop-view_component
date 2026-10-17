@@ -54,6 +54,77 @@ RSpec.describe RuboCop::Cop::ViewComponent::PreferPrivateMethods, :config do
     end
   end
 
+  context "when helper methods are made private with an explicit list" do
+    it "does not register offense for the listed methods" do
+      expect_no_offenses(<<~RUBY)
+        class CardComponent < ViewComponent::Base
+          def initialize(title)
+            @title = title
+          end
+
+          def formatted_title
+            @title.upcase
+          end
+
+          def helper
+            "helper"
+          end
+
+          private :formatted_title, :helper
+        end
+      RUBY
+    end
+
+    it "does not change the visibility of methods defined after the list" do
+      expect_offense(<<~RUBY)
+        class CardComponent < ViewComponent::Base
+          def formatted_title
+            "title"
+          end
+
+          private :formatted_title
+
+          def other_helper
+          ^^^^^^^^^^^^^^^^ ViewComponent/PreferPrivateMethods: Consider making `other_helper` private. Only ViewComponent interface methods should be public.
+            "other"
+          end
+        end
+      RUBY
+    end
+
+    it "flags a method made public again with an explicit list" do
+      expect_offense(<<~RUBY)
+        class CardComponent < ViewComponent::Base
+          private
+
+          def formatted_title
+          ^^^^^^^^^^^^^^^^^^^ ViewComponent/PreferPrivateMethods: Consider making `formatted_title` private. Only ViewComponent interface methods should be public.
+            "title"
+          end
+
+          public :formatted_title
+        end
+      RUBY
+    end
+  end
+
+  context "when a method is defined with `private def`" do
+    it "flags later public methods but not the `private def` method" do
+      expect_offense(<<~RUBY)
+        class CardComponent < ViewComponent::Base
+          private def formatted_title
+            "title"
+          end
+
+          def other_helper
+          ^^^^^^^^^^^^^^^^ ViewComponent/PreferPrivateMethods: Consider making `other_helper` private. Only ViewComponent interface methods should be public.
+            "other"
+          end
+        end
+      RUBY
+    end
+  end
+
   context "with allowed public interface methods" do
     it "allows initialize" do
       expect_no_offenses(<<~RUBY)
