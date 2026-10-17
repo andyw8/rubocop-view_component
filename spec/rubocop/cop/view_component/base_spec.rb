@@ -89,4 +89,20 @@ RSpec.describe RuboCop::Cop::ViewComponent::Base do
       )
     end
   end
+
+  describe "#resolved_index_declaration" do
+    it "raises when project_index is not set" do
+      source = parse_source(<<~RUBY)
+        class Foo < ViewComponent::Base
+        end
+      RUBY
+
+      parent = source.ast.parent_class
+
+      expect { cop.send(:resolved_index_declaration, parent) }.to raise_error(
+        RuntimeError,
+        /UseProjectIndex/
+      )
+    end
+  end
 end

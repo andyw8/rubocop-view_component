@@ -29,12 +29,8 @@ module RuboCop
 
         # Check if a constant node resolves to a class with ViewComponent::Base as ancestor
         def view_component_parent?(node)
-          return false unless node.const_type?
-
-          require_project_index!
-
-          declaration = resolve_constant_in_index(node)
-          return false unless declaration.respond_to?(:has_ancestor?)
+          declaration = view_component_declaration(node)
+          return false unless declaration
 
           declaration.name == VC_BASE || declaration.has_ancestor?(VC_BASE)
         end
@@ -44,13 +40,22 @@ module RuboCop
         def view_component_parent_class?(node)
           return false unless node&.class_type?
 
-          require_project_index!
-
-          declaration = resolve_constant_in_index(node.identifier)
-          return false unless declaration.respond_to?(:has_ancestor?)
+          declaration = view_component_declaration(node.identifier)
+          return false unless declaration
 
           declaration.has_ancestor?(VC_BASE) &&
             declaration.descendants.any? { |d| d.name != declaration.name }
+        end
+
+        # Resolve a constant node to its declaration in the project index, or
+        # nil when the node is not a constant or isn't defined anywhere in the
+        # index. The declaration may or may not be a ViewComponent; callers can
+        # inspect it (for example, to locate the class's source file).
+        def resolved_index_declaration(node)
+          return nil unless node&.const_type?
+
+          require_project_index!
+          resolve_constant_in_index(node)
         end
 
         def fully_qualified_name(node)
@@ -87,6 +92,16 @@ module RuboCop
             ViewComponent cops require `AllCops/UseProjectIndex: true` in your .rubocop.yml
             for ancestry-based class detection.
           MSG
+        end
+
+        private
+
+        # Resolve a constant node to a namespace declaration in the project
+        # index, or nil when the node is not a constant or does not resolve to a
+        # class or module.
+        def view_component_declaration(node)
+          declaration = resolved_index_declaration(node)
+          declaration if declaration.respond_to?(:has_ancestor?)
         end
       end
     end
