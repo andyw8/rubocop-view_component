@@ -35,7 +35,7 @@ This gem provides several cops to enforce ViewComponent best practices:
 - **ViewComponent/NoGlobalState** - Prevent direct access to `params`, `request`, `session`, etc.
 - **ViewComponent/PreferPrivateMethods** - Suggest making helper methods private (analyzes ERB templates to avoid flagging methods used in views)
 - **ViewComponent/PreferSlots** - Detect HTML parameters that should be slots
-- **ViewComponent/PreferComposition** - Avoid inheriting one ViewComponent from another (prefer composition)
+- **ViewComponent/PreferComposition** - Avoid inheriting one ViewComponent from another (prefer composition). Abstract bases without their own template, such as `ApplicationComponent`, are allowed
 - **ViewComponent/TestRenderedOutput** - Encourage testing rendered output over private methods. Supports Minitest and RSpec styles, including components built via `described_class.new` or a `let`/`subject` helper
 - **ViewComponent/MissingPreview** - Ensure every ViewComponent has a corresponding preview file (defaults to `test/components/previews` and `spec/components/previews` if `PreviewPaths` is not configured). Abstract base classes with descendants are automatically exempt.
 

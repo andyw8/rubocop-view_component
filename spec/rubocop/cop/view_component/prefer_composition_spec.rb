@@ -55,6 +55,62 @@ RSpec.describe RuboCop::Cop::ViewComponent::PreferComposition, :config do
     end
   end
 
+  context "when the parent is a resolvable component with its own template" do
+    it "registers an offense" do
+      allow(File).to receive(:exist?).and_call_original
+      allow(File).to receive(:exist?).with("/test_source.html.erb").and_return(true)
+
+      expect_offense(<<~RUBY)
+        class BaseCardComponent < ViewComponent::Base
+        end
+
+        class UserCardComponent < BaseCardComponent
+                                  ^^^^^^^^^^^^^^^^^ ViewComponent/PreferComposition: Avoid inheriting from another ViewComponent.
+        end
+      RUBY
+    end
+  end
+
+  context "when the parent is a resolvable component without a template" do
+    it "does not register an offense" do
+      expect_no_offenses(<<~RUBY)
+        class BaseCardComponent < ViewComponent::Base
+        end
+
+        class UserCardComponent < BaseCardComponent
+        end
+      RUBY
+    end
+  end
+
+  context "when the parent resolves to a non-ViewComponent class" do
+    it "does not register an offense even when the name ends with Component" do
+      expect_no_offenses(<<~RUBY)
+        class WidgetComponent
+        end
+
+        class UserCardComponent < WidgetComponent
+        end
+      RUBY
+    end
+  end
+
+  context "when inheriting from a namespaced abstract base class" do
+    it "does not register an offense" do
+      expect_no_offenses(<<~RUBY)
+        module Shadcn
+          class ApplicationViewComponent < ViewComponent::Base
+          end
+
+          module Button
+            class Component < ApplicationViewComponent
+            end
+          end
+        end
+      RUBY
+    end
+  end
+
   context "when class has no parent" do
     it "does not register an offense" do
       expect_no_offenses(<<~RUBY)

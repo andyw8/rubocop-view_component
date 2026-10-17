@@ -35,8 +35,19 @@ warns and degrades to file-local analysis (`project_index` is `nil`).
   `declaration.has_ancestor?("ViewComponent::Base")`.
 - `view_component_parent_class?` — checks `has_ancestor?` plus `declaration.descendants`
   to detect abstract base classes that have their own subclasses in the project.
+- `resolved_index_declaration` — returns the raw declaration for a constant, or nil
+  when it isn't defined in the index. This lets a cop distinguish "resolved but not a
+  ViewComponent" from "not resolvable", and inspect the declaration (for example, to
+  locate the class's source file).
 - `inside_view_component?` — finds the enclosing class and delegates to
   `view_component_class?`.
+
+`PreferComposition` uses `resolved_index_declaration` together with the parent's
+template to tell a concrete component apart from an abstract base: it flags a parent
+only when its name follows the component convention *and* the index resolves it to a
+ViewComponent that has its own template. Bases without a template (such as
+`ApplicationComponent`) and constants that resolve to something other than a
+ViewComponent are allowed.
 
 All of these call `require_project_index!` first, which raises with an actionable
 message if the index is unavailable:
