@@ -40,7 +40,7 @@ All cops inherit from `RuboCop::Cop::Base` and are located in `lib/rubocop/cop/v
 ### Shared Modules
 
 **`ViewComponent::Base`** (`lib/rubocop/cop/view_component/base.rb`)
-- Includes `RuboCop::Cop::ProjectIndexHelp` for rubydex integration
+- Includes `RuboCop::Cop::ProjectIndexHelp` for [rubydex integration](docs/rubydex.md)
 - Provides `view_component_class?(node)` - Detects ViewComponent classes via ancestry resolution
 - Provides `view_component_parent?(node)` - Checks if inheriting from ViewComponent::Base
 - Provides `view_component_parent_class?(node)` - Checks if a class is an abstract parent (has descendants)
