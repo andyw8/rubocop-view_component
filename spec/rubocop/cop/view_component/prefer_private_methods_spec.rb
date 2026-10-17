@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+require "fileutils"
+require "tmpdir"
+
 RSpec.describe RuboCop::Cop::ViewComponent::PreferPrivateMethods, :config do
   let(:config) { RuboCop::Config.new }
 
@@ -326,6 +329,56 @@ RSpec.describe RuboCop::Cop::ViewComponent::PreferPrivateMethods, :config do
           end
         end
       RUBY
+    end
+  end
+
+  context "with AdditionalSourcePaths" do
+    let(:engine_dir) { Dir.mktmpdir("engine") }
+
+    before do
+      FileUtils.mkdir_p(File.join(engine_dir, "app", "components"))
+      File.write(
+        File.join(engine_dir, "app", "components", "engine_base_component.rb"),
+        "class EngineBaseComponent < ViewComponent::Base\nend\n"
+      )
+    end
+
+    after { FileUtils.remove_entry(engine_dir) }
+
+    context "when the engine source path is configured" do
+      let(:config) do
+        RuboCop::Config.new(
+          "AllCops" => { "DisplayCopNames" => true },
+          "ViewComponent/PreferPrivateMethods" => {
+            "AdditionalSourcePaths" => [File.join(engine_dir, "app", "components")]
+          }
+        )
+      end
+
+      it "resolves ancestry through the additional source paths" do
+        expect_offense(<<~RUBY)
+          class CardComponent < EngineBaseComponent
+            def helper
+            ^^^^^^^^^^ ViewComponent/PreferPrivateMethods: Consider making `helper` private. Only ViewComponent interface methods should be public.
+              "helper"
+            end
+          end
+        RUBY
+      end
+    end
+
+    context "when the engine source path is not configured" do
+      let(:config) { RuboCop::Config.new }
+
+      it "does not detect the class as a ViewComponent" do
+        expect_no_offenses(<<~RUBY)
+          class CardComponent < EngineBaseComponent
+            def helper
+              "helper"
+            end
+          end
+        RUBY
+      end
     end
   end
 

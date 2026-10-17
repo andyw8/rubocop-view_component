@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "rubydex"
+require_relative "supplementary_index"
 
 module RuboCop
   module Cop
@@ -9,6 +10,7 @@ module RuboCop
       # Requires rubydex with UseProjectIndex: true for ancestry resolution.
       module Base
         include ProjectIndexHelp
+        include SupplementaryIndex
 
         VC_BASE = "ViewComponent::Base"
 

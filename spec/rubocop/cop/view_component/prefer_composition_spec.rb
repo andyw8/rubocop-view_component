@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+require "fileutils"
+require "tmpdir"
+
 RSpec.describe RuboCop::Cop::ViewComponent::PreferComposition, :config do
   let(:config) { RuboCop::Config.new }
 
@@ -140,6 +143,51 @@ RSpec.describe RuboCop::Cop::ViewComponent::PreferComposition, :config do
     it "does not register an offense for a class outside configured namespaces" do
       expect_no_offenses(<<~RUBY)
         class UserCard < SomeOtherBase
+        end
+      RUBY
+    end
+  end
+
+  context "with AdditionalSourcePaths" do
+    let(:engine_dir) { Dir.mktmpdir("engine") }
+
+    let(:config) do
+      RuboCop::Config.new(
+        "ViewComponent/PreferComposition" => {
+          "AdditionalSourcePaths" => [File.join(engine_dir, "app", "components")]
+        }
+      )
+    end
+
+    before do
+      write_engine_component("engine_card", "EngineCard")
+      write_engine_component("engine_base", "EngineBase")
+    end
+
+    after { FileUtils.remove_entry(engine_dir) }
+
+    def write_engine_component(dir_name, class_name)
+      dir = File.join(engine_dir, "app", "components", dir_name)
+      FileUtils.mkdir_p(dir)
+      File.write(
+        File.join(dir, "component.rb"),
+        "module #{class_name}\n  class Component < ViewComponent::Base\n  end\nend\n"
+      )
+    end
+
+    it "resolves a parent through the additional paths and flags one with a template" do
+      File.write(File.join(engine_dir, "app", "components", "engine_card", "component.html.erb"), "<div></div>\n")
+
+      expect_offense(<<~RUBY)
+        class UserCardComponent < EngineCard::Component
+                                  ^^^^^^^^^^^^^^^^^^^^^ Avoid inheriting from another ViewComponent.
+        end
+      RUBY
+    end
+
+    it "does not flag a parent resolved through the additional paths without a template" do
+      expect_no_offenses(<<~RUBY)
+        class UserCardComponent < EngineBase::Component
         end
       RUBY
     end
