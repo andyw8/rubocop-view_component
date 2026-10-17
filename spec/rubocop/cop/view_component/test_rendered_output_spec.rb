@@ -187,5 +187,211 @@ RSpec.describe RuboCop::Cop::ViewComponent::TestRenderedOutput, :config do
         RUBY
       end
     end
+
+    context "when it block uses described_class inside a describe block" do
+      it "registers an offense" do
+        expect_offense(<<~RUBY)
+          describe UserComponent do
+            it "formats the title" do
+            ^^^^^^^^^^^^^^^^^^^^^^^^^ ViewComponent/TestRenderedOutput: Test instantiates a component but doesn't use `render_inline` or `render_preview`. Test the rendered output instead of component methods directly.
+              component = described_class.new("hello")
+              expect(component.formatted_title).to eq("HELLO")
+            end
+          end
+        RUBY
+      end
+
+      it "registers an offense for RSpec.describe" do
+        expect_offense(<<~RUBY)
+          RSpec.describe UserComponent do
+            it "formats the title" do
+            ^^^^^^^^^^^^^^^^^^^^^^^^^ ViewComponent/TestRenderedOutput: Test instantiates a component but doesn't use `render_inline` or `render_preview`. Test the rendered output instead of component methods directly.
+              expect(described_class.new("hello").formatted_title).to eq("HELLO")
+            end
+          end
+        RUBY
+      end
+
+      it "registers an offense inside a nested context" do
+        expect_offense(<<~RUBY)
+          describe UserComponent do
+            context "when rendered" do
+              it "formats the title" do
+              ^^^^^^^^^^^^^^^^^^^^^^^^^ ViewComponent/TestRenderedOutput: Test instantiates a component but doesn't use `render_inline` or `render_preview`. Test the rendered output instead of component methods directly.
+                component = described_class.new("hello")
+                expect(component.formatted_title).to eq("HELLO")
+              end
+            end
+          end
+        RUBY
+      end
+
+      it "does not register an offense when using render_inline" do
+        expect_no_offenses(<<~RUBY)
+          describe UserComponent do
+            it "formats the title" do
+              render_inline described_class.new("hello")
+              expect(page).to have_text("HELLO")
+            end
+          end
+        RUBY
+      end
+    end
+
+    context "when the component is built to assert an error" do
+      it "does not register an offense for described_class" do
+        expect_no_offenses(<<~RUBY)
+          describe UserComponent do
+            it "raises for invalid input" do
+              expect { described_class.new(nil) }.to raise_error(ArgumentError)
+            end
+          end
+        RUBY
+      end
+
+      it "does not register an offense for a component constant" do
+        expect_no_offenses(<<~RUBY)
+          it "raises for invalid input" do
+            expect { UserComponent.new(nil) }.to raise_error(ArgumentError)
+          end
+        RUBY
+      end
+
+      it "does not register an offense for not_to raise_error" do
+        expect_no_offenses(<<~RUBY)
+          it "does not raise for valid input" do
+            expect { UserComponent.new("hello") }.not_to raise_error
+          end
+        RUBY
+      end
+
+      it "does not register an offense when raise_error takes a block" do
+        expect_no_offenses(<<~RUBY)
+          it "raises with a message" do
+            expect { UserComponent.new(nil) }.to raise_error(ArgumentError) do |error|
+              expect(error.message).to eq("invalid")
+            end
+          end
+        RUBY
+      end
+    end
+
+    context "when a component is built by a let helper" do
+      it "registers an offense" do
+        expect_offense(<<~RUBY)
+          describe UserComponent do
+            let(:component) { UserComponent.new("hello") }
+
+            it "formats the title" do
+            ^^^^^^^^^^^^^^^^^^^^^^^^^ ViewComponent/TestRenderedOutput: Test instantiates a component but doesn't use `render_inline` or `render_preview`. Test the rendered output instead of component methods directly.
+              expect(component.formatted_title).to eq("HELLO")
+            end
+          end
+        RUBY
+      end
+
+      it "registers an offense for a subject using described_class" do
+        expect_offense(<<~RUBY)
+          describe UserComponent do
+            subject(:component) { described_class.new("hello") }
+
+            it "formats the title" do
+            ^^^^^^^^^^^^^^^^^^^^^^^^^ ViewComponent/TestRenderedOutput: Test instantiates a component but doesn't use `render_inline` or `render_preview`. Test the rendered output instead of component methods directly.
+              expect(component.formatted_title).to eq("HELLO")
+            end
+          end
+        RUBY
+      end
+
+      it "registers an offense when the let is defined in an outer group" do
+        expect_offense(<<~RUBY)
+          describe UserComponent do
+            let(:component) { UserComponent.new("hello") }
+
+            context "when rendered" do
+              it "formats the title" do
+              ^^^^^^^^^^^^^^^^^^^^^^^^^ ViewComponent/TestRenderedOutput: Test instantiates a component but doesn't use `render_inline` or `render_preview`. Test the rendered output instead of component methods directly.
+                expect(component.formatted_title).to eq("HELLO")
+              end
+            end
+          end
+        RUBY
+      end
+
+      it "does not register an offense when the helper renders output" do
+        expect_no_offenses(<<~RUBY)
+          describe UserComponent do
+            let(:rendered) { render_inline(UserComponent.new("hello")) }
+
+            it "formats the title" do
+              expect(rendered).to have_text("HELLO")
+            end
+          end
+        RUBY
+      end
+
+      it "does not register an offense when the helper builds another object" do
+        expect_no_offenses(<<~RUBY)
+          describe UserComponent do
+            let(:component) { double("component") }
+
+            it "formats the title" do
+              expect(component.formatted_title).to eq("HELLO")
+            end
+          end
+        RUBY
+      end
+
+      it "does not register an offense when the helper is rendered with render_inline" do
+        expect_no_offenses(<<~RUBY)
+          describe UserComponent do
+            let(:component) { UserComponent.new("hello") }
+
+            it "formats the title" do
+              render_inline(component)
+              expect(page).to have_text("HELLO")
+            end
+          end
+        RUBY
+      end
+
+      it "prefers the innermost helper definition" do
+        expect_no_offenses(<<~RUBY)
+          describe UserComponent do
+            let(:component) { UserComponent.new("hello") }
+
+            context "with a stub" do
+              let(:component) { double("component") }
+
+              it "formats the title" do
+                expect(component).to be_present
+              end
+            end
+          end
+        RUBY
+      end
+    end
+  end
+
+  context "when the described class is not a ViewComponent" do
+    let(:project_index) do
+      build_index(
+        "file:///month.rb" => <<~RUBY
+          class Month
+          end
+        RUBY
+      )
+    end
+
+    it "does not register an offense" do
+      expect_no_offenses(<<~RUBY)
+        describe Month do
+          it "formats the month" do
+            month = described_class.new
+            expect(month.active?).to be(true)
+          end
+        end
+      RUBY
+    end
   end
 end
