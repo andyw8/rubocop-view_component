@@ -117,6 +117,36 @@ RSpec.describe RuboCop::Cop::ViewComponent::TestRenderedOutput, :config do
         RUBY
       end
     end
+
+    context "when the component is built to assert an error" do
+      it "does not register an offense for assert_raises" do
+        expect_no_offenses(<<~RUBY)
+          def test_raises_for_invalid_input
+            assert_raises(ArgumentError) { UserComponent.new(nil) }
+          end
+        RUBY
+      end
+
+      it "does not register an offense for a do/end assert_raises block" do
+        expect_no_offenses(<<~RUBY)
+          def test_raises_for_invalid_input
+            assert_raises(ArgumentError) do
+              UserComponent.new(nil)
+            end
+          end
+        RUBY
+      end
+
+      it "registers an offense when a component is built outside the assertion" do
+        expect_offense(<<~RUBY)
+          def test_mixed
+          ^^^^^^^^^^^^^^ ViewComponent/TestRenderedOutput: Test instantiates a component but doesn't use `render_inline` or `render_preview`. Test the rendered output instead of component methods directly.
+            component = UserComponent.new("hello")
+            assert_raises(ArgumentError) { component.invalid! }
+          end
+        RUBY
+      end
+    end
   end
 
   context "with TestPaths configured" do

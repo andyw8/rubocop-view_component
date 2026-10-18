@@ -75,5 +75,3 @@ ViewComponent/PreferPrivateMethods:
   - 'app/components/primer/beta/nav_list/divider.rb'
   - 'app/components/primer/beta/nav_list/group.rb'
   - 'app/components/primer/beta/nav_list/item.rb'
-ViewComponent/TestRenderedOutput:
-  - 'test/components/alpha/action_list_test.rb'
