@@ -73,6 +73,18 @@ RSpec.describe RuboCop::Cop::ViewComponent::TestRenderedOutput, :config do
       end
     end
 
+    context "when test instantiates a component and uses render_in_view_context" do
+      it "does not register an offense" do
+        expect_no_offenses(<<~RUBY)
+          def test_form_input
+            render_in_view_context do
+              render(UserComponent.new("hello"))
+            end
+          end
+        RUBY
+      end
+    end
+
     context "when test doesn't instantiate any constants" do
       it "does not register an offense" do
         expect_no_offenses(<<~RUBY)
@@ -202,6 +214,18 @@ RSpec.describe RuboCop::Cop::ViewComponent::TestRenderedOutput, :config do
           it "formats the title" do
             render_inline UserComponent.new("hello")
             expect(page).to have_text("HELLO")
+          end
+        RUBY
+      end
+    end
+
+    context "when it block instantiates a component and uses render_in_view_context" do
+      it "does not register an offense" do
+        expect_no_offenses(<<~RUBY)
+          it "renders a form" do
+            render_in_view_context do
+              render(UserComponent.new("hello"))
+            end
           end
         RUBY
       end

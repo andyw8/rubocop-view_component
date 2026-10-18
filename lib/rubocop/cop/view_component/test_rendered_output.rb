@@ -58,7 +58,9 @@ module RuboCop
         MSG = "Test instantiates a component but doesn't use `render_inline` or `render_preview`. " \
               "Test the rendered output instead of component methods directly."
 
-        RENDER_METHODS = %i[render_inline render_preview].freeze
+        # `render_in_view_context` renders through a view context (it is what
+        # form-builder tests need), so it is a rendered-output test too.
+        RENDER_METHODS = %i[render_inline render_preview render_in_view_context].freeze
 
         # Check Minitest-style test methods
         def on_def(node)
