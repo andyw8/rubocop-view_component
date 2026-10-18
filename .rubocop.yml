@@ -12,6 +12,9 @@ AllCops:
   TargetRubyVersion: 3.2
   NewCops: enable
   SuggestExtensions: false
+  # Required by this gem's own cops, which resolve ancestry through the
+  # project index (see docs/rubydex.md).
+  UseProjectIndex: true
   Exclude:
     - 'verification/**/*'
     - 'script/verify'
