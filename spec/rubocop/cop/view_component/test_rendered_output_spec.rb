@@ -73,6 +73,18 @@ RSpec.describe RuboCop::Cop::ViewComponent::TestRenderedOutput, :config do
       end
     end
 
+    context "when test instantiates a component and uses render_in_view_context" do
+      it "does not register an offense" do
+        expect_no_offenses(<<~RUBY)
+          def test_form_input
+            render_in_view_context do
+              render(UserComponent.new("hello"))
+            end
+          end
+        RUBY
+      end
+    end
+
     context "when test doesn't instantiate any constants" do
       it "does not register an offense" do
         expect_no_offenses(<<~RUBY)
@@ -113,6 +125,36 @@ RSpec.describe RuboCop::Cop::ViewComponent::TestRenderedOutput, :config do
           ^^^^^^^^^^^^^^^^^^^ ViewComponent/TestRenderedOutput: Test instantiates a component but doesn't use `render_inline` or `render_preview`. Test the rendered output instead of component methods directly.
             component = UserComponent.new("hello")
             assert_equal "HELLO", component.formatted_title
+          end
+        RUBY
+      end
+    end
+
+    context "when the component is built to assert an error" do
+      it "does not register an offense for assert_raises" do
+        expect_no_offenses(<<~RUBY)
+          def test_raises_for_invalid_input
+            assert_raises(ArgumentError) { UserComponent.new(nil) }
+          end
+        RUBY
+      end
+
+      it "does not register an offense for a do/end assert_raises block" do
+        expect_no_offenses(<<~RUBY)
+          def test_raises_for_invalid_input
+            assert_raises(ArgumentError) do
+              UserComponent.new(nil)
+            end
+          end
+        RUBY
+      end
+
+      it "registers an offense when a component is built outside the assertion" do
+        expect_offense(<<~RUBY)
+          def test_mixed
+          ^^^^^^^^^^^^^^ ViewComponent/TestRenderedOutput: Test instantiates a component but doesn't use `render_inline` or `render_preview`. Test the rendered output instead of component methods directly.
+            component = UserComponent.new("hello")
+            assert_raises(ArgumentError) { component.invalid! }
           end
         RUBY
       end
@@ -172,6 +214,18 @@ RSpec.describe RuboCop::Cop::ViewComponent::TestRenderedOutput, :config do
           it "formats the title" do
             render_inline UserComponent.new("hello")
             expect(page).to have_text("HELLO")
+          end
+        RUBY
+      end
+    end
+
+    context "when it block instantiates a component and uses render_in_view_context" do
+      it "does not register an offense" do
+        expect_no_offenses(<<~RUBY)
+          it "renders a form" do
+            render_in_view_context do
+              render(UserComponent.new("hello"))
+            end
           end
         RUBY
       end

@@ -58,7 +58,9 @@ module RuboCop
         MSG = "Test instantiates a component but doesn't use `render_inline` or `render_preview`. " \
               "Test the rendered output instead of component methods directly."
 
-        RENDER_METHODS = %i[render_inline render_preview].freeze
+        # `render_in_view_context` renders through a view context (it is what
+        # form-builder tests need), so it is a rendered-output test too.
+        RENDER_METHODS = %i[render_inline render_preview render_in_view_context].freeze
 
         # Check Minitest-style test methods
         def on_def(node)
@@ -115,13 +117,22 @@ module RuboCop
           end
         end
 
-        # A component built inside `expect { ... }.to raise_error` is exercising
+        # A component built inside an error assertion is exercising
         # initialisation behaviour rather than rendered output, so there is
-        # nothing to render.
+        # nothing to render. Covers RSpec's `expect { ... }.to raise_error` and
+        # Minitest's `assert_raises`.
         def inside_error_expectation?(node)
           node.each_ancestor(:block).any? do |ancestor|
-            ancestor.send_node&.method?(:expect) && error_expectation?(ancestor)
+            error_assertion?(ancestor)
           end
+        end
+
+        def error_assertion?(block)
+          send_node = block.send_node
+          return false unless send_node
+          return true if send_node.method?(:assert_raises)
+
+          send_node.method?(:expect) && error_expectation?(block)
         end
 
         def error_expectation?(expect_block)
