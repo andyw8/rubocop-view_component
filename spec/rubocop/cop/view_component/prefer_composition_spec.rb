@@ -72,6 +72,34 @@ RSpec.describe RuboCop::Cop::ViewComponent::PreferComposition, :config do
         end
       RUBY
     end
+
+    it "registers an offense for a Haml template" do
+      allow(File).to receive(:exist?).and_call_original
+      allow(File).to receive(:exist?).with("/test_source.html.haml").and_return(true)
+
+      expect_offense(<<~RUBY)
+        class BaseCardComponent < ViewComponent::Base
+        end
+
+        class UserCardComponent < BaseCardComponent
+                                  ^^^^^^^^^^^^^^^^^ ViewComponent/PreferComposition: Avoid inheriting from another ViewComponent.
+        end
+      RUBY
+    end
+
+    it "registers an offense for a Slim template" do
+      allow(File).to receive(:exist?).and_call_original
+      allow(File).to receive(:exist?).with("/test_source.html.slim").and_return(true)
+
+      expect_offense(<<~RUBY)
+        class BaseCardComponent < ViewComponent::Base
+        end
+
+        class UserCardComponent < BaseCardComponent
+                                  ^^^^^^^^^^^^^^^^^ ViewComponent/PreferComposition: Avoid inheriting from another ViewComponent.
+        end
+      RUBY
+    end
   end
 
   context "when the parent is a resolvable component without a template" do
