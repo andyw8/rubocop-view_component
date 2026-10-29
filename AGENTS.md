@@ -47,10 +47,10 @@ All cops inherit from `RuboCop::Cop::Base` and are located in `lib/rubocop/cop/v
 - Provides `inside_view_component?(node)` - Checks if code is within a ViewComponent
 
 **`TemplateAnalyzer`** (`lib/rubocop/cop/view_component/template_analyzer.rb`)
-- Used by PreferPrivateMethods cop to analyze ERB templates
+- Used by PreferPrivateMethods cop to analyze ERB, Haml, and Slim templates
 - Extracts method calls from templates to avoid flagging template-used methods as private candidates
-- Handles both sibling templates (`component.html.erb`) and sidecar templates (`component/component.html.erb`)
-- Uses the `herb` gem to parse ERB and extract Ruby code
+- Handles both sibling templates (`component.html.erb`) and sidecar templates (`component/component.html.erb`), including format-less templates (`component.erb`)
+- Uses the `herb` gem to parse ERB and the `haml` (6+) and `slim` engines to compile Haml and Slim templates to Ruby
 
 ### Verification System
 
@@ -59,6 +59,6 @@ The `script/verify` script downloads real component libraries, runs all ViewComp
 ## Implementation Notes
 
 - When adding a new cop, use `rake new_cop[ViewComponent/CopName]` to generate the boilerplate
-- Template analysis is performance-sensitive - `PreferPrivateMethods` uses `herb` gem for efficient ERB parsing
+- Template analysis is performance-sensitive - `PreferPrivateMethods` uses `herb` gem for efficient ERB parsing, while Haml and Slim rely on their template engines to compile to Ruby
 - Cops must handle graceful degradation when templates can't be parsed
 - All cops should include `ViewComponent::Base` module to get detection helpers

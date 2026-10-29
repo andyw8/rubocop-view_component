@@ -185,6 +185,26 @@ RSpec.describe RuboCop::Cop::ViewComponent::PreferComposition, :config do
       RUBY
     end
 
+    it "flags a parent with a Haml template" do
+      File.write(File.join(engine_dir, "app", "components", "engine_card", "component.html.haml"), "%div\n")
+
+      expect_offense(<<~RUBY)
+        class UserCardComponent < EngineCard::Component
+                                  ^^^^^^^^^^^^^^^^^^^^^ Avoid inheriting from another ViewComponent.
+        end
+      RUBY
+    end
+
+    it "flags a parent with a Slim template" do
+      File.write(File.join(engine_dir, "app", "components", "engine_card", "component.html.slim"), "div\n")
+
+      expect_offense(<<~RUBY)
+        class UserCardComponent < EngineCard::Component
+                                  ^^^^^^^^^^^^^^^^^^^^^ Avoid inheriting from another ViewComponent.
+        end
+      RUBY
+    end
+
     it "does not flag a parent resolved through the additional paths without a template" do
       expect_no_offenses(<<~RUBY)
         class UserCardComponent < EngineBase::Component

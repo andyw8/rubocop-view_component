@@ -3,11 +3,13 @@
 source "https://rubygems.org"
 
 gem "appraisal"
+gem "haml", ">= 6"
 gem "irb"
 gem "rake", "~> 13.4"
 gem "rspec"
 gem "rubocop", "= 1.89.0"
 gem "rubocop-rake"
 gem "rubocop-rspec"
+gem "slim", ">= 4"
 
 gemspec path: "../"
