@@ -72,6 +72,34 @@ RSpec.describe RuboCop::Cop::ViewComponent::PreferComposition, :config do
         end
       RUBY
     end
+
+    it "registers an offense for a Haml template" do
+      allow(File).to receive(:exist?).and_call_original
+      allow(File).to receive(:exist?).with("/test_source.html.haml").and_return(true)
+
+      expect_offense(<<~RUBY)
+        class BaseCardComponent < ViewComponent::Base
+        end
+
+        class UserCardComponent < BaseCardComponent
+                                  ^^^^^^^^^^^^^^^^^ ViewComponent/PreferComposition: Avoid inheriting from another ViewComponent.
+        end
+      RUBY
+    end
+
+    it "registers an offense for a Slim template" do
+      allow(File).to receive(:exist?).and_call_original
+      allow(File).to receive(:exist?).with("/test_source.html.slim").and_return(true)
+
+      expect_offense(<<~RUBY)
+        class BaseCardComponent < ViewComponent::Base
+        end
+
+        class UserCardComponent < BaseCardComponent
+                                  ^^^^^^^^^^^^^^^^^ ViewComponent/PreferComposition: Avoid inheriting from another ViewComponent.
+        end
+      RUBY
+    end
   end
 
   context "when the parent is a resolvable component without a template" do
@@ -177,6 +205,26 @@ RSpec.describe RuboCop::Cop::ViewComponent::PreferComposition, :config do
 
     it "resolves a parent through the additional paths and flags one with a template" do
       File.write(File.join(engine_dir, "app", "components", "engine_card", "component.html.erb"), "<div></div>\n")
+
+      expect_offense(<<~RUBY)
+        class UserCardComponent < EngineCard::Component
+                                  ^^^^^^^^^^^^^^^^^^^^^ Avoid inheriting from another ViewComponent.
+        end
+      RUBY
+    end
+
+    it "flags a parent with a Haml template" do
+      File.write(File.join(engine_dir, "app", "components", "engine_card", "component.html.haml"), "%div\n")
+
+      expect_offense(<<~RUBY)
+        class UserCardComponent < EngineCard::Component
+                                  ^^^^^^^^^^^^^^^^^^^^^ Avoid inheriting from another ViewComponent.
+        end
+      RUBY
+    end
+
+    it "flags a parent with a Slim template" do
+      File.write(File.join(engine_dir, "app", "components", "engine_card", "component.html.slim"), "div\n")
 
       expect_offense(<<~RUBY)
         class UserCardComponent < EngineCard::Component

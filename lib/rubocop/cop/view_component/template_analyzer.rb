@@ -5,8 +5,13 @@ require "herb"
 module RuboCop
   module Cop
     module ViewComponent
-      # Helper module for analyzing ViewComponent ERB templates
+      # Helper module for analyzing ViewComponent templates.
+      #
+      # Supports ERB, Haml (6+) and Slim templates.
       module TemplateAnalyzer
+        TEMPLATE_EXTENSIONS = %w[erb haml slim].freeze
+        TEMPLATE_GLOB = "{#{TEMPLATE_EXTENSIONS.join(",")}}".freeze
+
         # Find template file paths for a component
         # @param component_path [String] Path to the component Ruby file
         # @return [Array<String>] Array of template file paths
@@ -18,44 +23,81 @@ module RuboCop
           component_name = File.basename(component_path, ".rb")
           sidecar_dir = File.join(component_dir, component_name)
 
-          paths = sibling_templates(base_path) + sidecar_templates(sidecar_dir, component_name)
-          paths.uniq
+          (sibling_templates(base_path) + sidecar_templates(sidecar_dir, component_name)).uniq
         end
 
         def sibling_templates(base_path)
-          paths = []
-          sibling = "#{base_path}.html.erb"
-          paths << sibling if File.exist?(sibling)
-          paths.concat(Dir.glob("#{base_path}.*.html.erb"))
-          paths
+          template_paths(base_path)
         end
 
         def sidecar_templates(sidecar_dir, component_name)
-          paths = []
-          sidecar = File.join(sidecar_dir, "#{component_name}.html.erb")
-          paths << sidecar if File.exist?(sidecar)
-          paths.concat(Dir.glob(File.join(sidecar_dir, "#{component_name}.*.html.erb")))
-          paths
+          template_paths(File.join(sidecar_dir, component_name))
         end
 
-        # Extract method calls from an ERB template
-        # @param template_path [String] Path to the ERB template file
+        # Extract method calls from a template
+        # @param template_path [String] Path to the template file
         # @return [Set<Symbol>] Set of method names called in the template
         def extract_method_calls(template_path)
           return Set.new unless File.exist?(template_path)
 
-          source = File.read(template_path)
-          ruby_code = Herb.extract_ruby(source)
+          ruby_code = extract_template_ruby(template_path)
+          return Set.new unless ruby_code
 
-          # Parse the extracted Ruby code
           parse_ruby_for_method_calls(ruby_code)
-        rescue StandardError => e
+        rescue LoadError, StandardError => e
           # Graceful degradation on parse errors
           warn "Warning: Failed to parse template #{template_path}: #{e.message}" if ENV["RUBOCOP_DEBUG"]
           Set.new
         end
 
         private
+
+        def template_paths(base_path)
+          exact_paths = TEMPLATE_EXTENSIONS.flat_map do |extension|
+            ["#{base_path}.#{extension}", "#{base_path}.html.#{extension}"].select { |path| File.exist?(path) }
+          end
+
+          exact_paths + Dir.glob("#{base_path}.*.#{TEMPLATE_GLOB}")
+        end
+
+        def extract_template_ruby(template_path)
+          source = File.read(template_path)
+
+          case File.extname(template_path)
+          when ".erb"
+            Herb.extract_ruby(source)
+          when ".haml"
+            haml_to_ruby(source)
+          when ".slim"
+            slim_to_ruby(source)
+          end
+        end
+
+        def haml_to_ruby(source)
+          require "haml"
+          return unless supported_haml?
+
+          ::Haml::Engine.new.call(source)
+        rescue LoadError
+          nil
+        end
+
+        def supported_haml?
+          return true if ::Haml::VERSION.to_i >= 6
+
+          if ENV["RUBOCOP_DEBUG"]
+            warn "Warning: Haml #{::Haml::VERSION} is not supported; " \
+                 "Haml 6 or later is required"
+          end
+          false
+        end
+
+        def slim_to_ruby(source)
+          require "slim"
+          ::Slim::Engine.new.call(source)
+        rescue LoadError
+          nil
+        end
 
         # Parse Ruby code and extract method calls (send nodes with nil receiver)
         def parse_ruby_for_method_calls(ruby_code)

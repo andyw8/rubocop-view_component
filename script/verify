@@ -114,8 +114,10 @@ def replace_gemfile
   File.write("Gemfile", <<~RUBY)
     source "https://rubygems.org"
 
+    gem "haml", ">= 6"
     gem "rubocop"
     gem "rubocop-view_component", path: "#{GEM_DIR}"
+    gem "slim", ">= 4"
     gem "view_component"
   RUBY
 end

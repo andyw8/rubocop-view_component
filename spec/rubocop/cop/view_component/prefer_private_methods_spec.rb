@@ -382,6 +382,56 @@ RSpec.describe RuboCop::Cop::ViewComponent::PreferPrivateMethods, :config do
     end
   end
 
+  context "with Haml template files" do
+    let(:component_file) { "spec/fixtures/components/haml_method_component.rb" }
+
+    it "flags methods not called in the Haml template" do
+      expect_offense(<<~RUBY, component_file)
+        # frozen_string_literal: true
+
+        class HamlMethodComponent < ViewComponent::Base
+          def initialize(title)
+            @title = title
+          end
+
+          def formatted_title
+            @title.upcase
+          end
+
+          def helper_not_used
+          ^^^^^^^^^^^^^^^^^^^ ViewComponent/PreferPrivateMethods: Consider making `helper_not_used` private. Only ViewComponent interface methods should be public.
+            "not used"
+          end
+        end
+      RUBY
+    end
+  end
+
+  context "with Slim template files" do
+    let(:component_file) { "spec/fixtures/components/slim_method_component.rb" }
+
+    it "flags methods not called in the Slim template" do
+      expect_offense(<<~RUBY, component_file)
+        # frozen_string_literal: true
+
+        class SlimMethodComponent < ViewComponent::Base
+          def initialize(title)
+            @title = title
+          end
+
+          def formatted_title
+            @title.upcase
+          end
+
+          def helper_not_used
+          ^^^^^^^^^^^^^^^^^^^ ViewComponent/PreferPrivateMethods: Consider making `helper_not_used` private. Only ViewComponent interface methods should be public.
+            "not used"
+          end
+        end
+      RUBY
+    end
+  end
+
   context "with template files" do
     let(:component_file) { "spec/fixtures/components/template_method_component.rb" }
 
